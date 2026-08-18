@@ -9,14 +9,14 @@ npm run build
 # cd 到构建输出的目录下
 cd dist
 
-# 部署到 GitHub Pages（gh-pages 分支）
+# 部署到 GitHub Pages 用户站点（qianlixun.github.io 的 master 分支）
 git init
-git checkout -b gh-pages
+git checkout -b master
 git add -A
 git commit -m 'deploy'
 
-# 推送到 Qianlixun/qianlixun 仓库的 gh-pages 分支
-# 部署后请在仓库 Settings → Pages 选择 gh-pages 分支作为页面来源
-git push -f git@github.com:Qianlixun/qianlixun.git gh-pages
+# 推送到 Qianlixun/qianlixun.github.io 仓库的 master 分支
+# 用户站点默认从 master 分支发布，推送后约 1 分钟可访问 https://qianlixun.github.io
+git push -f git@github.com:Qianlixun/qianlixun.github.io.git master
 
 cd -

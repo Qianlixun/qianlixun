@@ -10,7 +10,7 @@
 
 技术栈：Vue + Github Pages + Github Issues + Github Api + Gitalk。
 
-在线演示：[千里寻](https://qianlixun.github.io/qianlixun)
+在线演示：[千里寻](https://qianlixun.github.io)
 
 ## Getting Started
 

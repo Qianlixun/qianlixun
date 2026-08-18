@@ -15,7 +15,7 @@ export default {
    * 站点标题
    */
   title: '千里寻',
-  subtitle: '蝉鸣如雨 花宵道中',
+  subtitle: '寻遍千山，终见灯火', // 千里寻：踏遍千山路，终见那一点灯火
 
   /**
    * Github Issues 配置

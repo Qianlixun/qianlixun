@@ -6,7 +6,7 @@
         <div class="me">
           <span>欢迎各位大佬交换友链 (づ￣ 3￣)づ</span>
           <span>★ Bio：千里寻</span>
-          <span>★ Motto：蝉鸣如雨，花宵道中</span>
+          <span>★ Motto：寻遍千山，终见灯火</span>
           <span>★ URL：https://qianlixun.github.io</span>
           <span
             >★ Avatar：<a href="https://cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/avatar.jpg" target="_blank"

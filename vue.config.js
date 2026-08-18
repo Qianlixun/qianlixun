@@ -1,6 +1,7 @@
 module.exports = {
   productionSourceMap: false,
-  publicPath: '/',
+  // 部署到 GitHub Pages 子路径 qianlixun.github.io/qianlixun，资源前缀必须为 /qianlixun/
+  publicPath: '/qianlixun/',
   chainWebpack(config) {
     const cdn = {
       css: ['//fonts.googleapis.com/css?family=Fira+Mono|Noto+Serif+SC&display=swap'],

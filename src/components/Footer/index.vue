@@ -58,7 +58,7 @@ import images from '@/assets/images'
 
 const { waifuClick, hoverTips, clickTips, hitokotos } = tips
 const { sakura } = images
-const path = '/live2d/'
+const path = process.env.BASE_URL + 'live2d/'
 
 export default {
   name: 'Footer',

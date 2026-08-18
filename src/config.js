@@ -179,12 +179,6 @@ export default {
    */
   APlayer: [
     {
-      name: 'うたかたの风と蝉时雨',
-      artist: 'Little Planet',
-      url: 'https://files.catbox.moe/wo7zjt.mp3',
-      cover: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/cover1.jpg',
-    },
-    {
       name: '春の凑に',
       artist: 'TUMENECO',
       url: 'https://files.catbox.moe/ducy49.mp3',

@@ -28,13 +28,14 @@ export default {
    * Gitalk 配置，文档详见：https://github.com/gitalk/gitalk
    */
   gitalk: {
-    clientID: '864b1c2cbc4e4aad9ed8',
-    clientSecret: '6ca16373efa03347e11a96ff92e355c5cea189bb',
+    clientID: 'Ov23liYx7QWOgIiNX9za',
+    clientSecret: '6ffd934edb1b3a4917843deedc808920d714ac51',
     repo: 'comment', // 评论仓库地址
     owner: 'Qianlixun',
     admin: ['Qianlixun'],
     distractionFreeMode: false, // 是否开始无干扰模式【背景遮罩】
-    proxy: 'https://bokegitalkcors.herokuapp.com/https://github.com/login/oauth/access_token',
+    // ponytail: 第三方 CORS 代理(heroku)已停服；置空后由打过补丁的 gitalk 直连 GitHub token 端点(表单格式,免预检)
+    proxy: '',
   },
 
   /**

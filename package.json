@@ -1,18 +1,17 @@
 {
   "name": "qianlixun",
-  "version": "2.0.0",
-  "description": "千里寻 - 个人站点",
+  "version": "3.0.0",
+  "description": "千里寻的个人站点",
   "author": "千里寻 <99498515@qq.com>",
   "license": "MIT",
   "scripts": {
-    "start": "npm run serve",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@moefe/vue-aplayer": "^2.0.0-beta.5",
     "aos": "^3.0.0-beta.6",
+    "aplayer": "^1.10.1",
     "clipboard": "^2.0.6",
     "core-js": "^3.6.5",
     "gitalk": "^1.6.2",
@@ -21,26 +20,14 @@
     "leancloud-storage": "^4.6.1",
     "marked": "^1.1.1",
     "timeago.js": "^4.0.2",
-    "vue": "^2.6.12",
-    "vue-progressbar": "^0.7.5",
-    "vue-router": "^3.4.3",
-    "vuex": "^3.5.1",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "vuex": "^4.1.0",
     "zooming": "^2.1.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.4",
-    "@vue/cli-plugin-eslint": "^4.5.4",
-    "@vue/cli-plugin-router": "^4.5.4",
-    "@vue/cli-plugin-vuex": "^4.5.4",
-    "@vue/cli-service": "^4.5.4",
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.8.1",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-vue": "^6.2.2",
+    "@vitejs/plugin-vue": "^5.0.4",
     "sass": "^1.32.0",
-    "prettier": "^2.1.1",
-    "sass-loader": "^10.0.2",
-    "vue-template-compiler": "^2.6.12"
+    "vite": "^5.2.8"
   }
 }

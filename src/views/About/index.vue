@@ -5,6 +5,7 @@
         <Quote :quote="$config.aboutOpts.qoute" />
         <div class="content">
           <div class="header">
+            <img :src="$config.aboutOpts.avatar" alt />
             <div class="info">
               <span>
                 <i class="icon icon-fort-awesome"></i>

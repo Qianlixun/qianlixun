@@ -80,7 +80,8 @@ export default {
     // 获取并增加热度
     async queryHot() {
       const hot = await this.$store.dispatch('increaseHot', { post: this.post })
-      this.$set(this.post, 'times', hot)
+      // Vue3 响应式对象直接赋值即可（替代 Vue2 的 $set）
+      this.post.times = hot
     },
   },
 }

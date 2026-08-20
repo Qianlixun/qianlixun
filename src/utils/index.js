@@ -72,9 +72,9 @@ export const localRead = (key, defaultValue = '') => {
 }
 
 /**
- * 图片地址恒等返回
- * 原 fileCDN 会把原作者图床做替换加速；现所有素材已自托管到
- * public/assets/，不再依赖任何外部图床，故直接返回原地址。
+ * 图片地址处理
+ * ponytail: 原"盗链原作者 raw 图并转 jsdelivr 加速"的逻辑已移除（版权问题 + 国内不可达）。
+ * 文章内容图片请使用自有图床或本地资源，不要引用原主题作者的仓库图片。
  */
 export const fileCDN = (url) => url
 

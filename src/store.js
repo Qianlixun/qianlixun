@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 import {
   queryArchivesCount,
   queryFilterArchivesCount,
@@ -17,11 +16,9 @@ import {
 } from './utils/services'
 import { formatPost, formatCategory, formatInspiration, formatPage } from './utils/format'
 
-Vue.use(Vuex)
-
 let tipsTimer = ''
 
-export default new Vuex.Store({
+export default createStore({
   state: {
     tips: '',
     tipsUpdateAt: '',

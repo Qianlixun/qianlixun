@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="author" content="千里寻" />
+    <meta name="description" content="千里寻的个人站点：寻遍千山，终见灯火。记录技术、生活与灵感。" />
+    <meta name="keywords" content="Code, ACG, 千里寻" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <!-- Open Graph / Twitter Card -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="千里寻" />
+    <meta property="og:title" content="千里寻 | 寻遍千山，终见灯火" />
+    <meta property="og:description" content="千里寻的个人站点：寻遍千山，终见灯火。" />
+    <meta property="og:url" content="https://qianlixun.github.io/" />
+    <meta property="og:image" content="https://qianlixun.github.io/assets/blog/defaultCover.jpg" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="千里寻 | 寻遍千山，终见灯火" />
+    <meta name="twitter:description" content="千里寻的个人站点：寻遍千山，终见灯火。" />
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "千里寻",
+        "url": "https://qianlixun.github.io",
+        "description": "寻遍千山，终见灯火",
+        "author": {
+          "@type": "Person",
+          "name": "千里寻",
+          "url": "https://github.com/Qianlixun"
+        }
+      }
+    </script>
+    <!-- Live2D 看板娘：defer 加载，不阻塞首屏解析 -->
+    <script defer src="/live2d/live2d.min.js"></script>
+    <title>千里寻 | 寻遍千山，终见灯火</title>
+  </head>
+  <body>
+    <noscript>
+      <strong>本站需要启用 JavaScript 才能正常运行，请在你的浏览器中开启。</strong>
+    </noscript>
+    <div id="bg"></div>
+    <div id="app"></div>
+    <!-- jquery / jquery-backstretch（自托管，用于 #bg 背景切换） -->
+    <script src="/lib/jquery.min.js"></script>
+    <script src="/lib/jquery.backstretch.min.js"></script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -43,11 +43,9 @@ export default {
     },
     // 处理滚动事件
     handleTop() {
-      // 更新顶部进度条
+      // 判断位置，控制滚动到顶部
       const clientHeight = document.documentElement.clientHeight
-      const scrollRange = document.body.clientHeight - clientHeight - 50
       const pageYOffset = window.pageYOffset
-      this.$Progress.set((pageYOffset / scrollRange) * 100)
 
       // 判断位置，控制滚动到顶部
       const showBackTop = pageYOffset >= 200

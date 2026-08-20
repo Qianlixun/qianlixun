@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from './views/Home'
 import Post from './views/Post'
 import Archive from './views/Archive'
@@ -10,9 +9,9 @@ import Book from './views/Book'
 import Friend from './views/Friend'
 import About from './views/About'
 
-Vue.use(Router)
-
-export default new Router({
+// 保持与原站点一致的 hash 模式（GitHub Pages 无需 404 fallback，旧 #/post/41 等链接继续有效）
+export default createRouter({
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',

@@ -1,6 +1,4 @@
-import Vue from 'vue'
-import VueProgressBar from 'vue-progressbar'
-import APlayer from '@moefe/vue-aplayer'
+import { createApp, reactive } from 'vue'
 import AV from 'leancloud-storage'
 
 // Let's go!
@@ -18,28 +16,11 @@ import 'katex/dist/katex.css'
 import '@/assets/font/fontello.scss'
 import '@/styles/index.scss'
 
-// Global variable
-Vue.config.productionTip = false
-Vue.prototype.$config = config
-Vue.prototype.$isMobile = Vue.observable({ value: isMobile() })
+const app = createApp(App)
 
-// Init Progress Bar
-const options = {
-  color: '#b28fce',
-  thickness: '4px',
-  transition: {
-    speed: '0.2s',
-    opacity: '0.5s',
-    termination: 300,
-  },
-  location: 'top',
-  autoRevert: true,
-  inverse: false,
-}
-Vue.use(VueProgressBar, options)
-
-// Init Player
-Vue.use(APlayer, { productionTip: false })
+// Global variable（Vue3：Vue.prototype → app.config.globalProperties；Vue.observable → reactive）
+app.config.globalProperties.$config = config
+app.config.globalProperties.$isMobile = reactive({ value: isMobile() })
 
 // Init Site Title
 const { title, subtitle } = config
@@ -52,17 +33,15 @@ AV.init(config.leancloud)
 // Init Cover
 new Image().src = config.defaultCover
 
-new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-}).$mount('#app')
+app.use(router)
+app.use(store)
+app.mount('#app')
 
 // (o=^•ェ•)o
 const labelStyle = 'line-height:22px;color:#FFF;background:#D68FE9;'
 const themeRepo = 'https://github.com/Qianlixun/qianlixun'
 console.info(`%c ${config.title} %c`, labelStyle, '', window.location.origin)
-console.info('%c Theme %c', labelStyle, '', themeRepo)
+console.info('%c Site %c', labelStyle, '', themeRepo)
 console.info('~❀~ 发现控制台报错请务必联系博主 ~❀~')
 console.log(
   '%c ',

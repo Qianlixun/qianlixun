@@ -1,41 +1,31 @@
 name: Deploy to GitHub Pages
 
+# 源码仓库 push 到 master 后自动构建并发布到 qianlixun.github.io（消除"源码新、线上旧"漂移）
 on:
   push:
     branches: [master]
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 20 # Vite 5 需要 Node 18+
+          cache: npm
 
-      - name: Install dependencies
-        # 仓库 .gitignore 忽略了 package-lock.json，故使用 npm install 而非 npm ci
-        run: npm install
+      - run: npm ci --no-audit --no-fund
 
-      - name: Build
-        # Vue CLI 4 基于 webpack 4，在 Node 17+ 下需启用 legacy OpenSSL provider
-        run: npm run build
-        env:
-          NODE_OPTIONS: --openssl-legacy-provider
+      - run: npm run build
 
-      - name: Deploy to qianlixun.github.io
+      - name: Deploy to Qianlixun/qianlixun.github.io (master)
         uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.DEPLOY_KEY }}
+          publish_dir: ./dist
           external_repository: Qianlixun/qianlixun.github.io
           publish_branch: master
-          publish_dir: ./dist
-          user_name: github-actions[bot]
-          user_email: github-actions[bot]@users.noreply.github.com
+          force_orphan: false

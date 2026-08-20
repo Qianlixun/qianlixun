@@ -22,7 +22,7 @@
             <i class="icon icon-emo-devil"></i>
           </div>
         </div>
-        <APlayer :class="isMini && 'mini'" :audio="audio" preload="none" fixed mini @update:mini="handleUpdate" />
+        <div ref="aplayer" class="aplayer-mount"></div>
       </div>
     </div>
     <div class="site-info">
@@ -51,6 +51,8 @@
 <script>
 import { mapState } from 'vuex'
 import { random } from '@/utils'
+import APlayer from 'aplayer'
+import 'aplayer/dist/APlayer.min.css'
 import model from '@/assets/live2d/waifu.json'
 import tips from '@/assets/live2d/tips.json'
 import costume from '@/assets/live2d/costume.json'
@@ -58,7 +60,7 @@ import images from '@/assets/images'
 
 const { waifuClick, hoverTips, clickTips, hitokotos } = tips
 const { sakura } = images
-const path = process.env.BASE_URL + 'live2d/'
+const path = import.meta.env.BASE_URL + 'live2d/'
 
 export default {
   name: 'Footer',
@@ -75,7 +77,6 @@ export default {
         { icon: 'cancel-outline', type: 'close' },
       ],
       audio: this.$config.APlayer,
-      isMini: true,
     }
   },
   computed: mapState({
@@ -86,9 +87,20 @@ export default {
     if (!this.$isMobile.value) {
       this.dressup()
       this.loopTips()
+      this.initPlayer()
     }
   },
   methods: {
+    initPlayer() {
+      new APlayer({
+        container: this.$refs.aplayer,
+        audio: this.audio,
+        preload: 'none',
+        fixed: true,
+        mini: true,
+        listFolded: true,
+      })
+    },
     dressup(switchWaifu = false) {
       if (switchWaifu) this.waifu = this.waifu === 'tia' ? 'pio' : 'tia'
       // 获取装扮
@@ -160,9 +172,6 @@ export default {
         default:
           return
       }
-    },
-    handleUpdate(isMini) {
-      this.isMini = isMini
     },
     dropPanel() {
       this.$store.commit('setShowPanel', true)

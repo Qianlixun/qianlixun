@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <vue-progress-bar />
     <Transition name="header-transform" mode="out-in">
       <Header v-show="showHeader" />
     </Transition>
@@ -63,14 +62,12 @@ export default {
     },
   },
   created() {
-    this.initProgress()
     this.visitorStatistics()
   },
   mounted() {
-    this.$Progress.finish()
     window.addEventListener('resize', this.handleResize)
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
@@ -85,17 +82,6 @@ export default {
       this.lastResizeTimer = setTimeout(() => {
         this.$isMobile.value = isMobile()
       }, 300)
-    },
-    // 注册顶部进度条
-    initProgress() {
-      this.$Progress.start()
-      this.$router.beforeEach((to, from, next) => {
-        this.$Progress.start()
-        next()
-      })
-      this.$router.afterEach(() => {
-        this.$Progress.finish()
-      })
     },
     // 统计访客来源
     visitorStatistics() {

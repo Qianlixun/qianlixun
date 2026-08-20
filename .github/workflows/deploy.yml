@@ -22,6 +22,7 @@ jobs:
       - run: npm run build
 
       - name: Deploy to Qianlixun/qianlixun.github.io (master)
+        if: ${{ secrets.DEPLOY_KEY != '' }} # 未配置 DEPLOY_KEY 时跳过，仅跑构建
         uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.DEPLOY_KEY }}

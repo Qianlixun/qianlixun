@@ -1,7 +1,6 @@
 /**
- * 千里寻 主题配置文件
+ * 千里寻 站点配置文件
  * 食用指南：https://github.com/Qianlixun/blog/issues/41
- * 联系作者：Blog https://qianlixun.github.io      QQ 1124590931
  */
 
 export default {
@@ -113,34 +112,25 @@ export default {
     display: true,
     enableComment: true,
     qoute: '寻遍千山，终见灯火',
-    avatar: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/iavatar.jpg',
     graduated: 'University of Electronic Science and Technology of China (UESTC)',
     college: 'Communication&Information Engineering',
     contact: [
       {
-        icon: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/email.png',
+        icon: '/assets/img/email.svg',
         link: 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=tNnR9Nfc1drH3N3NwZrX29k',
       },
       {
-        icon: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/github.png',
+        icon: '/assets/img/github.svg',
         link: 'https://github.com/Qianlixun',
       },
       {
-        icon: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/music.png',
+        icon: '/assets/img/music.svg',
         link: 'https://music.163.com/#/user/home?id=103060582',
       },
       {
-        icon: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/telegram.png',
-        link: 'https://t.me/chan_shi_yu',
-      },
-      {
-        icon: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/twitter.png',
+        icon: '/assets/img/twitter.svg',
         link: 'https://twitter.com/Qianlixun',
       },
-      // {
-      //   icon: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/rsshub.png',
-      //   link: 'https://rsshub.app/github/issue/Qianlixun/blog',
-      // },
     ],
   },
 
@@ -153,26 +143,12 @@ export default {
   /**
    * 加载动画
    */
-  loadingImg: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/loading.gif',
+  loadingImg: '/assets/img/loading.svg',
 
   /**
    * 文章默认图
    */
-  defaultCover: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/bg/defaultCover.jpg',
-
-  /**
-   * 赛钱箱
-   */
-  qrcode: [
-    {
-      name: '支付宝',
-      img: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/zfb.png',
-    },
-    {
-      name: '微信',
-      img: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/wx.png',
-    },
-  ],
+  defaultCover: '/assets/img/defaultCover.svg',
 
   /**
    * 音乐播放器,
@@ -182,25 +158,25 @@ export default {
       name: '春の凑に',
       artist: 'TUMENECO',
       url: 'https://files.catbox.moe/ducy49.mp3',
-      cover: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/cover2.jpg',
+      cover: '/assets/img/cover2.svg',
     },
     {
       name: '夏阳炎',
       artist: '天威梦方',
       url: 'https://files.catbox.moe/7migen.mp3',
-      cover: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/cover3.jpg',
+      cover: '/assets/img/cover3.svg',
     },
     {
       name: '秋风のとおり道',
       artist: '风神华伝',
       url: 'https://files.catbox.moe/b58fq6.mp3',
-      cover: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/cover4.jpg',
+      cover: '/assets/img/cover4.svg',
     },
     {
       name: '冬のわすれもの',
       artist: 'ハルノカゼ',
       url: 'https://files.catbox.moe/vwnawp.mp3',
-      cover: '//cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/cover5.jpg',
+      cover: '/assets/img/cover5.svg',
     },
   ],
 

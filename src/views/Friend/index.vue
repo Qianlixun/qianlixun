@@ -8,11 +8,7 @@
           <span>★ Bio：千里寻</span>
           <span>★ Motto：寻遍千山，终见灯火</span>
           <span>★ URL：https://qianlixun.github.io</span>
-          <span
-            >★ Avatar：<a href="https://cdn.jsdelivr.net/gh/chanshiyucx/yoi/blog/avatar.jpg" target="_blank"
-              >点击获取</a
-            ></span
-          >
+
           <span>※ 以下友链按博主互访频率排序，并根据个人对博客内容喜好加权，博主将不定期更新排序并过滤阵亡名单。</span>
         </div>
         <ul class="content">

@@ -15,13 +15,13 @@
             <div class="swiper-wrapper">
               <ul ref="swiper" id="swiper" class="swiper animate" :style="containerStyle">
                 <li>
-                  <Qrcode @zoom="setZoomSrc" />
+                  <Theme :theme="theme" @switchTheme="switchTheme" />
                 </li>
                 <li>
                   <Theme :theme="theme" @switchTheme="switchTheme" />
                 </li>
                 <li>
-                  <Qrcode @zoom="setZoomSrc" />
+                  <Theme :theme="theme" @switchTheme="switchTheme" />
                 </li>
                 <li>
                   <Theme :theme="theme" @switchTheme="switchTheme" />
@@ -60,7 +60,6 @@
 <script>
 import { mapState } from 'vuex'
 import Theme from './components/Theme'
-import Qrcode from './components/Qrcode'
 import { localSave, localRead } from '@/utils'
 import images from '@/assets/images'
 
@@ -68,7 +67,7 @@ const { bg } = images
 
 export default {
   name: 'Panel',
-  components: { Theme, Qrcode },
+  components: { Theme },
   data() {
     return {
       theme: '',
@@ -84,8 +83,7 @@ export default {
       showPanel: (state) => state.showPanel,
     }),
     panelTitle() {
-      const inx = (this.currentInx + 1) % 2
-      return ['背景主题', '赛钱箱'][inx]
+      return '背景主题'
     },
     distance() {
       return [0, -600, -1200, -1800][this.currentInx]

@@ -72,17 +72,11 @@ export const localRead = (key, defaultValue = '') => {
 }
 
 /**
- * 图片 cdn 加速，只对时雨个人使用
+ * 图片地址恒等返回
+ * 原 fileCDN 会把原作者图床做替换加速；现所有素材已自托管到
+ * public/assets/，不再依赖任何外部图床，故直接返回原地址。
  */
-const isMe = location.host.includes('qianlixun.github.io')
-const GithubPrefix = 'raw.githubusercontent.com/chanshiyucx/yoi/master'
-const JSDriverPrefix = 'cdn.jsdelivr.net/gh/chanshiyucx/yoi@latest'
-export const fileCDN = (url) => {
-  if (isMe && url.includes(GithubPrefix)) {
-    return url.replace(GithubPrefix, JSDriverPrefix)
-  }
-  return url
-}
+export const fileCDN = (url) => url
 
 /**
  * 图片尺寸处理

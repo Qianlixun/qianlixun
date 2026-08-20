@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <vue-progress-bar />
     <Transition name="header-transform" mode="out-in">
       <Header v-show="showHeader" />
     </Transition>
@@ -18,6 +17,7 @@
 </template>
 
 <script>
+import NProgress from 'nprogress'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Panel from '@/components/Panel'
@@ -67,10 +67,11 @@ export default {
     this.visitorStatistics()
   },
   mounted() {
-    this.$Progress.finish()
+    // 顶部进度条：原 vue-progressbar 已替换为 nprogress
+    NProgress.done()
     window.addEventListener('resize', this.handleResize)
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
@@ -86,15 +87,15 @@ export default {
         this.$isMobile.value = isMobile()
       }, 300)
     },
-    // 注册顶部进度条
+    // 注册顶部进度条（nprogress 替代 vue-progressbar）
     initProgress() {
-      this.$Progress.start()
+      NProgress.start()
       this.$router.beforeEach((to, from, next) => {
-        this.$Progress.start()
+        NProgress.start()
         next()
       })
       this.$router.afterEach(() => {
-        this.$Progress.finish()
+        NProgress.done()
       })
     },
     // 统计访客来源

@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from './views/Home'
 import Post from './views/Post'
 import Archive from './views/Archive'
@@ -10,9 +9,8 @@ import Book from './views/Book'
 import Friend from './views/Friend'
 import About from './views/About'
 
-Vue.use(Router)
-
-export default new Router({
+export default createRouter({
+  history: createWebHistory(),
   routes: [
     {
       path: '/',

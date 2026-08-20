@@ -1,15 +1,8 @@
-import Vue from 'vue'
-import VueProgressBar from 'vue-progressbar'
-import APlayer from '@moefe/vue-aplayer'
+import { createApp, reactive } from 'vue'
+import APlayer from '@/components/APlayer'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import AV from 'leancloud-storage'
-
-// Let's go!
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import config from './config'
-import images from './assets/images'
-import { isMobile } from './utils'
 
 // Layout and Font
 import 'aos/dist/aos.css'
@@ -18,28 +11,25 @@ import 'katex/dist/katex.css'
 import '@/assets/font/fontello.scss'
 import '@/styles/index.scss'
 
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import config from './config'
+import images from './assets/images'
+import { isMobile } from './utils'
+
+const app = createApp(App)
+
 // Global variable
-Vue.config.productionTip = false
-Vue.prototype.$config = config
-Vue.prototype.$isMobile = Vue.observable({ value: isMobile() })
+app.config.globalProperties.$config = config
+// Vue2 的 Vue.observable 在 Vue3 用 reactive 替代；组件内仍以 this.$isMobile.value 访问
+app.config.globalProperties.$isMobile = reactive({ value: isMobile() })
 
-// Init Progress Bar
-const options = {
-  color: '#b28fce',
-  thickness: '4px',
-  transition: {
-    speed: '0.2s',
-    opacity: '0.5s',
-    termination: 300,
-  },
-  location: 'top',
-  autoRevert: true,
-  inverse: false,
-}
-Vue.use(VueProgressBar, options)
+app.use(router)
+app.use(store)
 
-// Init Player
-Vue.use(APlayer, { productionTip: false })
+// 注册 APlayer 包裹组件（原 @moefe/vue-aplayer 仅支持 Vue2，已替换为基于原生 aplayer 的包裹组件）
+app.component('APlayer', APlayer)
 
 // Init Site Title
 const { title, subtitle } = config
@@ -52,11 +42,7 @@ AV.init(config.leancloud)
 // Init Cover
 new Image().src = config.defaultCover
 
-new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-}).$mount('#app')
+app.mount('#app')
 
 // (o=^•ェ•)o
 const labelStyle = 'line-height:22px;color:#FFF;background:#D68FE9;'

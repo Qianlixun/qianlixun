@@ -2,9 +2,12 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+  padding-top: 18px;
+  border-top: 1px solid $border-soft;
 
   .site-info {
     text-align: center;
+    color: $text-secondary;
     @include pc-layout {
       padding-bottom: 6px;
       font-size: $font-size-normal;
@@ -15,24 +18,32 @@ footer {
     }
 
     a {
-      transition: color 0.3s ease-out;
+      color: $link-color;
+      transition: color 0.3s ease-out, opacity 0.3s ease-out;
       &:hover {
-        color: $link-color;
+        opacity: 0.75;
       }
     }
 
     .icon-heart {
-      margin-left: 5px;
+      margin: 0 5px;
+      color: $sakura-color;
     }
   }
 
   .sakura {
     position: fixed;
-    right: 12px;
-    bottom: 12px;
-    width: 28px;
-    height: 28px;
-    animation: rotate 2s linear 0s infinite;
+    right: 14px;
+    bottom: 14px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 4px rgba(232, 122, 144, 0.4));
+    animation: rotate 6s linear 0s infinite;
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: scale(1.12) rotate(20deg);
+    }
     @include sp-layout {
       display: none;
     }

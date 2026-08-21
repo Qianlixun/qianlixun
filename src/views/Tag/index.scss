@@ -1,33 +1,43 @@
 #tag {
   .page {
-    padding: 16px 0;
+    padding: 18px 0;
     overflow: hidden;
-    @include card-page;
+    border-radius: $radius;
+    border: 1px solid $border-soft;
+    @include pc-layout {
+      background-color: $surface;
+      box-shadow: $card-shadow;
+    }
   }
 
   .content {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 16px;
+    padding: 18px;
 
     li {
       list-style: none;
       @include pc-layout {
-        margin: 10px 12px;
+        margin: 8px 10px;
       }
       @include sp-layout {
-        margin: 10px 6px;
+        margin: 8px 6px;
       }
 
       span {
-        padding: 4px 10px 6px;
-        border-radius: 3px;
+        display: inline-block;
+        padding: 7px 16px;
+        border-radius: $radius-pill;
         background-color: $bg-dark;
-        transition: background 0.3s ease-out;
+        color: $text-secondary;
+        font-size: $font-size-normal;
+        transition: all 0.3s ease-out;
 
         &:hover {
-          background-color: $bg-dark-deep;
+          color: white;
+          background-image: $gradient-primary;
+          box-shadow: $shadow-1;
+          transform: translateY(-2px);
         }
       }
     }
@@ -36,14 +46,16 @@
   .clean {
     padding-left: 22px;
     text-align: left;
+    font-size: $font-size-normal;
+    color: $text-secondary;
 
     .clean-btn {
       margin-left: 12px;
-      padding: 5px 10px;
-      border-radius: 3px;
+      padding: 5px 12px;
+      border-radius: $radius-pill;
       background-color: $bg-dark;
-      transition: background 0.3s ease-out;
       color: $link-color;
+      transition: background 0.3s ease-out;
 
       &:hover {
         background-color: $bg-dark-dim;
@@ -53,8 +65,18 @@
 }
 
 .empty-tip {
-  padding: 60px 0;
+  padding: 80px 20px;
   text-align: center;
-  color: $whitesmoke;
+  color: $text-muted;
   font-size: $font-size-normal;
+
+  p {
+    position: relative;
+    &::before {
+      content: '🌸';
+      display: block;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+  }
 }

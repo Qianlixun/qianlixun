@@ -18,6 +18,9 @@
                   :loadCover="index < LOAD_INX"
                   @loadNext="loadNext"
                 />
+                <span v-if="isProject(post)" class="badge">
+                  <i class="icon icon-folder"></i>项目
+                </span>
                 <div class="post-head">
                   <h3>{{ post.title }}</h3>
                   <span>{{ post.cover.title }}</span>
@@ -64,6 +67,7 @@ import MarkDown from '@/components/MarkDown'
 import Loading from '@/components/Loading'
 import Pagination from '@/components/Pagination'
 import Cover from '@/components/Cover'
+import config from '@/config'
 
 export default {
   name: 'Home',
@@ -153,6 +157,9 @@ export default {
     showTips(post) {
       const tips = `要去看看<span style="color: #b854d4"> ${post.title} </span>吗？`
       this.$store.dispatch('showTips', { tips })
+    },
+    isProject(post) {
+      return !!config.projectResources[post.number]
     },
   },
 }

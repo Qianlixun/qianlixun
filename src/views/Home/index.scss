@@ -17,34 +17,16 @@
     transition: $transition-base;
     will-change: transform;
     overflow: hidden;
+    border-radius: $radius;
+    border: 1px solid $border-soft;
     @include card;
     @include pc-layout {
-      margin-bottom: 15px;
-      width: 49.2%;
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 150px;
-        height: 100%;
-        transform: skewX(-30deg);
-        transition: left 1s ease 0s;
-        z-index: $zindex-1;
-        background: linear-gradient(
-          to right,
-          rgba(255, 255, 255, 0) 0,
-          rgba(255, 255, 255, 0.5) 50%,
-          rgba(255, 255, 255, 0) 100%
-        );
-      }
-
+      margin-bottom: 18px;
+      width: 49%;
       &:hover {
         transform: translateY(-6px);
         box-shadow: $card-shadow-hover;
-        &::before {
-          left: 150%;
-        }
+        border-color: $border;
       }
     }
     @include sp-layout {
@@ -60,43 +42,81 @@
     .post-header {
       position: relative;
       overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: $gradient-soft;
+
+      :deep(.wrapper),
+      :deep(.wrapper img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      img {
+        transition: transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1);
+      }
+
+      .badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 12px;
+        font-size: $font-size-small;
+        color: white;
+        border-radius: $radius-pill;
+        background-image: $gradient-primary;
+        box-shadow: $shadow-1;
+        .icon {
+          font-size: $font-size-small;
+        }
+      }
+
       .post-head {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-end;
         position: absolute;
         left: 0;
-        bottom: -1px;
-        padding: 0 12px;
+        bottom: 0;
+        padding: 18px 14px 10px;
         width: 100%;
-        height: 50px;
-        background-color: $bg-white-deep;
-        backdrop-filter: blur(5px) saturate(150%) brightness(1.1);
-        box-shadow: 0 -3px 5px $bg-dark;
-      }
+        background: linear-gradient(to top, rgba(40, 20, 60, 0.72) 0%, rgba(40, 20, 60, 0) 100%);
+        backdrop-filter: blur(2px);
 
-      h3,
-      span {
-        @include clip;
-      }
+        h3,
+        span {
+          color: white;
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+        }
 
-      h3 {
-        font-size: $font-size-larger;
-        font-weight: $font-weight-normal;
-      }
+        h3 {
+          font-size: $font-size-larger;
+          font-weight: $font-weight-bold;
+          line-height: 1.35;
+        }
 
-      span {
-        font-size: $font-size-code;
-        text-transform: capitalize;
-        @include sp-layout {
-          transform: translateY(2px);
+        span {
+          font-size: $font-size-code;
+          white-space: nowrap;
+          opacity: 0.92;
+          @include sp-layout {
+            display: none;
+          }
         }
       }
     }
 
+    &:hover .post-header img {
+      transform: scale(1.06);
+    }
+
     .post-body {
-      flex:1;
-      padding: $card-padding;
+      flex: 1;
+      padding: 14px 16px;
       text-align: justify;
 
       p {
@@ -104,6 +124,7 @@
         -webkit-box-orient: vertical;
         margin: 0;
         font-size: $font-size-base;
+        color: $text-secondary;
         text-overflow: ellipsis;
         overflow: hidden;
 
@@ -122,36 +143,28 @@
 
     .post-meta {
       display: flex;
-      padding: $card-padding;
-      height: 50px;
-      border-top: 1px solid $bg-dark;
-      word-break: keep-all;
-      @include sp-layout {
-        max-width: 94vw;
-        overflow: auto;
-      }
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px 14px;
+      padding: 10px 16px 14px;
+      font-size: $font-size-small;
+      color: $text-muted;
+      border-top: 1px solid $border-soft;
 
       & > span {
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        margin-right: 12px;
-
-        &:last-child {
-          margin-right: 0;
-        }
-
-        span {
-          padding-right: 6px;
-          &:last-child {
-            padding-right: 0;
-          }
-        }
 
         .icon {
           margin-right: 4px;
+          color: $purple-dark;
         }
-        .icon-fire {
-          margin-top: -2px;
+      }
+
+      .labels span {
+        padding-right: 6px;
+        &:last-child {
+          padding-right: 0;
         }
       }
     }
@@ -161,6 +174,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 12px 0 24px;
+    margin: 16px 0 24px;
   }
 }

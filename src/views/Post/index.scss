@@ -1,79 +1,79 @@
 #post {
   article {
     position: relative;
-    overflow: unset;
+    overflow: hidden;
+    border-radius: $radius;
+    border: 1px solid $border-soft;
     @include card;
 
     .post-header {
       position: relative;
       overflow: hidden;
-      border-radius: 3px 3px 0 0;
+      aspect-ratio: 21 / 9;
+      background: $gradient-soft;
 
-      .wrapper {
-        transition: transform 0.5s ease-out;
+      :deep(.wrapper),
+      :deep(.wrapper img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
-      &:hover {
-        .wrapper {
-          transform: scale(1.04);
-        }
+      .wrapper {
+        transition: transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1);
+      }
+
+      &:hover .wrapper {
+        transform: scale(1.04);
       }
 
       .post-head {
         position: absolute;
         bottom: 0;
         width: 100%;
-        color: $brown;
-        background-color: $bg-white-deep;
-        backdrop-filter: blur(5px) saturate(150%) brightness(1.1);
-        box-shadow: 0 -3px 5px $bg-dark;
-
-        @include pc-layout {
-          padding: $card-padding;
-          height: 80px;
-        }
-        @include sp-layout {
-          padding: $card-padding-small;
-          height: 60px;
-        }
+        padding: 30px 20px 16px;
+        color: white;
+        background: linear-gradient(to top, rgba(40, 20, 60, 0.78) 0%, rgba(40, 20, 60, 0) 100%);
 
         .post-title {
           display: flex;
           justify-content: space-between;
-          align-items: center;
-
-          @include pc-layout {
-            height: 34px;
-          }
-          @include sp-layout {
-            height: 24px;
-          }
+          align-items: baseline;
+          gap: 12px;
 
           h1 {
-            font-weight: $font-weight-normal;
+            font-family: $font-family-title;
+            font-weight: $font-weight-bold;
+            font-size: $font-size-title;
+            line-height: 1.3;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
             @include sp-layout {
-              font-size: $font-size-larger;
+              font-size: $font-size-larger + 4px;
+            }
+          }
+
+          span {
+            flex-shrink: 0;
+            font-size: $font-size-small;
+            opacity: 0.9;
+            text-align: right;
+            @include sp-layout {
+              display: none;
             }
           }
         }
 
         .post-meta {
           display: flex;
-          @include pc-layout {
-            margin-top: 8px;
-          }
-          @include sp-layout {
-            margin-top: 4px;
-          }
+          flex-wrap: wrap;
+          gap: 4px 16px;
+          margin-top: 10px;
+          font-size: $font-size-small;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 
           & > span {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            margin-right: 12px;
-
-            &:last-child {
-              margin-right: 0;
-            }
 
             span {
               padding-right: 6px;
@@ -83,13 +83,8 @@
             }
 
             .icon {
-              margin-right: 4px;
-            }
-            .icon-fire {
-              margin-top: -2px;
-            }
-            .icon::before {
-              display: unset;
+              margin-right: 5px;
+              color: $sakura-color-light;
             }
           }
         }
@@ -97,7 +92,10 @@
     }
 
     .post-body {
-      padding: 25px 0;
+      padding: 24px 22px;
+      @include sp-layout {
+        padding: 18px 14px;
+      }
     }
   }
 }

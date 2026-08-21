@@ -5,11 +5,11 @@ header {
   align-items: center;
 
   @include pc-layout {
-    padding: 50px 0;
+    padding: 64px 0 36px;
   }
   @include sp-layout {
     margin-bottom: 4vw;
-    padding: 40px 0;
+    padding: 44px 0 36px;
     color: white;
     background-image: $mobile-bg;
     background-size: cover;
@@ -19,39 +19,43 @@ header {
 
   .title,
   .subtitle {
-    font-family: GuDianMingChaoTi;
+    font-family: $font-family-title;
     letter-spacing: 4px;
     @include pc-layout {
-      animation: fadeInDown 0.5s ease-out forwards;
+      animation: fadeInDown 0.6s ease-out forwards;
     }
     @include sp-layout {
-      animation: fadeInDownSP 0.5s ease-out forwards;
+      animation: fadeInDownSP 0.6s ease-out forwards;
     }
   }
 
   .title {
     transition: color 0.3s ease-out;
     @include pc-layout {
-      font-size: 48px;
-      line-height: 60px;
+      font-size: 52px;
+      line-height: 64px;
+      @include clip;
     }
     @include sp-layout {
       font-size: 44px;
       line-height: 56px;
+      color: $text-on-dark;
     }
     &:hover {
-      color: $link-color;
+      color: $purple-deep;
     }
   }
 
   .subtitle {
+    margin-top: 6px;
+    color: $text-secondary;
     @include pc-layout {
-      font-size: 22px;
-      line-height: 32px;
-    }
-    @include sp-layout {
       font-size: 20px;
       line-height: 30px;
+    }
+    @include sp-layout {
+      font-size: 18px;
+      line-height: 28px;
     }
   }
 
@@ -61,15 +65,19 @@ header {
     align-items: center;
     overflow: hidden;
     @include pc-layout {
-      margin-top: 10px;
-      padding: 0 32px;
-      height: 60px;
-      background-color: $bg-dark;
-      box-shadow: 0 0 10px $bg-dark-dim inset;
-      transition: all 0.5s ease;
-      animation: fadeIn 0.5s ease-out;
+      margin-top: 22px;
+      padding: 0 14px;
+      height: 58px;
+      gap: 4px;
+      background-color: $surface;
+      border: 1px solid $border-soft;
+      border-radius: $radius-pill;
+      box-shadow: $shadow-1;
+      backdrop-filter: blur(10px) saturate(140%);
+      animation: fadeIn 0.6s ease-out;
+      transition: box-shadow 0.3s ease;
       &:hover {
-        border-radius: 30px;
+        box-shadow: $shadow-2;
       }
     }
     @include sp-layout {
@@ -78,7 +86,7 @@ header {
       transform: translateY(40px);
       text-shadow: 0 0 1px $bg-dark-dim;
       box-shadow: 0 -1px 2px $bg-dark;
-      backdrop-filter: blur(4px) ;
+      backdrop-filter: blur(4px);
 
       .router-link-exact-active {
         color: $purple;
@@ -90,13 +98,23 @@ header {
       flex-direction: column;
       justify-content: space-around;
       align-items: center;
-      width: 50px;
-      transition: color 0.3s ease;
+      width: 60px;
+      height: 46px;
+      border-radius: $radius-pill;
+      transition: color 0.3s ease, background-color 0.3s ease;
 
       @include pc-layout {
         font-size: $font-size-large;
+        &.router-link-exact-active {
+          color: white;
+          background-image: $gradient-primary;
+          box-shadow: $shadow-1;
+        }
         &:hover {
-          color: $link-color;
+          color: $purple-deep;
+          &:not(.router-link-exact-active) {
+            background-color: $bg-dark;
+          }
         }
       }
       @include sp-layout {

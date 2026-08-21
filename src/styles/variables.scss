@@ -1,20 +1,28 @@
 // Colors
 // colors for theme.
 // --------------------------------------------------
-$whitesmoke: #f5f5f5;
-$black-light: #444;
-$purple: #d68fe9;
-$purple-dark: #b28fce;
-$purple-dim: #986db2;
-$purple-deep: #b854d4;
+// 二次元清新基调：紫粉 + 樱粉，做精致化收敛（统一色阶、降低噪点）
+$whitesmoke: #f5f5f7;
+$black-light: #42414d; // 柔和墨色，替代纯灰，提升可读性
+$purple: #cf95e8; // 主紫（清新）
+$purple-dark: #a87fd6;
+$purple-dim: #8a63b0;
+$purple-deep: #a64fd0; // 链接/强调
 $brown: #795548;
 
+// 品牌渐变（hero / 按钮 / 强调条）
+$gradient-brand: linear-gradient(135deg, #fbc2eb 0%, #a18cd1 100%);
+$gradient-primary: linear-gradient(135deg, #d39bee 0%, #a18cd1 100%);
+$gradient-soft: linear-gradient(135deg, #fdd6f0 0%, #d9c7f5 100%);
+
 // Scaffolding
-// Settings for some of the most global styles.
 // --------------------------------------------------
 
 // Global text color on <body>
 $text-color: $black-light;
+$text-secondary: #6b6b7b;
+$text-muted: #9a9aa8;
+$text-on-dark: #fff;
 
 // Global link color.
 $link-color: $purple-deep;
@@ -23,33 +31,39 @@ $link-color: $purple-deep;
 $selection-bg: $purple;
 $selection-color: white;
 
-// Panel
+// Panel（侧栏设置面板）
 $panel-color: #5d3523;
 $panel-bg-color: #fbf4f1;
 $panel-theme-bg-from-color: #fbc2eb;
 $panel-theme-bg-to-color: #a6c1ee;
 $panel-theme-border: #ffe4d8;
 
-// Text Clip
+// Text Clip（标题渐变文字）
 $text-clip-start: #fb618d;
 $text-clip-center: #8dc00a;
 $text-clip-end: $purple;
 
-// Background
+// Background（半透明卡面，分层）
 $bg-white: rgba(255, 255, 255, 0.6);
 $bg-white-dim: rgba(255, 255, 255, 0.7);
-$bg-white-deep: rgba(255, 255, 255, 0.8);
-$bg-dark: rgba(0, 0, 0, 0.1);
-$bg-dark-dim: rgba(0, 0, 0, 0.2);
-$bg-dark-deep: rgba(0, 0, 0, 0.3);
-$bg-aplayer: rgba(178, 143, 206, 0.65);
-$bg-sp-color: #f4f8fb;
+$bg-white-deep: rgba(255, 255, 255, 0.82);
+$bg-dark: rgba(0, 0, 0, 0.06); // 收敛：原 0.1 → 更轻的描边
+$bg-dark-dim: rgba(0, 0, 0, 0.12);
+$bg-dark-deep: rgba(0, 0, 0, 0.22);
+$bg-aplayer: rgba(168, 127, 214, 0.65);
+$bg-sp-color: #f4f6fb; // 移动端底色（偏冷白，呼应清新）
+
+// Surface（语义化卡面 + 描边）
+$surface: rgba(255, 255, 255, 0.72);
+$surface-strong: rgba(255, 255, 255, 0.9);
+$border-soft: rgba(120, 90, 160, 0.1);
+$border: rgba(120, 90, 160, 0.16);
 
 // Sakura
 $sakura-color: #e87a90;
 $sakura-color-light: #fedfe1;
 
-// Concat
+// Concat（联系方式）
 $concat-email-color: $purple-dark;
 $concat-github-color: #c3ce5f;
 $concat-telegram-color: #6fd4ff;
@@ -57,7 +71,7 @@ $concat-music-color: #f596aa;
 $concat-rss-color: #ffba84;
 
 // Loading
-$loading-bg: #aaaaaa;
+$loading-bg: #c9b8d8;
 $loading-color-one: #faaacc;
 $loading-color-two: #c8aacc;
 $loading-color-three: #96aacc;
@@ -69,15 +83,29 @@ $code-color-red: #fc625d;
 $code-color-yello: #fdbc40;
 $code-color-green: #35cd4b;
 
+// Radius（统一圆角体系）
+$radius-sm: 8px;
+$radius: 14px;
+$radius-lg: 20px;
+$radius-pill: 999px;
+
+// Shadow（柔和分层阴影，替代旧硬阴影）
+$shadow-1: 0 2px 10px rgba(140, 100, 180, 0.08);
+$shadow-2: 0 8px 24px rgba(140, 100, 180, 0.12);
+$shadow-3: 0 16px 44px rgba(140, 100, 180, 0.18);
+$card-shadow: $shadow-2;
+$card-shadow-hover: $shadow-3;
+$card-shadow-light: 0 6px 20px rgba(140, 100, 180, 0.1);
+$card-shadow-light-hover: 0 14px 38px rgba(140, 100, 180, 0.16);
+$block-shadow: #e7dfef 0px 10px 10px -10px inset, #e7dfef 0px -10px 10px -10px inset;
+
 // Typography
-// Font, line-height, and elements colors.
 // --------------------------------------------------
 
-// Font families.
-// 已移除 Fira Mono / Noto Serif SC 外部字体（Google Fonts 国内不可达且阻塞首屏），
-// 改用系统字体栈，保证各平台可读且不依赖外部请求。
+// Font families. 系统字体栈，不依赖外部请求。
 $font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC',
   'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-title: GuDianMingChaoTi, 'PingFang SC', 'Microsoft YaHei', serif;
 
 // Font Weight
 $font-weight-normal: 400;
@@ -92,14 +120,15 @@ $font-size-small: $font-size-base - 2px;
 $font-size-large: $font-size-base + 2px;
 $font-size-smaller: $font-size-base - 4px;
 $font-size-larger: $font-size-base + 4px;
+$font-size-title: 30px;
 
 // Headings font size
 $font-size-headings-base: 24px;
 $font-size-headings-step: 2px;
 
 // Global line height
-$line-height-base: 1.6;
-$line-height-block: 1.8;
+$line-height-base: 1.7;
+$line-height-block: 1.85;
 
 // Z-index master list
 // --------------------------------------------------
@@ -111,32 +140,23 @@ $zindex-4: 1000;
 
 // Layout sizes
 // --------------------------------------------------
-$page-desktop: 876px;
+$page-desktop: 920px; // 略放宽，更舒展
 
 // Padding sizes
 // --------------------------------------------------
-$card-padding-small: 8px 10px;
-$card-padding: 12px 14px;
-$code-padding: 12px 14px;
+$card-padding-small: 10px 14px;
+$card-padding: 16px 18px;
+$code-padding: 14px 16px;
 
-// Shadow
+// Image Assets（$base-url 由 vite.config.js additionalData 注入）
 // --------------------------------------------------
-$card-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-$card-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.24);
-$card-shadow-light: 0 14px 38px rgba(0, 0, 0, 0.08), 0 3px 8px rgba(0, 0, 0, 0.06);
-$card-shadow-light-hover: 0 14px 38px rgba(0, 0, 0, 0.14), 0 3px 8px rgba(0, 0, 0, 0.12);
-$block-shadow: #ccc 0px 10px 10px -10px inset, #ccc 0px -10px 10px -10px inset;
-
-// Image Assets
-// --------------------------------------------------
-// 原作者图床已失效，所有素材自托管到 public/assets/img/
-// 路径前缀 $base-url 由 vite.config.js additionalData 注入（对应 GitHub Pages 子路径）
 $mobile-bg: url('#{$base-url}assets/img/mobile.svg');
 $backtop-bg: url('#{$base-url}assets/img/back-top.svg');
 
 // Transition
 // --------------------------------------------------
 $transition-base: all 0.3s ease 0s, transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+$transition-soft: all 0.25s ease;
 
 // About
 // --------------------------------------------------

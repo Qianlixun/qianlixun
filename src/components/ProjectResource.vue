@@ -1,5 +1,9 @@
 <template>
   <div v-if="project" class="project-resource">
+    <div class="pr-head">
+      <i class="icon icon-folder"></i>
+      <span>项目资源</span>
+    </div>
     <!-- 视频演示：B 站外链嵌入播放 -->
     <div v-if="project.bvid" class="video">
       <iframe
@@ -71,31 +75,72 @@ export default {
 
 <style lang="scss" scope>
 .project-resource {
-  margin: 1rem 0;
+  margin: 1.5rem 0 0.5rem;
+  padding: 18px 20px 20px;
+  border-radius: $radius;
+  border: 1px solid $border-soft;
+  background-color: $surface;
+  box-shadow: $card-shadow-light;
+
+  .pr-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    color: $text-color;
+
+    .icon {
+      color: $purple-deep;
+    }
+
+    &::before {
+      content: '';
+      width: 4px;
+      height: 18px;
+      border-radius: $radius-pill;
+      background-image: $gradient-primary;
+    }
+  }
+
   .video {
     position: relative;
     width: 100%;
     padding-top: 56.25%; // 16:9
     margin-bottom: 1rem;
+    border-radius: $radius;
+    overflow: hidden;
+    box-shadow: $shadow-2;
     iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      border-radius: 4px;
+      border: none;
     }
   }
+
   .download {
     .btn {
-      display: inline-block;
-      padding: 8px 20px;
-      border-radius: 4px;
-      background: $purple-dark;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      border-radius: $radius-pill;
+      background-image: $gradient-primary;
       color: white;
       font-size: $font-size-normal;
+      box-shadow: $shadow-1;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
       &:hover {
-        background: $purple;
+        transform: translateY(-2px);
+        box-shadow: $shadow-2;
+        opacity: 0.95;
+      }
+      .icon {
+        font-size: $font-size-normal;
       }
     }
   }

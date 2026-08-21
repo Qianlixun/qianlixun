@@ -4,8 +4,8 @@
   // =============== Hero ===============
   .hero {
     position: relative;
-    padding: 64px 24px 40px;
-    margin-bottom: 24px;
+    padding: 36px 24px 24px;
+    margin-bottom: 18px;
     overflow: hidden;
     border-radius: $radius-lg;
     background:
@@ -24,7 +24,7 @@
     }
 
     @include sp-layout {
-      padding: 40px 16px 28px;
+      padding: 28px 16px 20px;
     }
   }
 
@@ -40,13 +40,13 @@
     display: inline-flex;
     margin: 0;
     font-family: $font-family-header;
-    font-size: 88px;
+    font-size: 72px;
     line-height: 1;
     letter-spacing: 6px;
     color: $text-color;
 
     @include sp-layout {
-      font-size: 56px;
+      font-size: 48px;
       letter-spacing: 4px;
     }
 
@@ -78,7 +78,7 @@
   }
 
   .hero-sub {
-    margin: 18px 0 0;
+    margin: 12px 0 0;
     font-size: $font-size-large;
     color: $text-secondary;
     letter-spacing: 2px;
@@ -92,7 +92,7 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    margin-top: 22px;
+    margin-top: 14px;
     color: $text-muted;
     font-size: $font-size-code;
 
@@ -108,8 +108,8 @@
     display: inline-flex;
     align-items: center;
     gap: 18px;
-    margin-top: 28px;
-    padding: 12px 22px;
+    margin-top: 16px;
+    padding: 10px 22px;
     border-radius: $radius-pill;
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(8px);

@@ -9,6 +9,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # 把 secret 注入到 job 级 env，供下方 if 条件判断（secrets 上下文不能直接用于 if 表达式）
+    env:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -24,7 +27,7 @@ jobs:
 
       - name: Deploy to Qianlixun/qianlixun.github.io (master)
         # 未配置 DEPLOY_KEY 时跳过，仅跑构建
-        if: ${{ secrets.DEPLOY_KEY != '' }}
+        if: ${{ env.DEPLOY_KEY != '' }}
         uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.DEPLOY_KEY }}

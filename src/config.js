@@ -38,14 +38,6 @@ export default {
   },
 
   /**
-   * leancloud 配置 【注意切换为国际版】
-   */
-  leancloud: {
-    appId: 'LjOwR4ELEqbauKvtQbwq5TUw-MdYXbMMI',
-    appKey: 'BOSFJ49ohbGctgn4zvJE9VN6',
-  },
-
-  /**
    * =========================================================
    *                        页面设置
    * =========================================================
@@ -76,33 +68,6 @@ export default {
     display: true,
     enableComment: false,
     qoute: '灯笼流丽，百鬼夜行',
-  },
-
-  /**
-   * 灵感页面
-   */
-  inspirationOpts: {
-    display: true,
-    enableComment: true,
-    qoute: '詠奏妖華，明鏡止水',
-  },
-
-  /**
-   * 书单页面
-   */
-  bookOpts: {
-    display: true,
-    enableComment: true,
-    qoute: '追想風景 彼岸帰航',
-  },
-
-  /**
-   * 友链页面
-   */
-  friendOpts: {
-    display: true,
-    enableComment: true,
-    qoute: '青青子衿，悠悠我心',
   },
 
   /**
@@ -151,34 +116,12 @@ export default {
   defaultCover: '/assets/img/defaultCover.svg',
 
   /**
-   * 音乐播放器,
+   * 项目资源映射：Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号 }
+   * 下载为软限制（登录 GitHub 后显示入口）；视频在详情页嵌入 B 站播放器
    */
-  APlayer: [
-    {
-      name: '春の凑に',
-      artist: 'TUMENECO',
-      url: 'https://files.catbox.moe/ducy49.mp3',
-      cover: '/assets/img/cover2.svg',
-    },
-    {
-      name: '夏阳炎',
-      artist: '天威梦方',
-      url: 'https://files.catbox.moe/7migen.mp3',
-      cover: '/assets/img/cover3.svg',
-    },
-    {
-      name: '秋风のとおり道',
-      artist: '风神华伝',
-      url: 'https://files.catbox.moe/b58fq6.mp3',
-      cover: '/assets/img/cover4.svg',
-    },
-    {
-      name: '冬のわすれもの',
-      artist: 'ハルノカゼ',
-      url: 'https://files.catbox.moe/vwnawp.mp3',
-      cover: '/assets/img/cover5.svg',
-    },
-  ],
+  projectResources: {
+    // 1: { repo: 'demo-project', bvid: 'BV1xx411c7mD' },
+  },
 
   /**
    * 主题配色，主要用于文章、灵感、关于等卡片配色

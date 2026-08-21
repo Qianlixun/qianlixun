@@ -32,10 +32,6 @@
                   {{ post.created_at }}
                 </span>
                 <span>
-                  <i class="icon icon-fire"></i>
-                  热度{{ times[post.id] || 1 }}℃
-                </span>
-                <span>
                   <i class="icon icon-bookmark-empty"></i>
                   {{ post.milestone ? post.milestone.title : '未分类' }}
                 </span>
@@ -84,7 +80,6 @@ export default {
       pageSize: 10,
       posts: [],
       list: [],
-      times: {},
       LOAD_INX: 4,
     }
   },
@@ -142,11 +137,6 @@ export default {
         this.posts = posts
         this.list[queryPage] = posts
       })
-
-      // 获取文章热度
-      const ids = posts.map((o) => o.id)
-      const hot = await this.$store.dispatch('queryHot', { ids })
-      this.times = { ...this.times, ...hot }
     },
     // 滚动到顶部
     scrollTop(cb) {

@@ -22,7 +22,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Panel from '@/components/Panel'
 import ScrollTop from '@/components/ScrollTop'
-import { getLocation, isMobile } from '@/utils'
+import { isMobile } from '@/utils'
 
 export default {
   name: 'App',
@@ -64,7 +64,6 @@ export default {
   },
   created() {
     this.initProgress()
-    this.visitorStatistics()
   },
   mounted() {
     // 顶部进度条：原 vue-progressbar 已替换为 nprogress
@@ -97,12 +96,6 @@ export default {
       this.$router.afterEach(() => {
         NProgress.done()
       })
-    },
-    // 统计访客来源
-    visitorStatistics() {
-      const referrer = getLocation(document.referrer)
-      const hostname = referrer.hostname || '直接访问'
-      this.$store.dispatch('visitorStatistics', hostname)
     },
     // 滚动到顶部
     scrollTop() {

@@ -10,10 +10,6 @@
               {{ post.created_at }}
             </span>
             <span>
-              <i class="icon icon-fire"></i>
-              热度{{ times[post.id] || 1 }}℃
-            </span>
-            <span>
               <i class="icon icon-bookmark-empty"></i>
               {{ post.milestone ? post.milestone.title : '未分类' }}
             </span>
@@ -49,10 +45,6 @@ export default {
     posts: {
       type: Array,
       default: () => [],
-    },
-    times: {
-      type: Object,
-      default: () => {},
     },
     loading: {
       type: Boolean,

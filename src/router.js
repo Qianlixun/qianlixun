@@ -32,21 +32,6 @@ export default createRouter({
       component: () => import('@/views/Tag'),
     },
     {
-      path: '/inspiration',
-      name: 'inspiration',
-      component: () => import('@/views/Inspiration'),
-    },
-    {
-      path: '/book',
-      name: 'book',
-      component: () => import('@/views/Book'),
-    },
-    {
-      path: '/friend',
-      name: 'friend',
-      component: () => import('@/views/Friend'),
-    },
-    {
       path: '/about',
       name: 'about',
       component: () => import('@/views/About'),

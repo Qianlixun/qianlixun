@@ -5,7 +5,6 @@
         <Quote :quote="$config.archiveOpts.qoute" />
         <ArchiveCard
           :posts="posts"
-          :times="times"
           :loading="loading"
           :isDisabledPrev="isDisabledPrev"
           :isDisabledNext="isDisabledNext"
@@ -42,7 +41,6 @@ export default {
       pageSize: 10,
       posts: [],
       list: [],
-      times: {},
     }
   },
   computed: {
@@ -91,11 +89,6 @@ export default {
         this.posts = posts
         this.list[queryPage] = posts
       })
-
-      // 获取文章热度
-      const ids = posts.map((o) => o.id)
-      const hot = await this.$store.dispatch('queryHot', { ids })
-      this.times = { ...this.times, ...hot }
     },
     // 滚动到顶部
     scrollTop(cb) {

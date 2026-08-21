@@ -4,13 +4,13 @@
   // =============== Hero ===============
   .hero {
     position: relative;
-    padding: 36px 24px 24px;
+    padding: 18px 24px;
     margin-bottom: 18px;
     overflow: hidden;
-    border-radius: $radius-lg;
+    border-radius: $radius;
     background:
-      radial-gradient(at 20% 20%, rgba($purple, 0.18), transparent 50%),
-      radial-gradient(at 80% 30%, rgba($pink, 0.16), transparent 50%),
+      radial-gradient(at 20% 50%, rgba($purple, 0.12), transparent 60%),
+      radial-gradient(at 80% 50%, rgba($pink, 0.1), transparent 60%),
       $gradient-mesh;
 
     &::after {
@@ -19,82 +19,36 @@
       inset: 0;
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='1' cy='1' r='1' fill='%23ffffff' opacity='0.25'/></svg>");
       background-size: 24px 24px;
-      opacity: 0.4;
+      opacity: 0.3;
       pointer-events: none;
     }
 
     @include sp-layout {
-      padding: 28px 16px 20px;
+      padding: 14px 16px;
     }
   }
 
   .hero-inner {
     position: relative;
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
     text-align: center;
-    max-width: 720px;
-    margin: 0 auto;
-  }
-
-  .hero-title {
-    display: inline-flex;
-    margin: 0;
-    font-family: $font-family-header;
-    font-size: 72px;
-    line-height: 1;
-    letter-spacing: 6px;
-    color: $text-color;
 
     @include sp-layout {
-      font-size: 48px;
-      letter-spacing: 4px;
-    }
-
-    .char {
-      display: inline-block;
-      background-image: $gradient-text;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: hero-char-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
-
-      &.c1 { animation-delay: 0.05s; }
-      &.c2 { animation-delay: 0.18s; }
-      &.c3 { animation-delay: 0.32s; }
+      justify-content: center;
     }
   }
 
-  @keyframes hero-char-rise {
-    from {
-      opacity: 0;
-      transform: translateY(28px) scale(0.85);
-      filter: blur(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0);
-    }
-  }
-
-  .hero-sub {
-    margin: 12px 0 0;
-    font-size: $font-size-large;
-    color: $text-secondary;
-    letter-spacing: 2px;
-
-    @include sp-layout {
-      font-size: $font-size-base;
-    }
-  }
-
-  .hero-quote {
+  .hero-row {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    margin-top: 14px;
-    color: $text-muted;
-    font-size: $font-size-code;
+    color: $text-secondary;
+    font-size: $font-size-base;
 
     .quote-line {
       display: inline-block;
@@ -108,17 +62,17 @@
     display: inline-flex;
     align-items: center;
     gap: 18px;
-    margin-top: 16px;
-    padding: 10px 22px;
+    margin: 0;
+    padding: 6px 18px;
     border-radius: $radius-pill;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.78);
     backdrop-filter: blur(8px);
     border: 1px solid $border-soft;
     box-shadow: $shadow-1;
 
     @include sp-layout {
       gap: 10px;
-      padding: 8px 14px;
+      padding: 6px 12px;
     }
   }
 

@@ -1,13 +1,9 @@
 <template>
   <div id="home">
-    <!-- Hero 区：固定展示，与内容无关 -->
+    <!-- Hero 区：精简为一行引子 + 数据胶囊 -->
     <section class="hero">
       <div class="hero-inner">
-        <h1 class="hero-title">
-          <span class="char c1">千</span><span class="char c2">里</span><span class="char c3">寻</span>
-        </h1>
-        <p class="hero-sub">{{ subtitle }}</p>
-        <div class="hero-quote">
+        <div class="hero-row">
           <span class="quote-line"></span>
           <span class="quote-text">个人项目资源站 · 用 GitHub Issues 做内容</span>
           <span class="quote-line"></span>
@@ -156,9 +152,6 @@ export default {
     // 其余文章
     articles() {
       return this.posts.filter((p) => !config.projectResources[p.number])
-    },
-    subtitle() {
-      return config.subtitle
     },
     stats() {
       return {

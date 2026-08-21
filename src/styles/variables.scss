@@ -130,9 +130,9 @@ $block-shadow: #ccc 0px 10px 10px -10px inset, #ccc 0px -10px 10px -10px inset;
 // Image Assets
 // --------------------------------------------------
 // 原作者图床已失效，所有素材自托管到 public/assets/img/
-$mobile-bg: url('/assets/img/mobile.svg');
-$aplayer-bg: url('/assets/img/reimu.svg');
-$backtop-bg: url('/assets/img/back-top.svg');
+// 路径前缀 $base-url 由 vite.config.js additionalData 注入（对应 GitHub Pages 子路径）
+$mobile-bg: url('#{$base-url}assets/img/mobile.svg');
+$backtop-bg: url('#{$base-url}assets/img/back-top.svg');
 
 // Transition
 // --------------------------------------------------

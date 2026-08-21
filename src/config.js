@@ -3,6 +3,9 @@
  * 食用指南：https://github.com/Qianlixun/blog/issues/41
  */
 
+// GitHub Pages 子路径前缀（构建时替换）
+const B = import.meta.env.BASE_URL
+
 export default {
   /**
    * =========================================================
@@ -81,19 +84,19 @@ export default {
     college: 'Communication&Information Engineering',
     contact: [
       {
-        icon: '/assets/img/email.svg',
+        icon: `${B}assets/img/email.svg`,
         link: 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=tNnR9Nfc1drH3N3NwZrX29k',
       },
       {
-        icon: '/assets/img/github.svg',
+        icon: `${B}assets/img/github.svg`,
         link: 'https://github.com/Qianlixun',
       },
       {
-        icon: '/assets/img/music.svg',
+        icon: `${B}assets/img/music.svg`,
         link: 'https://music.163.com/#/user/home?id=103060582',
       },
       {
-        icon: '/assets/img/twitter.svg',
+        icon: `${B}assets/img/twitter.svg`,
         link: 'https://twitter.com/Qianlixun',
       },
     ],
@@ -108,12 +111,12 @@ export default {
   /**
    * 加载动画
    */
-  loadingImg: '/assets/img/loading.svg',
+  loadingImg: `${B}assets/img/loading.svg`,
 
   /**
    * 文章默认图
    */
-  defaultCover: '/assets/img/defaultCover.svg',
+  defaultCover: `${B}assets/img/defaultCover.svg`,
 
   /**
    * 项目资源映射：Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号 }

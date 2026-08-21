@@ -8,12 +8,18 @@ $purple: #cf95e8; // 主紫（清新）
 $purple-dark: #a87fd6;
 $purple-dim: #8a63b0;
 $purple-deep: #a64fd0; // 链接/强调
+$pink: #f596aa; // 樱粉（取自 themeColors 桃，与主紫做渐变伙伴）
+$pink-deep: #d63b6c; // 樱粉深（用于强调描边）
 $brown: #795548;
 
 // 品牌渐变（hero / 按钮 / 强调条）
 $gradient-brand: linear-gradient(135deg, #fbc2eb 0%, #a18cd1 100%);
 $gradient-primary: linear-gradient(135deg, #d39bee 0%, #a18cd1 100%);
 $gradient-soft: linear-gradient(135deg, #fdd6f0 0%, #d9c7f5 100%);
+// 用于 hero 大字渐变 + 强调文字
+$gradient-text: linear-gradient(135deg, #d39bee 0%, #fb6fa6 50%, #d39bee 100%);
+// hero 背景：两层径向 + 底色
+$gradient-mesh: linear-gradient(180deg, #f7e9fa 0%, #ffe9f1 100%);
 
 // Scaffolding
 // --------------------------------------------------
@@ -106,6 +112,8 @@ $block-shadow: #e7dfef 0px 10px 10px -10px inset, #e7dfef 0px -10px 10px -10px i
 $font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC',
   'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-family-title: GuDianMingChaoTi, 'PingFang SC', 'Microsoft YaHei', serif;
+$font-family-header: $font-family-title; // hero 大字用古风字
+$font-family-code: 'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace;
 
 // Font Weight
 $font-weight-normal: 400;

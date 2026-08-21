@@ -17,6 +17,7 @@ export default createStore({
     tips: '',
     tipsUpdateAt: '',
     totalCount: 0,
+    tags: null, // 标签列表（首次访问时拉取）
     showPanel: false,
   },
   mutations: {
@@ -28,6 +29,10 @@ export default createStore({
     // 设置文章总数
     setTotalCount(state, totalCount) {
       state.totalCount = totalCount
+    },
+    // 设置标签列表
+    setTags(state, tags) {
+      state.tags = tags || []
     },
     // 设置是否显示看板
     setShowPanel(state, status) {
@@ -70,10 +75,12 @@ export default createStore({
       return formatCategory(data || [])
     },
     // 获取标签
-    async queryTag() {
+    async queryTag({ commit }) {
       const data = await queryTag()
       const filterLabel = ['Inspiration', 'Friend', 'Book', 'About']
-      return (data || []).filter((o) => !filterLabel.includes(o.name))
+      const tags = (data || []).filter((o) => !filterLabel.includes(o.name))
+      commit('setTags', tags)
+      return tags
     },
     // 获取书单 & 友链 & 关于
     async queryPage(context, { type }) {

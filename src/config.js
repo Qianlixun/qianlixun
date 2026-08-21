@@ -125,7 +125,9 @@ export default {
   projectResources: {
     // Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号 }
     // 下载为软限制（登录 GitHub 后显示入口）；视频在详情页嵌入 B 站播放器
-    1: { repo: 'qianlixun' }, // 示例：站点源码仓库（欢迎文章）
+    1: { repo: 'qianlixun' }, // 站点源码仓库（欢迎文章）
+    4: { repo: 'qianlixun' }, // 示例：Vue3 + Vite 模板（占位仓库，等你创建真实仓库后替换）
+    5: { repo: 'qianlixun' }, // 示例：REST vs GraphQL 选型记录（占位仓库）
     // 2: { repo: 'demo-project', bvid: 'BV1xx411c7mD' },
   },
 

@@ -94,7 +94,8 @@ export default {
       if (this.milestone.number === category.number) return
       this.reset()
       this.milestone = category
-      this.totalCount = await this.$store.dispatch('queryFilterArchivesCount', { milestone: category.title })
+      // REST 按 milestone 号筛选（GraphQL 已移除）
+      this.totalCount = await this.$store.dispatch('queryFilterArchivesCount', { milestone: category.number })
       this.filterPosts()
     },
     // 重置

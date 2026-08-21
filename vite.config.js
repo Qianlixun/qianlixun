@@ -2,11 +2,11 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 
-// GitHub Pages 项目站点子路径（仓库名 qianlixun，非 <user>.github.io）
-const base = '/qianlixun/'
+// GitHub Pages 用户站点根域名部署（dist 推送到 Qianlixun/qianlixun.github.io）
+const base = '/'
 
 // Vite 取代 vue.config.js（Vue CLI 已移除）。
-// - base 对应 GitHub Pages 项目子路径（/qianlixun/），配 %BASE_URL% 与 import.meta.env.BASE_URL 使用
+// - base '/' 对应 GitHub Pages 用户站点根域名（qianlixun.github.io）
 // - @ 别名保持与原有 @/ 引用一致
 // - SCSS 全局变量/混入通过 additionalData 注入（沿用原 vue.config 的 sass 配置）
 export default defineConfig({

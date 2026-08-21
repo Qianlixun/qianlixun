@@ -52,8 +52,8 @@ export default createStore({
     // 获取文章总数
     async queryArchivesCount({ commit }) {
       const data = await queryArchivesCount()
-      const totalCount = data.repository.issues.totalCount
-      commit('setTotalCount', totalCount)
+      // 仓库缺失/API 异常时 GraphQL 返回 repository=null，兜底为 0
+      commit('setTotalCount', data?.repository?.issues?.totalCount || 0)
     },
     // 获取分类 & 标签筛选文章数量
     async queryFilterArchivesCount(context, payload) {
@@ -63,13 +63,13 @@ export default createStore({
     // 获取灵感总数
     async queryInspirationCount() {
       const data = await queryInspirationCount()
-      return data.repository.issues.totalCount
+      return data?.repository?.issues?.totalCount ?? 0
     },
     // 获取归档
     async queryPosts(context, payload) {
       const data = await queryPosts(payload)
-      data.forEach(formatPost)
-      return data
+      ;(data || []).forEach(formatPost)
+      return data || []
     },
     // 获取文章热度
     async queryHot(context, { ids }) {

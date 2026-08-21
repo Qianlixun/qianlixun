@@ -1,61 +1,55 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from './views/Home'
-import Post from './views/Post'
-import Archive from './views/Archive'
-import Category from './views/Category'
-import Tag from './views/Tag'
-import Inspiration from './views/Inspiration'
-import Book from './views/Book'
-import Friend from './views/Friend'
-import About from './views/About'
 
+// ponytail: 路由懒加载——按需下载视图 chunk，首屏只加载当前页代码。
+// 已知上限：多视图共享的第三方库（marked/katex 等）仍会进入公共 chunk，
+// 若主 chunk 仍超 500KB 需再 manualChunks 显式分包。
 export default createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: () => import('@/views/Home'),
     },
     {
       path: '/post/:number',
       name: 'post',
-      component: Post,
+      component: () => import('@/views/Post'),
     },
     {
       path: '/archive',
       name: 'archive',
-      component: Archive,
+      component: () => import('@/views/Archive'),
     },
     {
       path: '/category',
       name: 'category',
-      component: Category,
+      component: () => import('@/views/Category'),
     },
     {
       path: '/tag',
       name: 'tag',
-      component: Tag,
+      component: () => import('@/views/Tag'),
     },
     {
       path: '/inspiration',
       name: 'inspiration',
-      component: Inspiration,
+      component: () => import('@/views/Inspiration'),
     },
     {
       path: '/book',
       name: 'book',
-      component: Book,
+      component: () => import('@/views/Book'),
     },
     {
       path: '/friend',
       name: 'friend',
-      component: Friend,
+      component: () => import('@/views/Friend'),
     },
     {
       path: '/about',
       name: 'about',
-      component: About,
+      component: () => import('@/views/About'),
     },
   ],
 })

@@ -7,7 +7,7 @@ const GITHUB_API = 'https://api.github.com/repos'
 
 const { username, repository, token } = config
 const blog = `${GITHUB_API}/${username}/${repository}`
-const access_token = `token ${token.join('')}`
+const access_token = token && token.length ? `token ${token.join('')}` : ''
 const isDev = /^(192\.168|localhost)/.test(window.location.host)
 
 // 状态检测
@@ -23,9 +23,8 @@ const githubFetch = async (url, isQueryPage = false) => {
   try {
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        Authorization: access_token,
-      },
+      // token 为空时不带 Authorization，回退匿名访问（限额 60/h）
+      headers: access_token ? { Authorization: access_token } : {},
     })
     checkStatus(response)
     const data = await response.json()
@@ -41,9 +40,7 @@ const createCall = async (document) => {
     const payload = JSON.stringify({ query: document })
     const response = await fetch(GRAPHQL_URL, {
       method: 'POST',
-      headers: {
-        Authorization: access_token,
-      },
+      headers: access_token ? { Authorization: access_token } : {},
       body: payload,
     })
     checkStatus(response)

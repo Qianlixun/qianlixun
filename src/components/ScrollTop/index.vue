@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import NProgress from 'nprogress'
+
 export default {
   name: 'ScrollTop',
   data() {
@@ -26,6 +28,9 @@ export default {
       window.addEventListener('scroll', this.handleScroll)
     }
   },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
+  },
   methods: {
     // 滚动到顶部
     scrollTop() {
@@ -43,9 +48,11 @@ export default {
     },
     // 处理滚动事件
     handleTop() {
-      // 判断位置，控制滚动到顶部
+      // 更新顶部进度条（vue-progressbar 已替换为 nprogress）
       const clientHeight = document.documentElement.clientHeight
+      const scrollRange = document.body.clientHeight - clientHeight - 50
       const pageYOffset = window.pageYOffset
+      NProgress.set((pageYOffset / scrollRange) * 100)
 
       // 判断位置，控制滚动到顶部
       const showBackTop = pageYOffset >= 200

@@ -17,11 +17,12 @@
 </template>
 
 <script>
+import NProgress from 'nprogress'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Panel from '@/components/Panel'
 import ScrollTop from '@/components/ScrollTop'
-import { getLocation, isMobile } from '@/utils'
+import { isMobile } from '@/utils'
 
 export default {
   name: 'App',
@@ -62,9 +63,11 @@ export default {
     },
   },
   created() {
-    this.visitorStatistics()
+    this.initProgress()
   },
   mounted() {
+    // 顶部进度条：原 vue-progressbar 已替换为 nprogress
+    NProgress.done()
     window.addEventListener('resize', this.handleResize)
   },
   beforeUnmount() {
@@ -83,11 +86,16 @@ export default {
         this.$isMobile.value = isMobile()
       }, 300)
     },
-    // 统计访客来源
-    visitorStatistics() {
-      const referrer = getLocation(document.referrer)
-      const hostname = referrer.hostname || '直接访问'
-      this.$store.dispatch('visitorStatistics', hostname)
+    // 注册顶部进度条（nprogress 替代 vue-progressbar）
+    initProgress() {
+      NProgress.start()
+      this.$router.beforeEach((to, from, next) => {
+        NProgress.start()
+        next()
+      })
+      this.$router.afterEach(() => {
+        NProgress.done()
+      })
     },
     // 滚动到顶部
     scrollTop() {

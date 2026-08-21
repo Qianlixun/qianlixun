@@ -1,36 +1,66 @@
-# 千里寻 · 个人站点
+# 千里寻 - 一个优雅的博客主题
 
 [![Author](https://img.shields.io/badge/author-Qianlixun-blue.svg?style=flat-square)](https://qianlixun.github.io)
-[![Email](https://img.shields.io/badge/Email%20me-99498515@qq.com-green.svg?style=flat-square)](mailto:99498515@qq.com)
+[![QQ群](https://img.shields.io/badge/QQ群-1029784628-blue.svg?style=flat-square)](https://jq.qq.com/?_wv=1027&k=5cHOhhO)
+[![Email](https://img.shields.io/badge/Email%20me-99498515@qq.com-green.svg?style=flat-square)](99498515@qq.com)
 
-千里寻的个人站点：基于 **GitHub Issues** 写作、**GitHub API** 取数、**GitHub Pages** 免费托管的单页应用，无服务器、无数据库。评论采用 [Gitalk](https://github.com/gitalk/gitalk)。
+![千里寻](https://i.loli.net/2019/04/28/5cc5bbc4ae020.png)
 
-技术栈：**Vue 3 + Vite 5 + vue-router 4 + vuex 4 + Gitalk + GitHub Pages**。
+千里寻 是一个基于 Vue 开发的 SPA 单页面博客应用程序，使用 [Github Issues](https://developer.github.com/v3/issues/) 进行写作，借助 [Github Api](https://developer.github.com/v3/) 获取内容，通过 `Github Pages` 部署在线访问。博客评论系统采用开源项目 [Gitalk](https://github.com/gitalk/gitalk)。主题基于 Github 全家桶，脱离服务器与数据库，关注内容本身，操作简单，免费食用。
 
-> 本站派生自开源主题 Aurora（chanshiyucx/yoi），已去除主题模板措辞与第三方 CDN 盗链，素材全部自托管，定位为**个人品牌站点**而非主题发布仓库。
+技术栈：Vue + Github Pages + Github Issues + Github Api + Gitalk。
 
-在线访问：[千里寻](https://qianlixun.github.io)
+在线演示：[千里寻](https://qianlixun.github.io)
 
-## 本地开发
+## Getting Started
+
+### Installing
 
 ```bash
+npm install -g @vue/cli-service-global
+
+git clone git@github.com:Qianlixun/qianlixun.git
+
+cd qianlixun
 npm install
-npm run dev      # 本地预览 http://localhost:5173
-npm run build    # 构建到 dist/
 ```
 
-> 注意：本地预览时 Gitalk 评论无法正常加载，发布线上后正常。
+### Configuration
 
-## 部署（GitHub Actions 自动）
+修改配置文件 `src/config.js`，每个配置项都有详细说明。
 
-push 到 `master` 分支即触发 `.github/workflows/deploy.yml` 自动构建并发布到 `qianlixun.github.io`。
+完整详细的主题食用方法参考 [千里寻 食用指南](https://qianlixun.github.io/#/post/41)。
 
-首次使用需配置一次：源码仓库 `Settings → Secrets and variables → Actions` 添加 `DEPLOY_KEY`（值为 `Qianlixun/qianlixun.github.io` 仓库 deploy key 的私钥）。
+### Preview
 
-## 配置
+确定配置无误，可以先行本地预览。
 
-修改 `src/config.js`，每个配置项均有说明。需你本人替换的素材（收款码）见文件内标注。
+```shell
+npm start
+```
+
+浏览器打开 `http://localhost:8000` 便可访问新的博客！
+
+> 注意在本地预览时 gitalk 不能正常使用，这属于正常情况，发布线上访问便能正常显示评论。
+
+### Deployment
+
+本地预览检查能正常访问后，即可以打包发布上线。
+
+千里寻 2.0 添加一键部署功能，只需要编辑 `deploy.sh`，配置自己的仓库和域名，之后命令行执行 `./deploy.sh`，即可自动打包并上传到指定仓库，将该仓库开启 `Github Pages` 功能即可在线访问。
+
+```shell
+./deploy.sh
+```
+
+Just enjoy it ฅ●ω●ฅ
+
+## Timeline
+
+- 2019/10/24 千里寻 2.0
+- 2019/04/25 新增背景主题-千年幻想
+- 2019/03/08 新增 Valine 匿名评论功能
 
 ## License
 
-派生自 Aurora（MIT）。本仓库沿用 MIT License。
+This project is licensed under the MIT License.

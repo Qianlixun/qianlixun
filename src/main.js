@@ -1,13 +1,6 @@
 import { createApp, reactive } from 'vue'
-import AV from 'leancloud-storage'
-
-// Let's go!
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import config from './config'
-import images from './assets/images'
-import { isMobile } from './utils'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 // Layout and Font
 import 'aos/dist/aos.css'
@@ -16,32 +9,41 @@ import 'katex/dist/katex.css'
 import '@/assets/font/fontello.scss'
 import '@/styles/index.scss'
 
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import config from './config'
+import images from './assets/images'
+import { isMobile } from './utils'
+import { handleOAuthCallback } from './utils/auth'
+
 const app = createApp(App)
 
-// Global variable（Vue3：Vue.prototype → app.config.globalProperties；Vue.observable → reactive）
+// Global variable
 app.config.globalProperties.$config = config
+// Vue2 的 Vue.observable 在 Vue3 用 reactive 替代；组件内仍以 this.$isMobile.value 访问
 app.config.globalProperties.$isMobile = reactive({ value: isMobile() })
+
+app.use(router)
+app.use(store)
 
 // Init Site Title
 const { title, subtitle } = config
 document.title = `${title} | ${subtitle}`
 
-// Init Leancloud
-window.AV = AV
-AV.init(config.leancloud)
-
 // Init Cover
 new Image().src = config.defaultCover
 
-app.use(router)
-app.use(store)
 app.mount('#app')
+
+// GitHub OAuth 回调：换取 token 后清理 URL 参数（软限制下载登录态）
+handleOAuthCallback()
 
 // (o=^•ェ•)o
 const labelStyle = 'line-height:22px;color:#FFF;background:#D68FE9;'
 const themeRepo = 'https://github.com/Qianlixun/qianlixun'
 console.info(`%c ${config.title} %c`, labelStyle, '', window.location.origin)
-console.info('%c Site %c', labelStyle, '', themeRepo)
+console.info('%c Theme %c', labelStyle, '', themeRepo)
 console.info('~❀~ 发现控制台报错请务必联系博主 ~❀~')
 console.log(
   '%c ',

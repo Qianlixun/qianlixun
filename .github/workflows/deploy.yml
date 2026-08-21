@@ -1,9 +1,9 @@
 name: Deploy to GitHub Pages
 
-# 源码仓库 push 到 master 后自动构建并发布到 qianlixun.github.io（消除"源码新、线上旧"漂移）
+# 源码仓库 push 后自动构建并发布到 qianlixun.github.io（消除"源码新、线上旧"漂移）
 on:
   push:
-    branches: [master]
+    branches: [master, vue3-migration]
   workflow_dispatch:
 
 jobs:
@@ -17,12 +17,14 @@ jobs:
           node-version: 20 # Vite 5 需要 Node 18+
           cache: npm
 
-      - run: npm ci --no-audit --no-fund
+      # 仓库 .gitignore 忽略了 package-lock.json，故使用 npm install 而非 npm ci
+      - run: npm install
 
       - run: npm run build
 
       - name: Deploy to Qianlixun/qianlixun.github.io (master)
-        if: ${{ secrets.DEPLOY_KEY != '' }} # 未配置 DEPLOY_KEY 时跳过，仅跑构建
+        # 未配置 DEPLOY_KEY 时跳过，仅跑构建
+        if: ${{ secrets.DEPLOY_KEY != '' }}
         uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.DEPLOY_KEY }}

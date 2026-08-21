@@ -1,39 +1,32 @@
-import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { fileURLToPath, URL } from 'node:url'
 
-// Vue CLI 4 / webpack 4 → Vite 迁移配置
+// GitHub Pages 用户站点根域名部署（dist 推送到 Qianlixun/qianlixun.github.io）
+const base = '/'
+
+// Vite 取代 vue.config.js（Vue CLI 已移除）。
+// - base '/' 对应 GitHub Pages 用户站点根域名（qianlixun.github.io）
+// - @ 别名保持与原有 @/ 引用一致
+// - SCSS 全局变量/混入通过 additionalData 注入（沿用原 vue.config 的 sass 配置）
 export default defineConfig({
-  // 部署到 GitHub Pages 用户站点（根域名），资源前缀为 /
-  base: '/',
+  base,
   plugins: [vue()],
   resolve: {
+    // .vue：兼容原 webpack 风格的无扩展名导入（如 @/components/APlayer）
+    extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
-    // 兼容原有 webpack 的目录导入（如 import X from '@/components/Panel' 解析到 index.vue）
-    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
   },
   css: {
     preprocessorOptions: {
       scss: {
-        // 与原先 sass-loader additionalData 一致：全局注入变量与 mixin
-        additionalData: `@import "@/styles/variables.scss";\n@import "@/styles/mixin.scss";\n`,
+        additionalData: `$base-url: '${base}';\n@import "@/styles/variables.scss";\n@import "@/styles/mixin.scss";\n`,
       },
     },
   },
   build: {
-    // 与 vue.config.js 原 productionSourceMap: false 保持一致
-    sourcemap: false,
-    // 大图/素材保持相对引用，避免静态资源超限告警
-    assetsInlineLimit: 4096,
-    rollupOptions: {
-      output: {
-        // 拆分 vendor chunk，避免单文件过大影响首屏加载
-        manualChunks: {
-          vue: ['vue', 'vue-router', 'vuex'],
-        },
-      },
-    },
+    outDir: 'dist',
   },
 })

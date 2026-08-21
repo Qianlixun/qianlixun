@@ -1,7 +1,10 @@
 /**
  * 千里寻 站点配置文件
- * 内容源：GitHub Issues（仓库见下方 username/repository 配置）
+ * 食用指南：https://github.com/Qianlixun/blog/issues/41
  */
+
+// GitHub Pages 子路径前缀（构建时替换）
+const B = import.meta.env.BASE_URL
 
 export default {
   /**
@@ -38,14 +41,6 @@ export default {
   },
 
   /**
-   * leancloud 配置 【注意切换为国际版】
-   */
-  leancloud: {
-    appId: 'LjOwR4ELEqbauKvtQbwq5TUw-MdYXbMMI',
-    appKey: 'BOSFJ49ohbGctgn4zvJE9VN6',
-  },
-
-  /**
    * =========================================================
    *                        页面设置
    * =========================================================
@@ -79,60 +74,31 @@ export default {
   },
 
   /**
-   * 灵感页面
-   */
-  inspirationOpts: {
-    display: true,
-    enableComment: true,
-    qoute: '詠奏妖華，明鏡止水',
-  },
-
-  /**
-   * 书单页面
-   */
-  bookOpts: {
-    display: true,
-    enableComment: true,
-    qoute: '追想風景 彼岸帰航',
-  },
-
-  /**
-   * 友链页面
-   */
-  friendOpts: {
-    display: true,
-    enableComment: true,
-    qoute: '青青子衿，悠悠我心',
-  },
-
-  /**
    * 关于页面
    */
   aboutOpts: {
     display: true,
     enableComment: true,
     qoute: '寻遍千山，终见灯火',
-    avatar: '/assets/blog/avatar.png',
     graduated: 'University of Electronic Science and Technology of China (UESTC)',
     college: 'Communication&Information Engineering',
     contact: [
       {
-        icon: '/assets/blog/contact-email.svg',
+        icon: `${B}assets/img/email.svg`,
         link: 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=tNnR9Nfc1drH3N3NwZrX29k',
       },
       {
-        icon: '/assets/blog/contact-github.svg',
+        icon: `${B}assets/img/github.svg`,
         link: 'https://github.com/Qianlixun',
       },
       {
-        icon: '/assets/blog/contact-music.svg',
+        icon: `${B}assets/img/music.svg`,
         link: 'https://music.163.com/#/user/home?id=103060582',
       },
       {
-        icon: '/assets/blog/contact-twitter.svg',
+        icon: `${B}assets/img/twitter.svg`,
         link: 'https://twitter.com/Qianlixun',
       },
-      // 注：原主题作者的 telegram 入口已移除，如需展示请改为你自己的链接
     ],
   },
 
@@ -145,62 +111,27 @@ export default {
   /**
    * 加载动画
    */
-  loadingImg: '/assets/blog/loading.svg',
+  loadingImg: `${B}assets/img/loading.svg`,
 
   /**
    * 文章默认图
    */
-  defaultCover: '/assets/blog/defaultCover.jpg',
+  defaultCover: `${B}assets/img/defaultCover.svg`,
 
   /**
-   * 赛钱箱
-   * ！！以下二维码为占位图，请替换为你本人的真实收款码：
-   *   支付宝 → public/assets/blog/qrcode-alipay.svg
-   *   微信   → public/assets/blog/qrcode-wechat.svg
+   * 项目资源映射：Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号 }
+   * 下载为软限制（登录 GitHub 后显示入口）；视频在详情页嵌入 B 站播放器
    */
-  qrcode: [
-    {
-      name: '支付宝',
-      img: '/assets/blog/qrcode-alipay.svg',
-    },
-    {
-      name: '微信',
-      img: '/assets/blog/qrcode-wechat.svg',
-    },
-  ],
-
-  /**
-   * 音乐播放器
-   */
-  APlayer: [
-    {
-      name: '春の凑に',
-      artist: 'TUMENECO',
-      url: 'https://files.catbox.moe/ducy49.mp3',
-      cover: '/assets/blog/cover1.jpg',
-    },
-    {
-      name: '夏阳炎',
-      artist: '天威梦方',
-      url: 'https://files.catbox.moe/7migen.mp3',
-      cover: '/assets/blog/cover2.jpg',
-    },
-    {
-      name: '秋风のとおり道',
-      artist: '风神华伝',
-      url: 'https://files.catbox.moe/b58fq6.mp3',
-      cover: '/assets/blog/cover3.jpg',
-    },
-    {
-      name: '冬のわすれもの',
-      artist: 'ハルノカゼ',
-      url: 'https://files.catbox.moe/vwnawp.mp3',
-      cover: '/assets/blog/cover4.jpg',
-    },
-  ],
+  projectResources: {
+    // Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号 }
+    // 下载为软限制（登录 GitHub 后显示入口）；视频在详情页嵌入 B 站播放器
+    1: { repo: 'qianlixun' }, // 示例：站点源码仓库（欢迎文章）
+    // 2: { repo: 'demo-project', bvid: 'BV1xx411c7mD' },
+  },
 
   /**
    * 主题配色，主要用于文章、灵感、关于等卡片配色
+   * 推荐一个超棒的取色站，日本の伝統色：http://nipponcolors.com/
    */
   themeColors: [
     '#B28FCE', // 薄

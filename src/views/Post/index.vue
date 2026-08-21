@@ -15,10 +15,6 @@
                 {{ post.created_at }}
               </span>
               <span>
-                <i class="icon icon-fire"></i>
-                热度{{ post.times || 1 }}℃
-              </span>
-              <span>
                 <i class="icon icon-bookmark-empty"></i>
                 {{ post.milestone ? post.milestone.title : '未分类' }}
               </span>
@@ -32,6 +28,8 @@
         <div class="post-body">
           <MarkDown :content="post.body" target="#post" />
         </div>
+        <!-- 项目资源：视频演示（B站嵌入）与源码下载（软限制） -->
+        <ProjectResource :project="projectResource" />
       </article>
       <Loading v-else />
     </Transition>
@@ -45,6 +43,7 @@ import MarkDown from '@/components/MarkDown'
 import Loading from '@/components/Loading'
 import Comment from '@/components/Comment'
 import Cover from '@/components/Cover'
+import ProjectResource from '@/components/ProjectResource'
 
 export default {
   name: 'Post',
@@ -53,12 +52,20 @@ export default {
     Loading,
     Comment,
     Cover,
+    ProjectResource,
   },
   data() {
     return {
       post: '',
       initComment: false,
     }
+  },
+  computed: {
+    // 从 config.projectResources 取当前项目的资源映射（repo/bvid）
+    projectResource() {
+      if (!this.post) return {}
+      return (this.$config.projectResources || {})[this.post.number] || {}
+    },
   },
   async created() {
     const { number, post } = this.$route.params
@@ -68,7 +75,6 @@ export default {
       await this.queryPost(number)
     }
     this.$nextTick(() => {
-      this.queryHot()
       this.initComment = true
     })
   },
@@ -76,12 +82,6 @@ export default {
     // 获取文章详情
     async queryPost(number) {
       this.post = await this.$store.dispatch('queryPost', { number })
-    },
-    // 获取并增加热度
-    async queryHot() {
-      const hot = await this.$store.dispatch('increaseHot', { post: this.post })
-      // Vue3 响应式对象直接赋值即可（替代 Vue2 的 $set）
-      this.post.times = hot
     },
   },
 }

@@ -15,13 +15,13 @@
             <div class="swiper-wrapper">
               <ul ref="swiper" id="swiper" class="swiper animate" :style="containerStyle">
                 <li>
-                  <Qrcode @zoom="setZoomSrc" />
+                  <Theme :theme="theme" @switchTheme="switchTheme" />
                 </li>
                 <li>
                   <Theme :theme="theme" @switchTheme="switchTheme" />
                 </li>
                 <li>
-                  <Qrcode @zoom="setZoomSrc" />
+                  <Theme :theme="theme" @switchTheme="switchTheme" />
                 </li>
                 <li>
                   <Theme :theme="theme" @switchTheme="switchTheme" />
@@ -34,16 +34,8 @@
             <button class="cursor btn right-btn" @click="swiperTo(1)">
               <i class="icon icon-right-open-outline"></i>
             </button>
-            <div class="like">
-              <p>
-                已有
-                <span>{{ likeTimes }}</span> 人点赞了哦！
-              </p>
-            </div>
           </div>
-          <div class="footer">
-            <div class="cursor" :data-title="likeBtnText" @click="likeSite"></div>
-          </div>
+          <div class="footer"></div>
         </div>
         <div class="long-line">
           <div></div>
@@ -60,7 +52,6 @@
 <script>
 import { mapState } from 'vuex'
 import Theme from './components/Theme'
-import Qrcode from './components/Qrcode'
 import { localSave, localRead } from '@/utils'
 import images from '@/assets/images'
 
@@ -68,12 +59,10 @@ const { bg } = images
 
 export default {
   name: 'Panel',
-  components: { Theme, Qrcode },
+  components: { Theme },
   data() {
     return {
       theme: '',
-      likeTimes: 0,
-      isLikeSite: localRead('isLikeSite', false),
       currentInx: 1,
       lockSwiper: false,
       zoomSrc: '',
@@ -84,17 +73,13 @@ export default {
       showPanel: (state) => state.showPanel,
     }),
     panelTitle() {
-      const inx = (this.currentInx + 1) % 2
-      return ['背景主题', '赛钱箱'][inx]
+      return '背景主题'
     },
     distance() {
       return [0, -600, -1200, -1800][this.currentInx]
     },
     containerStyle() {
       return { transform: `translate3d(${this.distance}px, 0, 0)` }
-    },
-    likeBtnText() {
-      return this.isLikeSite ? "谢谢点赞 (●'◡'●)" : '点赞一下 (<ゝω・)☆'
     },
   },
   watch: {
@@ -106,21 +91,7 @@ export default {
       },
     },
   },
-  mounted() {
-    this.queryLike()
-  },
   methods: {
-    // 点赞数
-    async queryLike() {
-      this.likeTimes = await this.$store.dispatch('queryLike', 'getTimes')
-    },
-    // 点赞
-    async likeSite() {
-      if (this.isLikeSite) return
-      this.likeTimes = await this.$store.dispatch('queryLike')
-      this.isLikeSite = true
-      localSave('isLikeSite', true)
-    },
     // 初始化背景主题
     initTheme() {
       if (this.theme) return

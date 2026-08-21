@@ -61,7 +61,13 @@ export default createStore({
     // 获取归档
     async queryPosts(context, payload) {
       const data = await queryPosts(payload)
-      ;(data || []).forEach(formatPost)
+      ;(data || []).forEach((p) => {
+        try {
+          formatPost(p)
+        } catch (e) {
+          console.warn('formatPost fail', p?.number, e)
+        }
+      })
       return data || []
     },
     // 获取文章详情

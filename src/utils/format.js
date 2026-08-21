@@ -4,25 +4,25 @@ import config from '../config'
 
 /**
  * 格式化文章
+ * ponytail: 兼容 LF/CRLF；body 不符合 [title](url)\ndesc 约定时安全回退到默认封面 + 全文。
  */
-const regex = /^(.+)?\r\n\s*(.+)?\r\n/
-const coverRegex = /^\[(.+)\].*(http.*(?:jpg|jpeg|png|gif))/
+const regex = /^(.+?)\r?\n\s*(.+?)\r?\n/s
+const coverRegex = /^\[(.+)\].*(https?:.*(?:jpg|jpeg|png|gif|webp))/
 export const formatPost = (post) => {
-  const { body, created_at } = post
+  if (!post) return post
+  const { created_at } = post
+  const body = String(post.body || '')
   const result = regex.exec(body)
-  const cover = coverRegex.exec(result[1])
+  let cover = null
+  if (result) {
+    cover = coverRegex.exec(result[1])
+  }
   if (cover && cover.length === 3) {
-    post.cover = {
-      title: cover[1],
-      src: cover[2],
-    }
+    post.cover = { title: cover[1], src: cover[2] }
     post.description = result[2]
   } else {
-    post.cover = {
-      title: '',
-      src: config.defaultCover,
-    }
-    post.description = result[1]
+    post.cover = { title: '', src: config.defaultCover }
+    post.description = result ? result[1] : body
   }
   post.created_at = format(created_at, 'zh_CN').replace(/\s/, '')
   return post

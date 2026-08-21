@@ -1,7 +1,5 @@
 import config from '../config'
-import documents from './documents'
 
-const GRAPHQL_URL = 'https://api.github.com/graphql'
 const GITHUB_API = 'https://api.github.com/repos'
 
 const { username, repository, token } = config
@@ -32,29 +30,36 @@ const githubFetch = async (url, isQueryPage = false) => {
   }
 }
 
-// 构建 GraphQL
-const createCall = async (document) => {
+// REST 分页计数：per_page=100 一次拉取，>100 时用 Link 头 last page 推断总数
+// 替代 GraphQL（匿名限额 60/h 独立且易耗尽），仅用 REST 统一限额
+const githubFetchCount = async (url) => {
   try {
-    const payload = JSON.stringify({ query: document })
-    const response = await fetch(GRAPHQL_URL, {
-      method: 'POST',
+    const response = await fetch(url, {
+      method: 'GET',
       headers: access_token ? { Authorization: access_token } : {},
-      body: payload,
     })
     checkStatus(response)
-    const body = await response.json()
-    return body.data
-  } catch (err) {
-    console.log(err)
+    const link = response.headers.get('Link') || ''
+    const last = link.match(/[?&]page=(\d+)>;\s*rel="last"/)
+    if (last) return parseInt(last[1], 10)
+    const data = await response.json()
+    return Array.isArray(data) ? data.length : 0
+  } catch (error) {
+    console.log(error)
+    return 0
   }
 }
 
 // 获取文章数量
-export const queryArchivesCount = () => createCall(documents.queryArchivesCount({ username, repository }))
+export const queryArchivesCount = () => githubFetchCount(`${blog}/issues?state=open&per_page=100`)
 
-// 按分类 & 标签筛选文章
-export const queryFilterArchivesCount = ({ label, milestone }) =>
-  createCall(documents.queryFilterArchivesCount({ username, repository, label, milestone }))
+// 按分类（milestone 号）& 标签筛选文章数量
+export const queryFilterArchivesCount = ({ label, milestone }) => {
+  const params = new URLSearchParams({ state: 'open', per_page: '100' })
+  if (label) params.set('labels', label)
+  if (milestone) params.set('milestone', milestone)
+  return githubFetchCount(`${blog}/issues?${params.toString()}`)
+}
 
 // 获取文章列表
 export const queryPosts = ({ page = 1, pageSize = 10, filter = '' }) => {

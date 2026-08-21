@@ -49,10 +49,9 @@ export default createStore({
       // 仓库缺失/API 异常时 GraphQL 返回 repository=null，兜底为 0
       commit('setTotalCount', data?.repository?.issues?.totalCount || 0)
     },
-    // 获取分类 & 标签筛选文章数量
+    // 获取分类 & 标签筛选文章数量（REST 计数，已弃用 GraphQL）
     async queryFilterArchivesCount(context, payload) {
-      const data = await queryFilterArchivesCount(payload)
-      return data.search.issueCount
+      return await queryFilterArchivesCount(payload)
     },
     // 获取归档
     async queryPosts(context, payload) {
@@ -68,13 +67,13 @@ export default createStore({
     // 获取分类
     async queryCategory() {
       const data = await queryCategory()
-      return formatCategory(data)
+      return formatCategory(data || [])
     },
     // 获取标签
     async queryTag() {
       const data = await queryTag()
       const filterLabel = ['Inspiration', 'Friend', 'Book', 'About']
-      return data.filter((o) => !filterLabel.includes(o.name))
+      return (data || []).filter((o) => !filterLabel.includes(o.name))
     },
     // 获取书单 & 友链 & 关于
     async queryPage(context, { type }) {

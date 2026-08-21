@@ -30,12 +30,13 @@ export const formatPost = (post) => {
 
 /**
  * 格式化分类
+ * description 约定格式：第一行 summary:xxx，第二行 cover:xxx（缺省则兜底为空）
  */
 export const formatCategory = (category) => {
-  category.forEach((o) => {
-    const description = o.description.split('\r\n')
-    o.summary = description[0].split('summary:')[1]
-    o.cover = description[1].split('cover:')[1]
+  ;(category || []).forEach((o) => {
+    const lines = String(o.description || '').split('\r\n')
+    o.summary = String(lines[0] || '').split('summary:')[1] || ''
+    o.cover = String(lines[1] || '').split('cover:')[1] || ''
   })
   return category
 }

@@ -28,7 +28,9 @@
           </ul>
         </Transition>
       </div>
-      <Loading v-else />
+      <div v-else class="empty-tip">
+        <p>暂无标签，为文章添加标签后在这里展示</p>
+      </div>
     </Transition>
 
     <Comment v-if="$config.tagOpts.enableComment && initComment" title="标签" />

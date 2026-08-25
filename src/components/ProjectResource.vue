@@ -79,7 +79,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .project-resource {
   margin: 1.5rem 0 0.5rem;
   padding: 18px 20px 20px;

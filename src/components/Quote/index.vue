@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="quote">
     <i class="icon icon-quote-left"></i>
     <span>{{ quote }}</span>
@@ -18,6 +18,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 @import './index.scss';
 </style>

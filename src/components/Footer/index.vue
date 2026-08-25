@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <footer>
     <div class="site-info">
       <p>
@@ -21,6 +21,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 @import './index.scss';
 </style>

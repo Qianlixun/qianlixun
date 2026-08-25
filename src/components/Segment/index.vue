@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="segment" :style="{ borderColor: color }">
     <div class="label" :style="{ color }">
       <span>{{ title }}</span>
@@ -23,6 +23,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 @import './index.scss';
 </style>

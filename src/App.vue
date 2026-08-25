@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div id="app">
     <Transition name="header-transform" mode="out-in">
       <Header v-show="showHeader" />
@@ -102,7 +102,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 #app {
   position: relative;
   @include pc-layout {

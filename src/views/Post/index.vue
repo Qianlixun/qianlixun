@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div id="post">
     <Transition name="fade-transform" mode="out-in">
       <article v-if="post">
@@ -87,6 +87,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 @import './index.scss';
 </style>

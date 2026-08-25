@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="markdown" v-html="html"></div>
 </template>
 
@@ -181,6 +181,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 @import './index.scss';
 </style>

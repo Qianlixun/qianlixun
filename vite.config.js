@@ -28,5 +28,18 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
+    // ponytail: 显式 vendor 分包——按库域各自独立 chunk，利于浏览器长效缓存；
+    // 已知上限：gitalk/leancloud 等评论统计库仍集中在 Post 懒加载 chunk，后续可再按需拆分
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!/node_modules/.test(id)) return
+          if (/[/\\](vue|vue-router|vuex|@vue)[/\\]/.test(id)) return 'vue-vendor'
+          if (/[/\\](marked|katex|highlight\.js|zooming|clipboard|github-markdown)[/\\]/.test(id)) return 'markdown-libs'
+          if (/[/\\](gitalk|leancloud-storage|axios|github)[/\\]/.test(id)) return 'comment-libs'
+          if (/[/\\](aos|nprogress|timeago\.js)[/\\]/.test(id)) return 'ui-vendor'
+        },
+      },
+    },
   },
 })

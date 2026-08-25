@@ -92,8 +92,8 @@ export const queryPage = (type) => {
   return githubFetch(url, true)
 }
 
-// 获取生活记事（私有仓库，凭用户 OAuth token 访问）
-// ponytail: 隐私由 GitHub 私有仓库 ACL 兜底——非拥有者登录后请求同样 404，
+// 获取生活记事（私有仓库，凭站长细粒度 PAT 访问）
+// ponytail: 隐私由 GitHub 私有仓库 ACL 兜底——非拥有者即便带 token 也 404，
 // 前端只负责展示门控；上限：单页拉 100 条，超出不分页。
 export const queryLife = async (token) => {
   const repo = config.lifeOpts.repository
@@ -103,10 +103,10 @@ export const queryLife = async (token) => {
       method: 'GET',
       headers: { Authorization: `token ${token}` },
     })
-    if (!response.ok) return { ok: false, data: [] }
-    return { ok: true, data: await response.json() }
+    if (!response.ok) return { ok: false, status: response.status, data: [] }
+    return { ok: true, status: 200, data: await response.json() }
   } catch (error) {
     console.log(error)
-    return { ok: false, data: [] }
+    return { ok: false, status: 0, data: [] }
   }
 }

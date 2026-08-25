@@ -36,7 +36,9 @@ export default {
     owner: 'Qianlixun',
     admin: ['Qianlixun'],
     distractionFreeMode: false, // 是否开始无干扰模式【背景遮罩】
-    // ponytail: 第三方 CORS 代理(heroku)已停服；置空后由打过补丁的 gitalk 直连 GitHub token 端点(表单格式,免预检)
+    // 注意：GitHub token 端点无 CORS 头，浏览器无法直连换 token——
+    // 置空 proxy 时 gitalk 的评论登录实际不可用（评论渲染不受影响）；
+    // 如需恢复评论登录，须自备可用 CORS 代理填到这里
     proxy: '',
   },
 
@@ -67,13 +69,13 @@ export default {
   /**
    * 生活页面（私密，仅站长本人可见）
    * 内容源：私有仓库（每条 open issue = 一篇生活记录，正文 Markdown）
-   * 访问控制：GitHub 私有仓库 ACL 兜底——登录后凭 OAuth token 拉取，
-   * 非拥有者即使登录也拿不到数据
+   * 访问控制：站长在页面粘贴细粒度 PAT（仅本仓库、Issues 只读）解锁，
+   * GitHub 私有仓库 ACL 兜底——非拥有者的令牌同样 404，数据不落浏览器
    */
   lifeOpts: {
     display: true,
     qoute: '山月不知心底事',
-    repository: 'life', // 私有仓库名（需你本人创建为 private）
+    repository: 'life', // 私有仓库名（需站长本人创建为 private）
   },
 
   /**

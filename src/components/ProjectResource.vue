@@ -15,22 +15,17 @@
         allowfullscreen="true"
       ></iframe>
     </div>
-    <!-- 源码下载：软限制，登录后才显示入口 -->
-    <div v-if="project.repo" class="download">
-      <a v-if="logged && downloadUrl" class="btn cursor" :href="downloadUrl" target="_blank" rel="noopener noreferrer">
-        <i class="icon icon-download"></i> 下载源码
+    <!-- 源码下载：公开仓库 zip 直链 -->
+    <div v-if="project.repo && downloadUrl" class="download">
+      <a class="btn cursor" :href="downloadUrl" target="_blank" rel="noopener noreferrer">
+        <i class="icon icon-gift"></i> 下载源码
       </a>
-      <button v-else-if="!logged" class="btn cursor" @click="doLogin">
-        <i class="icon icon-github"></i> 登录 GitHub 后下载
-      </button>
     </div>
   </div>
 </template>
 
 <script>
-// 项目资源展示：B 站视频嵌入 + 公开仓库源码下载（软限制）
-import { isLogged, login } from '@/utils/auth'
-
+// 项目资源展示：B 站视频嵌入 + 公开仓库源码下载
 export default {
   name: 'ProjectResource',
   props: {
@@ -41,26 +36,25 @@ export default {
   },
   data() {
     return {
-      logged: isLogged(),
       downloadUrl: '',
     }
   },
   async created() {
-    if (this.logged && this.project.repo) await this.fetchRepo()
+    if (this.project.repo) await this.fetchRepo()
   },
   methods: {
-    doLogin() {
-      login()
-    },
-    // 获取仓库默认分支，构造 zip 下载地址
+    // 获取仓库默认分支，构造 zip 下载地址；api 不可达时兜底 main 分支
     async fetchRepo() {
       const { username } = this.$config
+      const repo = this.project.repo
       try {
-        const res = await fetch(`https://api.github.com/repos/${username}/${this.project.repo}`)
+        const res = await fetch(`https://api.github.com/repos/${username}/${repo}`)
         const data = await res.json()
-        this.downloadUrl = `https://github.com/${username}/${this.project.repo}/archive/refs/heads/${data.default_branch}.zip`
+        this.downloadUrl = `https://github.com/${username}/${repo}/archive/refs/heads/${
+          data.default_branch || 'main'
+        }.zip`
       } catch (e) {
-        console.log(e)
+        this.downloadUrl = `https://github.com/${username}/${repo}/archive/refs/heads/main.zip`
       }
     },
   },

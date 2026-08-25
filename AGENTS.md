@@ -6,8 +6,8 @@
 - **构建工具**：Vite 5（`vite.config.js`：`@` 别名、SCSS 全局变量注入 `additionalData`、`manualChunks` 手动分包——marked/katex/highlight/gitalk 独立 chunk 按需加载）
 - **样式**：SCSS（`src/styles/`，variables/mixin 全局注入；PC/SP 双端变量体系，`isMobile = body.clientWidth < 876`）
 - **内容架构**：GitHub Issues 即内容源——`blog` 仓库 open issue 为作品/文章（编号进 `config.projectResources` 即作品集），closed issue + Label（`About` 等）为板块页；私有仓库 `life` 为生活记事
-- **隐私方案**：生活页走 GitHub 私有仓库 ACL——前端凭 OAuth token 拉取，非拥有者 404，数据不落浏览器
-- **评论**：Gitalk（`config.gitalk`，clientSecret 明文为既有设计约定）
+- **隐私方案**：生活页走 GitHub 私有仓库 ACL——站长在页面粘贴细粒度 PAT（仅 life 仓库、Issues 只读），api.github.com 直连（CORS 友好），非拥有者令牌 404 数据不落浏览器。**禁用 OAuth 浏览器换 token**：`github.com/login/oauth/access_token` 无 CORS 头，纯前端必挂
+- **评论**：Gitalk（`config.gitalk`，clientSecret 明文为既有设计约定；proxy 置空时评论登录不可用——同上 CORS 限制，评论渲染不受影响）
 - **交互组件**：仅 `nprogress` 进度条、`zooming` 图片放大、AOS 滚动动画；Live2D/APlayer/jquery-backstretch 背景轮播均已移除，**禁止复活**
 - **部署**：GitHub Pages + `.github/workflows/deploy.yml`（push 到 `main` 自动构建发布，需 `DEPLOY_KEY` secret；`build` 脚本额外复制 `dist/index.html` 为 `dist/404.html` 作 history 路由 fallback）
 
@@ -24,7 +24,7 @@
 
 - `src/views/`：Home/Works/Archive(博客)/Life/Post/Category/Tag/About/Contact 九个视图，**路由懒加载**（动态 import），新页面照此办理
 - `src/components/`：公共组件（目录内 `index.vue` + 同目录 `index.scss` 局部样式；`ProjectCard`/`ProjectResource` 为作品集专用）
-- `src/utils/`：services.js（GitHub API 封装，token 为空回退匿名）、auth.js（OAuth 登录/`isOwner` 站长校验）、format.js、index.js
+- `src/utils/`：services.js（GitHub API 封装，token 为空回退匿名）、auth.js（PAT 存取/`isOwner` 站长校验）、format.js、index.js
 - `public/assets/`：仅 `img/`（SVG 图标与 favicon）；`bg/`（背景轮播图）与 `lib/`（jquery）已移除
 - 新增静态资源一律自托管，禁止外链原作者资源
 

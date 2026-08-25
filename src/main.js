@@ -13,7 +13,6 @@ import store from './store'
 import config from './config'
 import images from './assets/images'
 import { isMobile } from './utils'
-import { handleOAuthCallback } from './utils/auth'
 
 const app = createApp(App)
 
@@ -32,15 +31,7 @@ document.title = `${title} | ${subtitle}`
 // Init Cover
 new Image().src = config.defaultCover
 
-// GitHub OAuth 回调：换取 token 后清理 URL 参数（软限制下载登录态）。
-// 带 code 参数时须先等 token 落地再挂载，避免视图读到"未登录"的过期快照；
-// 异步 IIFE 而非顶层 await，兼容 es2020 构建目标。
-;(async () => {
-  if (new URLSearchParams(location.search).get('code')) {
-    await handleOAuthCallback()
-  }
-  app.mount('#app')
-})()
+app.mount('#app')
 
 // (o=^•ェ•)o
 const labelStyle = 'line-height:22px;color:#FFF;background:#D68FE9;'

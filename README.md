@@ -17,16 +17,17 @@
 | 首页 | `/` | 精选作品 + 近期文章 |
 | 作品集 | `/works` | `blog` 仓库 open issue，编号映射进 `config.js` 的 `projectResources` 即收录 |
 | 博客 | `/blog` | `blog` 仓库 open issue（未映射进作品集的即为博客文章） |
-| 生活 | `/life` | **私有仓库** `life` 的 open issue，仅站长本人 GitHub 登录后可见 |
+| 生活 | `/life` | **私有仓库** `life` 的 open issue，站长粘贴细粒度 PAT 解锁后可见 |
 | 关于 | `/about` | `blog` 仓库 closed issue（Label: `About`） |
 | 联系 | `/contact` | `config.js` 的 `contactOpts.list`（全站联系方式唯一数据源） |
 
 ### 生活页（私密）原理
 
-隐私由 GitHub 私有仓库 ACL 兜底：前端凭 OAuth token 请求 `api.github.com/repos/<user>/life/issues`，非拥有者即使登录也会得到 404，**数据根本到不了浏览器**。使用前需：
+隐私由 GitHub 私有仓库 ACL 兜底：前端凭站长粘贴的细粒度 PAT 请求 `api.github.com/repos/<user>/life/issues`，非拥有者的令牌同样得到 404，**数据根本到不了浏览器**。使用前需：
 
 1. 在 GitHub 创建**私有**仓库 `life`，每条 open issue 即一篇生活记录（标题 + Markdown 正文）；
-2. OAuth App（复用 Gitalk 的 `clientID`）需在 GitHub 应用设置中把站点域名加入回调白名单。
+2. 站长生成[细粒度 PAT](https://github.com/settings/personal-access-tokens/new)（仅选 `life` 仓库、Issues 只读），在生活页粘贴解锁。
+   不用 OAuth 的原因：`github.com/login/oauth/access_token` 无 CORS 头，纯静态前端无法完成 code→token 交换。
 
 ## Getting Started
 

@@ -52,6 +52,57 @@
       }
     }
 
+    .gate-error {
+      margin: -10px 0 14px;
+      font-size: $font-size-small;
+      color: $pink-deep;
+    }
+
+    .gate-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+
+      @include sp-layout {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    .gate-input {
+      flex: 1;
+      min-width: 0;
+      padding: 10px 14px;
+      font-size: $font-size-base;
+      font-family: $font-family-code;
+      color: $text-color;
+      border: 1px solid $border-soft;
+      border-radius: $radius;
+      outline: none;
+      background: rgba(255, 255, 255, 0.75);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+      &::placeholder {
+        font-size: $font-size-small;
+        color: $text-muted;
+      }
+
+      &:focus {
+        border-color: rgba($purple, 0.5);
+        box-shadow: 0 0 0 3px rgba($purple, 0.12);
+      }
+    }
+
+    .gate-help {
+      margin: 0;
+      font-size: $font-size-small;
+      color: $text-muted;
+
+      a {
+        color: $purple-deep;
+      }
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;

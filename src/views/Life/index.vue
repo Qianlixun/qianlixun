@@ -93,6 +93,10 @@ export default {
       await this.fetchLife()
     }
   },
+  mounted() {
+    // 未登录门禁卡片也带 data-aos，须无条件初始化 AOS 否则保持 opacity:0 不可见
+    AOS.init({ duration: 800, easing: 'ease', debounceDelay: 50, throttleDelay: 100, offset: 40 })
+  },
   methods: {
     doLogin() {
       login()
@@ -112,9 +116,6 @@ export default {
       if (res.ok) {
         this.posts = res.data || []
         this.status = 'ok'
-        this.$nextTick(() => {
-          AOS.init({ duration: 800, easing: 'ease', debounceDelay: 50, throttleDelay: 100, offset: 40 })
-        })
         return
       }
       // 拉取失败：站长本人 → 仓库未建；其他账号 → 无权限

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <img :src="defaultCover" alt="defaultCover" />
-    <img :class="['cover', visible && 'fadeIn']" :src="imgSrc" />
+    <img v-if="imgSrc" :class="['cover', visible && 'fadeIn']" :src="imgSrc" :alt="alt" />
   </div>
 </template>
 

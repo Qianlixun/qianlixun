@@ -4,7 +4,7 @@
       <li class="cursor" v-for="(post, i) in posts" :key="post.id" :style="{ '--accent': colors[i] }">
         <router-link :to="{ name: 'post', params: { number: post.number, post } }">
           <div class="cover">
-            <Cover :src="post.cover.src" :alt="post.cover.title" />
+            <Cover :src="post.cover.src" :alt="post.cover.title" :loadCover="true" />
             <span v-if="isProject(post)" class="badge"> <i class="icon icon-folder"></i>项目 </span>
           </div>
           <div class="body">

@@ -172,6 +172,7 @@ export default {
    * 命中的 issue 归入「作品集」；下载为软限制（登录 GitHub 后显示入口）
    */
   projectResources: {
+    6: { mp4: 'https://raw.githubusercontent.com/Qianlixun/medias/main/signal-maintenance-demo.mp4' }, // 现场信号设备检修实录
     1: { repo: 'qianlixun' }, // 站点源码仓库（欢迎文章）
     4: { repo: 'qianlixun' }, // 示例：Vue3 + Vite 模板（占位仓库，等你创建真实仓库后替换）
     5: { repo: 'qianlixun' }, // 示例：REST vs GraphQL 选型记录（占位仓库）

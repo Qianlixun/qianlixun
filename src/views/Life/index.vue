@@ -49,6 +49,9 @@
               并为令牌授权该仓库（Issues 只读），在其中添加 open issue 即为一条生活记录。
             </p>
             <button class="btn cursor" @click="fetchLife"><i class="icon icon-comment"></i> 我已配置，刷新看看</button>
+            <button class="btn cursor reset-btn" @click="doLogout">
+              <i class="icon icon-cancel-outline"></i> 清除令牌，重新输入
+            </button>
           </div>
 
           <Loading v-else-if="status === 'loading'" />

@@ -11,7 +11,7 @@
         <div class="hero-stats">
           <div class="stat">
             <span class="stat-num">{{ stats.projects }}</span>
-            <span class="stat-label">个项目</span>
+            <span class="stat-label">个作品</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
@@ -29,48 +29,25 @@
 
     <!-- 主体 -->
     <div class="content">
-      <!-- 精选项目区 -->
+      <!-- 精选作品区 -->
       <section v-if="projects.length" class="section section-projects">
         <header class="section-head">
           <div class="section-title">
             <span class="bar"></span>
-            <h2>我的项目</h2>
+            <h2>我的作品</h2>
+            <RouterLink class="more-link" to="/works">全部作品 <i class="icon icon-right-open-outline"></i></RouterLink>
           </div>
           <p class="section-sub">视频演示 · 源码下载 · 技术文档</p>
         </header>
         <div class="projects-grid">
-          <article
-            v-for="(post, index) in projects"
+          <ProjectCard
+            v-for="(post, index) in featuredProjects"
             :key="post.id"
-            class="project-card"
-            data-aos="fade-up"
+            :post="post"
+            :loadCover="index < loadInx"
             :data-aos-delay="index * 80"
-          >
-            <router-link :to="{ name: 'post', params: { number: post.number, post } }">
-              <div class="card-cover">
-                <Cover :src="post.cover.src" :alt="post.cover.title" :loadCover="index < 2" @loadNext="loadNext" />
-                <span class="badge"><i class="icon icon-folder"></i>项目</span>
-              </div>
-              <div class="card-body">
-                <h3 class="card-title">{{ post.title }}</h3>
-                <div class="card-excerpt">
-                  <!-- ponytail: 摘要是已剥掉 markdown 语法的纯文本，直接输出即可，
-                       无需引入重型 MarkDown 渲染器（marked/katex/highlight）污染首屏 bundle -->
-                  <span class="excerpt-text">{{ excerpt(post.description, 90) }}</span>
-                </div>
-                <div class="card-actions">
-                  <span v-if="config.projectResources[post.number]?.bvid" class="act-btn">
-                    <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true">
-                      <path fill="currentColor" d="M3 2v8l7-4z" />
-                    </svg>视频演示
-                  </span>
-                  <span class="act-btn">
-                    <i class="icon icon-download"></i> 源码下载
-                  </span>
-                </div>
-              </div>
-            </router-link>
-          </article>
+            @loadNext="loadNext"
+          />
         </div>
       </section>
 
@@ -80,11 +57,12 @@
           <div class="section-title">
             <span class="bar"></span>
             <h2>近期记录</h2>
+            <RouterLink class="more-link" to="/blog">全部文章 <i class="icon icon-right-open-outline"></i></RouterLink>
           </div>
           <p class="section-sub">踩坑笔记、技术记录与项目文档</p>
         </header>
         <ul class="article-list">
-          <li v-for="(post, index) in articles" :key="post.id" data-aos="fade-up" :data-aos-delay="index * 50">
+          <li v-for="post in featuredArticles" :key="post.id" data-aos="fade-up">
             <router-link :to="{ name: 'post', params: { number: post.number, post } }">
               <span class="article-date">{{ shortDate(post.created_at) }}</span>
               <span class="article-title">{{ post.title }}</span>
@@ -102,15 +80,6 @@
           <p>在 blog 仓库创建 open issue 后，会自动显示在这里</p>
         </div>
       </section>
-
-      <div class="btn-group" v-if="!isDisabledPrev || !isDisabledNext">
-        <Pagination
-          :loading="loading"
-          :isDisabledPrev="isDisabledPrev"
-          :isDisabledNext="isDisabledNext"
-          @handlePage="queryPosts"
-        />
-      </div>
     </div>
   </div>
 </template>
@@ -118,51 +87,47 @@
 <script>
 import { mapState } from 'vuex'
 import AOS from 'aos'
-import Pagination from '@/components/Pagination'
-import Cover from '@/components/Cover'
+import ProjectCard from '@/components/ProjectCard'
 import config from '@/config'
+
+// 首页一次拉取的条数（精选 + 近期记录共用）
+const HOME_PAGE_SIZE = 30
 
 export default {
   name: 'Home',
-  components: { Pagination, Cover },
+  components: {
+    ProjectCard,
+  },
   data() {
     return {
       loading: false,
-      page: 0,
-      pageSize: 12,
       posts: [],
-      list: [],
-      LOAD_INX: 2,
+      loadInx: 2,
     }
   },
   computed: {
     ...mapState({ totalCount: (s) => s.totalCount, tags: (s) => s.tags }),
-    maxPage() {
-      return Math.ceil(this.totalCount / this.pageSize)
-    },
-    isDisabledPrev() {
-      return this.page <= 1
-    },
-    isDisabledNext() {
-      return this.page >= this.maxPage
-    },
-    // 精选项目：open issue 且在 projectResources 映射里
+    // 作品：open issue 且在 projectResources 映射里
     projects() {
       return this.posts.filter((p) => !!config.projectResources[p.number])
     },
-    // 其余文章
+    // 其余为技术文章
     articles() {
       return this.posts.filter((p) => !config.projectResources[p.number])
     },
+    featuredProjects() {
+      return this.projects.slice(0, 3)
+    },
+    featuredArticles() {
+      return this.articles.slice(0, 8)
+    },
+    // ponytail: 作品数按首页拉取的一页（≤30）统计，文章超量时计数偏低，个人站够用
     stats() {
       return {
         projects: this.projects.length,
-        articles: this.articles.length,
+        articles: Math.max(this.totalCount - this.projects.length, this.articles.length),
         tags: (this.tags || []).length,
       }
-    },
-    config() {
-      return config
     },
   },
   async created() {
@@ -172,38 +137,17 @@ export default {
     AOS.init({ duration: 800, easing: 'ease', debounceDelay: 50, throttleDelay: 100, offset: 40 })
   },
   methods: {
-    async queryPosts(type = 'next') {
-      if (this.loading) return
-      const q = type === 'prev' ? this.page - 1 : this.page + 1
-      this.page = q
-      this.LOAD_INX = 2
-      if (this.list[q]) {
-        this.scrollTop(() => (this.posts = this.list[q]))
-        return
-      }
+    async queryPosts() {
       this.loading = true
-      const posts = await this.$store.dispatch('queryPosts', { page: q, pageSize: this.pageSize })
+      const posts = await this.$store.dispatch('queryPosts', { page: 1, pageSize: HOME_PAGE_SIZE })
       this.loading = false
-      this.scrollTop(() => {
-        this.posts = posts
-        this.list[q] = posts
-      })
-    },
-    scrollTop(cb) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      const d = this.$isMobile.value ? 200 : 0
-      setTimeout(cb, 700 + d)
-      setTimeout(AOS.refresh, 1100 + d)
+      this.posts = posts || []
     },
     loadNext() {
-      this.LOAD_INX += 1
-    },
-    excerpt(md, n) {
-      const s = (md || '').replace(/[#>*_`\[\]()!\n]/g, ' ').trim()
-      return s.length > n ? s.slice(0, n) + '…' : s
+      this.loadInx += 1
     },
     shortDate(s) {
-      return (s || '').slice(0, 10)
+      return String(s || '').slice(0, 10)
     },
   },
 }

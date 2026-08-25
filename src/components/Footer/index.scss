@@ -30,22 +30,4 @@ footer {
       color: $sakura-color;
     }
   }
-
-  .sakura {
-    position: fixed;
-    right: 14px;
-    bottom: 14px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    filter: drop-shadow(0 2px 4px rgba(232, 122, 144, 0.4));
-    animation: rotate 6s linear 0s infinite;
-    transition: transform 0.3s ease;
-    &:hover {
-      transform: scale(1.12) rotate(20deg);
-    }
-    @include sp-layout {
-      display: none;
-    }
-  }
 }

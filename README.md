@@ -1,66 +1,48 @@
-# 千里寻 - 一个优雅的博客主题
+# 千里寻 — 个人综合主页
 
 [![Author](https://img.shields.io/badge/author-Qianlixun-blue.svg?style=flat-square)](https://qianlixun.github.io)
-[![QQ群](https://img.shields.io/badge/QQ群-1029784628-blue.svg?style=flat-square)](https://jq.qq.com/?_wv=1027&k=5cHOhhO)
-[![Email](https://img.shields.io/badge/Email%20me-99498515@qq.com-green.svg?style=flat-square)](99498515@qq.com)
 
-![千里寻](https://i.loli.net/2019/04/28/5cc5bbc4ae020.png)
+> 寻遍千山，终见灯火。
 
-千里寻 是一个基于 Vue 开发的 SPA 单页面博客应用程序，使用 [Github Issues](https://developer.github.com/v3/issues/) 进行写作，借助 [Github Api](https://developer.github.com/v3/) 获取内容，通过 `Github Pages` 部署在线访问。博客评论系统采用开源项目 [Gitalk](https://github.com/gitalk/gitalk)。主题基于 Github 全家桶，脱离服务器与数据库，关注内容本身，操作简单，免费食用。
+千里寻 是一个基于 Vue 3 的单页应用个人主页，集「作品集（视频演示 + 源码归档）· 技术博客 · 私密生活记事 · 关于 · 联系」于一体。内容全部托管在 GitHub Issues 上（无后端、无数据库），通过 GitHub API 获取，GitHub Actions 自动构建发布到 GitHub Pages。
 
-技术栈：Vue + Github Pages + Github Issues + Github Api + Gitalk。
+技术栈：Vue 3.4 + Vite 5 + Vuex 4 + Vue Router 4 + GitHub Issues + Gitalk。
 
-在线演示：[千里寻](https://qianlixun.github.io)
+在线访问：[qianlixun.github.io](https://qianlixun.github.io)
+
+## 板块说明
+
+| 板块 | 路由 | 内容源 |
+| --- | --- | --- |
+| 首页 | `/` | 精选作品 + 近期文章 |
+| 作品集 | `/works` | `blog` 仓库 open issue，编号映射进 `config.js` 的 `projectResources` 即收录 |
+| 博客 | `/blog` | `blog` 仓库 open issue（未映射进作品集的即为博客文章） |
+| 生活 | `/life` | **私有仓库** `life` 的 open issue，仅站长本人 GitHub 登录后可见 |
+| 关于 | `/about` | `blog` 仓库 closed issue（Label: `About`） |
+| 联系 | `/contact` | `config.js` 的 `contactOpts.list`（全站联系方式唯一数据源） |
+
+### 生活页（私密）原理
+
+隐私由 GitHub 私有仓库 ACL 兜底：前端凭 OAuth token 请求 `api.github.com/repos/<user>/life/issues`，非拥有者即使登录也会得到 404，**数据根本到不了浏览器**。使用前需：
+
+1. 在 GitHub 创建**私有**仓库 `life`，每条 open issue 即一篇生活记录（标题 + Markdown 正文）；
+2. OAuth App（复用 Gitalk 的 `clientID`）需在 GitHub 应用设置中把站点域名加入回调白名单。
 
 ## Getting Started
 
-### Installing
-
 ```bash
-npm install -g @vue/cli-service-global
-
-git clone git@github.com:Qianlixun/qianlixun.git
-
-cd qianlixun
+git clone git@github.com:Qianlixun/blog.git   # 源码仓库
+cd blog
 npm install
+npm run dev      # 本地开发
 ```
 
-### Configuration
+修改 `src/config.js` 即可调整站点标题、导航、联系方式、作品映射等。
 
-修改配置文件 `src/config.js`，每个配置项都有详细说明。
+## Deployment
 
-完整详细的主题食用方法参考 [千里寻 食用指南](https://qianlixun.github.io/#/post/41)。
-
-### Preview
-
-确定配置无误，可以先行本地预览。
-
-```shell
-npm start
-```
-
-浏览器打开 `http://localhost:8000` 便可访问新的博客！
-
-> 注意在本地预览时 gitalk 不能正常使用，这属于正常情况，发布线上访问便能正常显示评论。
-
-### Deployment
-
-本地预览检查能正常访问后，即可以打包发布上线。
-
-千里寻 2.0 添加一键部署功能，只需要编辑 `deploy.sh`，配置自己的仓库和域名，之后命令行执行 `./deploy.sh`，即可自动打包并上传到指定仓库，将该仓库开启 `Github Pages` 功能即可在线访问。
-
-```shell
-./deploy.sh
-```
-
-Just enjoy it ฅ●ω●ฅ
-
-## Timeline
-
-- 2019/10/24 千里寻 2.0
-- 2019/04/25 新增背景主题-千年幻想
-- 2019/03/08 新增 Valine 匿名评论功能
+推送到 `main` 分支后，GitHub Actions（`.github/workflows/deploy.yml`）自动构建并发布到 `qianlixun.github.io`（需在仓库 Secrets 配置 `DEPLOY_KEY`）。无需手动部署脚本。
 
 ## License
 
-This project is licensed under the MIT License.
+MIT

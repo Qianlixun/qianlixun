@@ -37,13 +37,6 @@ $link-color: $purple-deep;
 $selection-bg: $purple;
 $selection-color: white;
 
-// Panel（侧栏设置面板）
-$panel-color: #5d3523;
-$panel-bg-color: #fbf4f1;
-$panel-theme-bg-from-color: #fbc2eb;
-$panel-theme-bg-to-color: #a6c1ee;
-$panel-theme-border: #ffe4d8;
-
 // Text Clip（标题渐变文字）
 $text-clip-start: #fb618d;
 $text-clip-center: #8dc00a;
@@ -56,7 +49,6 @@ $bg-white-deep: rgba(255, 255, 255, 0.82);
 $bg-dark: rgba(0, 0, 0, 0.06); // 收敛：原 0.1 → 更轻的描边
 $bg-dark-dim: rgba(0, 0, 0, 0.12);
 $bg-dark-deep: rgba(0, 0, 0, 0.22);
-$bg-aplayer: rgba(168, 127, 214, 0.65);
 $bg-sp-color: #f4f6fb; // 移动端底色（偏冷白，呼应清新）
 
 // Surface（语义化卡面 + 描边）

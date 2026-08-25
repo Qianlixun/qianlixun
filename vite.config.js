@@ -29,7 +29,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     // ponytail: 显式 vendor 分包——按库域各自独立 chunk，利于浏览器长效缓存；
-    // 已知上限：gitalk/leancloud 等评论统计库仍集中在 Post 懒加载 chunk，后续可再按需拆分
+    // 已知上限：gitalk 等评论库仍集中在 Post 懒加载 chunk，后续可再按需拆分
     rollupOptions: {
       output: {
         manualChunks(id) {

@@ -40,8 +40,8 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   @include pc-layout {
-    // 清新二次元：柔和紫粉渐变页面底色（半透明叠在 #bg 之上）
-    background: linear-gradient(180deg, rgba(253, 214, 240, 0.35) 0%, rgba(217, 199, 245, 0.25) 40%, rgba(244, 246, 251, 0.4) 100%);
+    // 清新二次元：柔和紫粉渐变页面底色（背景轮播层已移除，纯渐变即可）
+    background: linear-gradient(180deg, rgba(253, 214, 240, 0.55) 0%, rgba(217, 199, 245, 0.45) 40%, #f4f6fb 100%);
   }
   @include sp-layout {
     background-color: $bg-sp-color;
@@ -78,20 +78,6 @@ button {
   appearance: none;
   border: none;
   border-radius: 0;
-}
-
-#bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
-  @include sp-layout {
-    display: none;
-  }
 }
 
 /* 代码高亮 */

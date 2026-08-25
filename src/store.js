@@ -7,6 +7,7 @@ import {
   queryTag,
   queryCategory,
   queryPage,
+  queryLife,
 } from './utils/services'
 import { formatPost, formatCategory, formatPage } from './utils/format'
 
@@ -18,7 +19,6 @@ export default createStore({
     tipsUpdateAt: '',
     totalCount: 0,
     tags: null, // 标签列表（首次访问时拉取）
-    showPanel: false,
   },
   mutations: {
     // 设置一言
@@ -33,10 +33,6 @@ export default createStore({
     // 设置标签列表
     setTags(state, tags) {
       state.tags = tags || []
-    },
-    // 设置是否显示看板
-    setShowPanel(state, status) {
-      state.showPanel = status
     },
   },
   actions: {
@@ -83,7 +79,8 @@ export default createStore({
     // 获取标签
     async queryTag({ commit }) {
       const data = await queryTag()
-      const filterLabel = ['Inspiration', 'Friend', 'Book', 'About']
+      // 过滤非文章类标签（历史板块与生活标签不进标签云）
+      const filterLabel = ['Inspiration', 'Friend', 'Book', 'About', 'Life']
       const tags = (data || []).filter((o) => !filterLabel.includes(o.name))
       commit('setTags', tags)
       return tags
@@ -92,6 +89,10 @@ export default createStore({
     async queryPage(context, { type }) {
       const data = await queryPage(type)
       return formatPage(data, type)
+    },
+    // 获取生活记事（私有仓库 + 用户 token，见 services.queryLife）
+    async queryLife(context, { token }) {
+      return await queryLife(token)
     },
   },
 })

@@ -26,13 +26,13 @@
           </div>
           <div class="contact">
             <a
-              v-for="(item, i) in $config.aboutOpts.contact"
-              :key="i"
+              v-for="item in $config.contactOpts.list"
+              :key="item.name"
               :href="item.link"
               rel="noopener noreferrer"
               target="_blank"
             >
-              <img alt :src="item.icon" />
+              <img :alt="item.name" :src="item.icon" />
             </a>
           </div>
           <Segment v-for="(item, i) in about" :key="item.title" :title="item.title" :color="colors[i]">

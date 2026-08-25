@@ -47,12 +47,71 @@ export default {
    */
 
   /**
-   * 归档页面
+   * 归档页面（博客列表）
    */
   archiveOpts: {
     display: true, // 是否显示该页面
     enableComment: false, // 是否开启评论功能
     qoute: '華枝春滿 天心月圓', // 页面顶部一言
+  },
+
+  /**
+   * 作品集页面
+   * 收录规则：blog 仓库 open issue 且编号映射进 projectResources
+   */
+  worksOpts: {
+    display: true,
+    qoute: '代码与灯火，皆我所造',
+  },
+
+  /**
+   * 生活页面（私密，仅站长本人可见）
+   * 内容源：私有仓库（每条 open issue = 一篇生活记录，正文 Markdown）
+   * 访问控制：GitHub 私有仓库 ACL 兜底——登录后凭 OAuth token 拉取，
+   * 非拥有者即使登录也拿不到数据
+   */
+  lifeOpts: {
+    display: true,
+    qoute: '山月不知心底事',
+    repository: 'life', // 私有仓库名（需你本人创建为 private）
+  },
+
+  /**
+   * 联系页面
+   * list 为全站联系方式唯一数据源（关于页图标墙同用此处）
+   */
+  contactOpts: {
+    display: true,
+    qoute: '若你也在寻山，不妨捎个信',
+    heading: '联系千里寻',
+    intro: '关于项目合作、技术交流或生活杂谈，都欢迎通过以下方式找到我。',
+    mail: 'mailto:99498515@qq.com',
+    list: [
+      {
+        name: '邮箱',
+        desc: '99498515@qq.com',
+        icon: `${B}assets/img/email.svg`,
+        link: 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=tNnR9Nfc1drH3N3NwZrX29k',
+      },
+      {
+        name: 'GitHub',
+        desc: 'github.com/Qianlixun',
+        icon: `${B}assets/img/github.svg`,
+        link: 'https://github.com/Qianlixun',
+      },
+      {
+        name: '网易云音乐',
+        desc: '听歌记录与歌单',
+        icon: `${B}assets/img/music.svg`,
+        link: 'https://music.163.com/#/user/home?id=103060582',
+      },
+      {
+        name: 'Twitter',
+        desc: '@Qianlixun',
+        icon: `${B}assets/img/twitter.svg`,
+        link: 'https://twitter.com/Qianlixun',
+      },
+    ],
   },
 
   /**
@@ -82,24 +141,6 @@ export default {
     qoute: '寻遍千山，终见灯火',
     graduated: 'University of Electronic Science and Technology of China (UESTC)',
     college: 'Communication&Information Engineering',
-    contact: [
-      {
-        icon: `${B}assets/img/email.svg`,
-        link: 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=tNnR9Nfc1drH3N3NwZrX29k',
-      },
-      {
-        icon: `${B}assets/img/github.svg`,
-        link: 'https://github.com/Qianlixun',
-      },
-      {
-        icon: `${B}assets/img/music.svg`,
-        link: 'https://music.163.com/#/user/home?id=103060582',
-      },
-      {
-        icon: `${B}assets/img/twitter.svg`,
-        link: 'https://twitter.com/Qianlixun',
-      },
-    ],
   },
 
   /**
@@ -120,11 +161,9 @@ export default {
 
   /**
    * 项目资源映射：Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号 }
-   * 下载为软限制（登录 GitHub 后显示入口）；视频在详情页嵌入 B 站播放器
+   * 命中的 issue 归入「作品集」；下载为软限制（登录 GitHub 后显示入口）；视频在详情页嵌入 B 站播放器
    */
   projectResources: {
-    // Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号 }
-    // 下载为软限制（登录 GitHub 后显示入口）；视频在详情页嵌入 B 站播放器
     1: { repo: 'qianlixun' }, // 站点源码仓库（欢迎文章）
     4: { repo: 'qianlixun' }, // 示例：Vue3 + Vite 模板（占位仓库，等你创建真实仓库后替换）
     5: { repo: 'qianlixun' }, // 示例：REST vs GraphQL 选型记录（占位仓库）

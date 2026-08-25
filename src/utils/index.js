@@ -58,20 +58,6 @@ export const parseTime = (time, format = '{y}-{m}-{d} {h}:{i}:{s}') => {
 }
 
 /**
- * 写入缓存
- */
-export const localSave = (key, value) => {
-  localStorage.setItem(key, value)
-}
-
-/**
- * 读取缓存
- */
-export const localRead = (key, defaultValue = '') => {
-  return localStorage.getItem(key) || defaultValue
-}
-
-/**
  * 图片地址恒等返回
  * 原 fileCDN 会把原作者图床做替换加速；现所有素材已自托管到
  * public/assets/，不再依赖任何外部图床，故直接返回原地址。

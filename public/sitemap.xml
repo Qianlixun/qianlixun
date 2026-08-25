@@ -6,31 +6,27 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://qianlixun.github.io/archive</loc>
+    <loc>https://qianlixun.github.io/works</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://qianlixun.github.io/blog</loc>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://qianlixun.github.io/category</loc>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://qianlixun.github.io/tag</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://qianlixun.github.io/inspiration</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://qianlixun.github.io/book</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://qianlixun.github.io/friend</loc>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://qianlixun.github.io/about</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://qianlixun.github.io/contact</loc>
     <priority>0.7</priority>
   </url>
 </urlset>

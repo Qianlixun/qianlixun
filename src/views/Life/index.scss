@@ -1,0 +1,194 @@
+#life {
+  .page {
+    padding: 18px 0;
+    overflow: hidden;
+    border-radius: $radius;
+    border: 1px solid $border-soft;
+    @include pc-layout {
+      background-color: $surface;
+      box-shadow: $card-shadow;
+    }
+  }
+
+  .content {
+    width: 100%;
+    padding: 0 18px 18px;
+  }
+
+  // =============== 门控卡片（未登录/无权/未建仓库） ===============
+  .gate-card {
+    margin: 40px auto;
+    max-width: 420px;
+    padding: 36px 32px;
+    text-align: center;
+    border-radius: $radius;
+    border: 1px dashed rgba($purple, 0.35);
+    background: rgba($purple, 0.04);
+
+    .gate-icon {
+      font-size: 40px;
+      color: $purple-deep;
+    }
+
+    h3 {
+      margin: 12px 0 8px;
+      font-size: $font-size-large;
+      color: $text-color;
+    }
+
+    p {
+      margin: 0 0 18px;
+      font-size: $font-size-base;
+      color: $text-secondary;
+      line-height: 1.7;
+
+      code {
+        padding: 2px 8px;
+        font-family: $font-family-code;
+        font-size: $font-size-small;
+        color: $purple-deep;
+        border-radius: $radius;
+        background: rgba($purple, 0.1);
+      }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 26px;
+      border-radius: $radius-pill;
+      background-image: $gradient-primary;
+      color: white;
+      font-size: $font-size-normal;
+      border: none;
+      box-shadow: $shadow-1;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-2;
+        opacity: 0.95;
+      }
+
+      .icon {
+        font-size: $font-size-normal;
+      }
+    }
+  }
+
+  // =============== 工具条 ===============
+  .life-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding: 10px 16px;
+    border-radius: $radius;
+    border: 1px solid $border-soft;
+    background: rgba($purple, 0.05);
+  }
+
+  .life-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: $font-size-small;
+    color: $purple-deep;
+
+    .icon {
+      color: $pink-deep;
+    }
+  }
+
+  .logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    font-size: $font-size-small;
+    color: $text-muted;
+    border: none;
+    border-radius: $radius-pill;
+    background: transparent;
+    transition: color 0.25s ease, background-color 0.25s ease;
+
+    &:hover {
+      color: $pink-deep;
+      background: rgba($pink, 0.1);
+    }
+  }
+
+  // =============== 记事列表 ===============
+  .life-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-radius: $radius;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid $border-soft;
+    box-shadow: $shadow-1;
+    overflow: hidden;
+  }
+
+  .life-item {
+    border-bottom: 1px dashed $border-soft;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .life-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 13px 18px;
+    border: none;
+    background: transparent;
+    color: $text-color;
+    text-align: left;
+    transition: background 0.25s ease;
+
+    &:hover {
+      background: rgba($purple, 0.06);
+    }
+
+    .icon {
+      flex-shrink: 0;
+      color: $text-muted;
+      font-size: $font-size-small;
+    }
+  }
+
+  .life-date {
+    flex-shrink: 0;
+    width: 90px;
+    font-family: $font-family-code;
+    font-size: $font-size-small;
+    color: $text-muted;
+
+    @include sp-layout {
+      width: 76px;
+    }
+  }
+
+  .life-title {
+    flex: 1;
+    font-size: $font-size-base;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .life-body {
+    padding: 4px 18px 18px 108px;
+    border-top: 1px dashed $border-soft;
+    background: rgba($purple, 0.03);
+
+    @include sp-layout {
+      padding: 4px 16px 16px 16px;
+    }
+  }
+}

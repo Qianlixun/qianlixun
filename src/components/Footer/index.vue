@@ -12,33 +12,12 @@
         | {{ $config.subtitle }}
       </p>
     </div>
-    <img
-      v-if="!$isMobile.value"
-      class="sakura cursor"
-      :src="sakura"
-      @click="dropPanel"
-      alt="sakura"
-    />
   </footer>
 </template>
 
 <script>
-import images from '@/assets/images'
-
-const { sakura } = images
-
 export default {
   name: 'Footer',
-  data() {
-    return {
-      sakura,
-    }
-  },
-  methods: {
-    dropPanel() {
-      this.$store.commit('setShowPanel', true)
-    },
-  },
 }
 </script>
 

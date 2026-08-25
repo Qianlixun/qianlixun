@@ -14,7 +14,7 @@
             </div>
             <ArchiveCard
               :posts="posts"
-                  :loading="loading"
+              :loading="loading"
               :isDisabledPrev="isDisabledPrev"
               :isDisabledNext="isDisabledNext"
               @handlePage="filterPosts"

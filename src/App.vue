@@ -11,7 +11,6 @@
       </Transition>
     </main>
     <Footer />
-    <Panel />
     <ScrollTop />
   </div>
 </template>
@@ -20,7 +19,6 @@
 import NProgress from 'nprogress'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import Panel from '@/components/Panel'
 import ScrollTop from '@/components/ScrollTop'
 import { isMobile } from '@/utils'
 
@@ -29,7 +27,6 @@ export default {
   components: {
     Header,
     Footer,
-    Panel,
     ScrollTop,
   },
   data() {

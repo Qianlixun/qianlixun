@@ -17,13 +17,7 @@
     </div>
     <!-- 源码下载：软限制，登录后才显示入口 -->
     <div v-if="project.repo" class="download">
-      <a
-        v-if="logged && downloadUrl"
-        class="btn cursor"
-        :href="downloadUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a v-if="logged && downloadUrl" class="btn cursor" :href="downloadUrl" target="_blank" rel="noopener noreferrer">
         <i class="icon icon-download"></i> 下载源码
       </a>
       <button v-else-if="!logged" class="btn cursor" @click="doLogin">

@@ -34,3 +34,17 @@ export function login() {
   const redirect = encodeURIComponent(location.origin + location.pathname)
   location.href = `https://github.com/login/oauth/authorize?client_id=${clientID}&redirect_uri=${redirect}&scope=repo`
 }
+
+// 校验当前登录者是否站长本人（生活页拉取失败时用于区分"无权限"与"仓库未建"）
+export async function isOwner(token) {
+  try {
+    const res = await fetch('https://api.github.com/user', {
+      headers: { Authorization: `token ${token || getToken()}` },
+    })
+    if (!res.ok) return false
+    const data = await res.json()
+    return data.login === config.username
+  } catch (e) {
+    return false
+  }
+}

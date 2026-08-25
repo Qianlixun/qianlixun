@@ -1,0 +1,130 @@
+#contact {
+  .page {
+    padding: 18px 0;
+    overflow: hidden;
+    border-radius: $radius;
+    border: 1px solid $border-soft;
+    @include pc-layout {
+      background-color: $surface;
+      box-shadow: $card-shadow;
+    }
+  }
+
+  .content {
+    width: 100%;
+    padding: 0 18px 24px;
+  }
+
+  // =============== 头部 ===============
+  .contact-hero {
+    padding: 26px 20px;
+    margin-bottom: 22px;
+    text-align: center;
+    border-radius: $radius;
+    background:
+      radial-gradient(at 20% 50%, rgba($purple, 0.12), transparent 60%),
+      radial-gradient(at 80% 50%, rgba($pink, 0.1), transparent 60%),
+      $gradient-mesh;
+
+    .hero-icon {
+      font-size: 34px;
+      color: $purple-deep;
+    }
+
+    h2 {
+      margin: 10px 0 6px;
+      font-size: $font-size-larger;
+      font-weight: $font-weight-bold;
+      color: $text-color;
+    }
+
+    p {
+      margin: 0;
+      font-size: $font-size-base;
+      color: $text-secondary;
+      line-height: 1.7;
+    }
+  }
+
+  // =============== 图标墙 ===============
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 22px 16px;
+    border-radius: $radius;
+    border: 1px solid $border-soft;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: $shadow-1;
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-3;
+    }
+
+    img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+  }
+
+  .contact-name {
+    margin-top: 6px;
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    color: $text-color;
+  }
+
+  .contact-desc {
+    font-size: $font-size-small;
+    color: $text-muted;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  // =============== 邮件 CTA ===============
+  .mail-cta {
+    margin-top: 26px;
+    text-align: center;
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 34px;
+      border-radius: $radius-pill;
+      background-image: $gradient-primary;
+      color: white;
+      font-size: $font-size-normal;
+      box-shadow: $shadow-1;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-2;
+        opacity: 0.95;
+      }
+
+      .icon {
+        font-size: $font-size-normal;
+      }
+    }
+  }
+
+  .mail-note {
+    margin: 12px 0 0;
+    font-size: $font-size-small;
+    color: $text-muted;
+  }
+}

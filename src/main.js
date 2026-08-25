@@ -4,7 +4,6 @@ import 'nprogress/nprogress.css'
 
 // Layout and Font
 import 'aos/dist/aos.css'
-import 'gitalk/dist/gitalk.css'
 import '@/assets/font/fontello.scss'
 import '@/styles/index.scss'
 
@@ -33,10 +32,15 @@ document.title = `${title} | ${subtitle}`
 // Init Cover
 new Image().src = config.defaultCover
 
-app.mount('#app')
-
-// GitHub OAuth 回调：换取 token 后清理 URL 参数（软限制下载登录态）
-handleOAuthCallback()
+// GitHub OAuth 回调：换取 token 后清理 URL 参数（软限制下载登录态）。
+// 带 code 参数时须先等 token 落地再挂载，避免视图读到"未登录"的过期快照；
+// 异步 IIFE 而非顶层 await，兼容 es2020 构建目标。
+;(async () => {
+  if (new URLSearchParams(location.search).get('code')) {
+    await handleOAuthCallback()
+  }
+  app.mount('#app')
+})()
 
 // (o=^•ェ•)o
 const labelStyle = 'line-height:22px;color:#FFF;background:#D68FE9;'

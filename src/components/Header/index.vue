@@ -15,14 +15,15 @@
 export default {
   name: 'Header',
   data() {
-    const { archiveOpts, categoryOpts, tagOpts, aboutOpts } = this.$config
+    const { worksOpts, archiveOpts, lifeOpts, aboutOpts, contactOpts } = this.$config
     return {
       menu: [
         { path: '/', display: true, icon: 'shop', title: '首页' },
-        { path: '/archive', display: archiveOpts.display, icon: 'inbox', title: '归档' },
-        { path: '/category', display: categoryOpts.display, icon: 'bookmark-empty', title: '分类' },
-        { path: '/tag', display: tagOpts.display, icon: 'tag', title: '标签' },
+        { path: '/works', display: worksOpts.display, icon: 'star', title: '作品集' },
+        { path: '/blog', display: archiveOpts.display, icon: 'inbox', title: '博客' },
+        { path: '/life', display: lifeOpts.display, icon: 'heart', title: '生活' },
         { path: '/about', display: aboutOpts.display, icon: 'universal-access', title: '关于' },
+        { path: '/contact', display: contactOpts.display, icon: 'link', title: '联系' },
       ],
     }
   },

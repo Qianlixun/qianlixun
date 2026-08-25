@@ -162,14 +162,16 @@ export default {
   defaultCover: `${B}assets/img/defaultCover.svg`,
 
   /**
-   * 项目资源映射：Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号 }
-   * 命中的 issue 归入「作品集」；下载为软限制（登录 GitHub 后显示入口）；视频在详情页嵌入 B 站播放器
+   * 项目资源映射：Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号, mp4: 演示视频直链 }
+   * mp4/bvid 至少填一个即显示视频区（more 优先覆盖 bvid）；mp4 为独立公开仓库直链，可在线播也可下载
+   * 命中的 issue 归入「作品集」；下载为软限制（登录 GitHub 后显示入口）
    */
   projectResources: {
     1: { repo: 'qianlixun' }, // 站点源码仓库（欢迎文章）
     4: { repo: 'qianlixun' }, // 示例：Vue3 + Vite 模板（占位仓库，等你创建真实仓库后替换）
     5: { repo: 'qianlixun' }, // 示例：REST vs GraphQL 选型记录（占位仓库）
     // 2: { repo: 'demo-project', bvid: 'BV1xx411c7mD' },
+    // 3: { repo: 'demo', mp4: 'https://raw.githubusercontent.com/Qianlixun/medias/main/demo.mp4' },
   },
 
   /**

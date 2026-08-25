@@ -20,8 +20,8 @@ jobs:
           node-version: 20 # Vite 5 需要 Node 18+
           cache: npm
 
-      # 仓库 .gitignore 忽略了 package-lock.json，故使用 npm install 而非 npm ci
-      - run: npm install
+      # 锁文件已提交，npm ci 按 package-lock.json 精确还原依赖
+      - run: npm ci
 
       - run: npm run build
 

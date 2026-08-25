@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 # 源码仓库 push 后自动构建并发布到 qianlixun.github.io（消除"源码新、线上旧"漂移）
 on:
   push:
-    branches: [master, vue3-migration]
+    branches: [main]
   workflow_dispatch:
 
 jobs:

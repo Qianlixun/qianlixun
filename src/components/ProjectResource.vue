@@ -4,8 +4,11 @@
       <i class="icon icon-folder"></i>
       <span>项目资源</span>
     </div>
-    <!-- 视频演示：B 站外链嵌入播放 -->
-    <div v-if="project.bvid" class="video">
+    <!-- 视频演示：本地 mp4（可在线播 + 可下载）或 B 站外链二选一 -->
+    <div v-if="project.mp4" class="video mp4">
+      <video :src="project.mp4" controls preload="metadata"></video>
+    </div>
+    <div v-else-if="project.bvid" class="video">
       <iframe
         :src="`https://player.bilibili.com/player.html?bvid=${project.bvid}&page=1&high_quality=1&danmaku=0`"
         scrolling="no"
@@ -15,6 +18,15 @@
         allowfullscreen="true"
       ></iframe>
     </div>
+    <a
+      v-if="project.mp4"
+      class="btn cursor video-download"
+      :href="project.mp4"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i class="icon icon-inbox"></i> 下载演示视频
+    </a>
     <!-- 源码下载：公开仓库 zip 直链 -->
     <div v-if="project.repo && downloadUrl" class="download">
       <a class="btn cursor" :href="downloadUrl" target="_blank" rel="noopener noreferrer">
@@ -107,6 +119,40 @@ export default {
       width: 100%;
       height: 100%;
       border: none;
+    }
+  }
+
+  // 本地 mp4：载入即占满，不套 16:9 容块
+  .video.mp4 {
+    padding-top: 0;
+    background: #000;
+    video {
+      display: block;
+      width: 100%;
+      max-height: 480px;
+      background: #000;
+    }
+  }
+
+  .video-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    margin-bottom: 1rem;
+    border-radius: $radius-pill;
+    border: 1px solid rgba($purple, 0.4);
+    color: $purple-deep;
+    background: rgba($purple, 0.06);
+    font-size: $font-size-normal;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-2;
+      opacity: 0.95;
+    }
+    .icon {
+      font-size: $font-size-normal;
     }
   }
 

@@ -54,7 +54,9 @@
               <div class="card-body">
                 <h3 class="card-title">{{ post.title }}</h3>
                 <div class="card-excerpt">
-                  <MarkDown :content="excerpt(post.description, 90)" />
+                  <!-- ponytail: 摘要是已剥掉 markdown 语法的纯文本，直接输出即可，
+                       无需引入重型 MarkDown 渲染器（marked/katex/highlight）污染首屏 bundle -->
+                  <span class="excerpt-text">{{ excerpt(post.description, 90) }}</span>
                 </div>
                 <div class="card-actions">
                   <span v-if="config.projectResources[post.number]?.bvid" class="act-btn">
@@ -116,14 +118,13 @@
 <script>
 import { mapState } from 'vuex'
 import AOS from 'aos'
-import MarkDown from '@/components/MarkDown'
 import Pagination from '@/components/Pagination'
 import Cover from '@/components/Cover'
 import config from '@/config'
 
 export default {
   name: 'Home',
-  components: { MarkDown, Pagination, Cover },
+  components: { Pagination, Cover },
   data() {
     return {
       loading: false,

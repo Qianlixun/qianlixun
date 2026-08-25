@@ -35,6 +35,15 @@
               <img :alt="item.name" :src="item.icon" />
             </a>
           </div>
+          <a
+            v-if="$config.aboutOpts.resume && $config.aboutOpts.resume.url"
+            class="resume btn cursor"
+            :href="$config.aboutOpts.resume.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="icon icon-inbox"></i> {{ $config.aboutOpts.resume.label }}
+          </a>
           <Segment v-for="(item, i) in about" :key="item.title" :title="item.title" :color="colors[i]">
             <MarkDown :content="item.content" />
           </Segment>

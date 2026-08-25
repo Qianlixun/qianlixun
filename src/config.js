@@ -143,6 +143,11 @@ export default {
     qoute: '寻遍千山，终见灯火',
     graduated: 'University of Electronic Science and Technology of China (UESTC)',
     college: 'Communication&Information Engineering',
+    // 简历 PDF 下载：自托管 medias 仓库 raw 直链，留空则「关于我」不显示下载按钮
+    resume: {
+      url: '',
+      label: '下载简历 PDF',
+    },
   },
 
   /**
@@ -162,8 +167,8 @@ export default {
   defaultCover: `${B}assets/img/defaultCover.svg`,
 
   /**
-   * 项目资源映射：Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号, mp4: 演示视频直链 }
-   * mp4/bvid 至少填一个即显示视频区（more 优先覆盖 bvid）；mp4 为独立公开仓库直链，可在线播也可下载
+   * 项目资源映射：Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号, mp4: 演示视频直链, zip: 源码压缩包直链 }
+   * mp4/bvid 至少填一个即显示视频区（mp4 优先）；zip 为源码压缩包直链，优先于 repo
    * 命中的 issue 归入「作品集」；下载为软限制（登录 GitHub 后显示入口）
    */
   projectResources: {

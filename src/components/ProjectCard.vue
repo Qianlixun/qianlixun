@@ -13,12 +13,12 @@
           <span class="excerpt-text">{{ excerpt }}</span>
         </div>
         <div class="card-actions">
-          <span v-if="resource.bvid" class="act-btn">
+          <span v-if="resource.bvid || resource.mp4" class="act-btn">
             <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true">
               <path fill="currentColor" d="M3 2v8l7-4z" /></svg
             >视频演示
           </span>
-          <span v-if="resource.repo" class="act-btn"><i class="icon icon-gift"></i> 源码归档</span>
+          <span v-if="resource.repo || resource.zip" class="act-btn"><i class="icon icon-gift"></i> 源码归档</span>
         </div>
       </div>
     </router-link>

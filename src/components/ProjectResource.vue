@@ -27,9 +27,9 @@
     >
       <i class="icon icon-inbox"></i> 下载演示视频
     </a>
-    <!-- 源码下载：公开仓库 zip 直链 -->
-    <div v-if="project.repo && downloadUrl" class="download">
-      <a class="btn cursor" :href="downloadUrl" target="_blank" rel="noopener noreferrer">
+    <!-- 源码下载：zip 压缩包直链优先，否则公开仓库默认分支 zip -->
+    <div v-if="sourceUrl" class="download">
+      <a class="btn cursor" :href="sourceUrl" target="_blank" rel="noopener noreferrer">
         <i class="icon icon-gift"></i> 下载源码
       </a>
     </div>
@@ -52,7 +52,13 @@ export default {
     }
   },
   async created() {
-    if (this.project.repo) await this.fetchRepo()
+    if (this.project.repo && !this.project.zip) await this.fetchRepo()
+  },
+  computed: {
+    // 源码下载地址：zip 直链优先，否则用公开仓库默认分支 zip
+    sourceUrl() {
+      return this.project.zip || this.downloadUrl
+    },
   },
   methods: {
     // 获取仓库默认分支，构造 zip 下载地址；api 不可达时兜底 main 分支

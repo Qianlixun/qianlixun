@@ -7,6 +7,7 @@ import marked from 'marked'
 import Zooming from 'zooming'
 import ClipboardJS from 'clipboard'
 import katex from 'katex'
+import 'katex/dist/katex.css'
 import hljs from '@/assets/lib/highlight'
 import { fileCDN, handleImg } from '@/utils'
 

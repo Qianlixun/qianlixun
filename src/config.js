@@ -207,6 +207,24 @@ export default {
       ],
     },
     // #9 口腔医学 → medias-dental 仓库（待切分上传完成后接线）
+    9: {  // 口腔医学数智化培训系统
+      hls: [
+        { name: 'CBCT的使用方法与标准流程', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-CBCT的使用方法与标准流程.m3u8' },
+        { name: '医护患时钟体位', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-医护患时钟体位.m3u8' },
+        { name: '口腔一般检查', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-口腔一般检查.m3u8' },
+        { name: '口腔门诊接诊话术洁牙术', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-口腔门诊接诊话术洁牙术.m3u8' },
+        { name: '工具器械认知', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-工具器械认知.m3u8' },
+        { name: '术前摆台', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-术前摆台.m3u8' },
+        { name: '术后撤台', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-术后撤台.m3u8' },
+        { name: '窝沟封闭_医生', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-窝沟封闭医生.m3u8' },
+        { name: '窝沟封闭_咨询', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-窝沟封闭咨询.m3u8' },
+        { name: '窝沟封闭_护士', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-窝沟封闭护士.m3u8' },
+        { name: '诊间消毒', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-诊间消毒.m3u8' },
+        { name: '超声波龈上洁牙术_医生', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-超声波龈上洁牙术医生.m3u8' },
+        { name: '超声波龈上洁牙术_咨询', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-超声波龈上洁牙术咨询.m3u8' },
+        { name: '超声波龈上洁牙术_护士', src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-超声波龈上洁牙术护士.m3u8' },
+      ],
+    },
     // #10 信号基础设备 → medias-basic-signal 仓库（待切分上传完成后接线）
     // #11 AFC 售票机 → medias-afc-ticket 仓库（待切分上传完成后接线）
     // #12 AFC 检票机 → medias-afc-gate 仓库（待切分上传完成后接线）

@@ -5,9 +5,11 @@ import config from '../config'
 /**
  * 格式化文章
  * ponytail: 兼容 LF/CRLF；body 不符合 [title](url)\ndesc 约定时安全回退到默认封面 + 全文。
+ *           封面 URL 命中黑名单（紫粉系占位图路径/文件名）时自动回退，避免老内容泄漏旧主题色。
  */
 const regex = /^(.+?)\r?\n\s*(.+?)\r?\n/s
-const coverRegex = /^\[(.+)\].*(https?:.*(?:jpg|jpeg|png|gif|webp))/
+const coverRegex = /^\[(.+)\].*(https?:.*(?:jpg|jpeg|png|gif|webp|svg))/
+const blacklistCoverRe = /purple|pink|sakura|b28fce|b854d4|cf95e8|f596aa|fbc2eb|a18cd1|a64fd0/i
 export const formatPost = (post) => {
   if (!post) return post
   const { created_at } = post
@@ -17,7 +19,7 @@ export const formatPost = (post) => {
   if (result) {
     cover = coverRegex.exec(result[1])
   }
-  if (cover && cover.length === 3) {
+  if (cover && cover.length === 3 && !blacklistCoverRe.test(cover[2])) {
     post.cover = { title: cover[1], src: cover[2] }
     post.description = result[2]
   } else {

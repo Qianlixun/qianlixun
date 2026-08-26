@@ -67,7 +67,7 @@ header {
     @include pc-layout {
       margin-top: 22px;
       padding: 0 14px;
-      height: 58px;
+      height: 66px;
       gap: 4px;
       background-color: $surface;
       border: 1px solid $border-soft;
@@ -96,17 +96,20 @@ header {
     a {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
-      width: 60px;
-      height: 46px;
+      width: 64px;
+      height: 54px;
+      padding: 6px 4px;
+      gap: 2px;
       border-radius: $radius-pill;
+      box-sizing: border-box;
       transition: color 0.3s ease, background-color 0.3s ease;
 
       @include pc-layout {
         font-size: $font-size-large;
         &.router-link-exact-active {
-          color: white;
+          color: $text-on-dark;
           background-image: $gradient-primary;
           box-shadow: $shadow-1;
         }

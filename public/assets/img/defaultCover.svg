@@ -9,8 +9,15 @@
     <stop offset="0" stop-color="#c4a06a" stop-opacity="0.12"/>
     <stop offset="1" stop-color="#0e0e10" stop-opacity="0"/>
   </radialGradient>
+  <radialGradient id="h2" cx="0.85" cy="1" r="0.6">
+    <stop offset="0" stop-color="#9a7e54" stop-opacity="0.08"/>
+    <stop offset="1" stop-color="#0e0e10" stop-opacity="0"/>
+  </radialGradient>
 </defs>
 <rect width="100%" height="100%" fill="url(#g)" rx="14"/>
 <rect width="100%" height="100%" fill="url(#h)" rx="14"/>
-<text x="50%" y="426" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="28" font-weight="700" fill="#c4a06a">默认封面</text>
+<rect width="100%" height="100%" fill="url(#h2)" rx="14"/>
+<circle cx="680" cy="80" r="3" fill="#c4a06a" opacity="0.5"/>
+<circle cx="120" cy="380" r="2" fill="#9a7e54" opacity="0.4"/>
+<circle cx="400" cy="60" r="1.5" fill="#c4a06a" opacity="0.3"/>
 </svg>

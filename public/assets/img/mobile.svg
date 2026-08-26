@@ -1,3 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="750" height="1334" viewBox="0 0 750 1334">
-<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b28fce"/><stop offset="1" stop-color="#2EA9DF"/></linearGradient><rect width="100%" height="100%" fill="url(#g)" rx="14"/><text x="50%" y="1310" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="28" font-weight="700" fill="rgba(255,255,255,0.95)">Mobile BG</text>
+<defs>
+  <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1f1f23"/>
+    <stop offset="0.6" stop-color="#131316"/>
+    <stop offset="1" stop-color="#0e0e10"/>
+  </linearGradient>
+  <radialGradient id="h" cx="0.2" cy="0" r="0.9">
+    <stop offset="0" stop-color="#c4a06a" stop-opacity="0.1"/>
+    <stop offset="1" stop-color="#0e0e10" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<rect width="100%" height="100%" fill="url(#g)" rx="14"/>
+<rect width="100%" height="100%" fill="url(#h)" rx="14"/>
+<text x="50%" y="1310" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="28" font-weight="700" fill="#847f7a">Mobile BG</text>
 </svg>

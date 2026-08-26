@@ -167,12 +167,34 @@ export default {
   defaultCover: `${B}assets/img/defaultCover.svg`,
 
   /**
-   * 项目资源映射：Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号, mp4: 演示视频直链, zip: 源码压缩包直链 }
-   * mp4/bvid 至少填一个即显示视频区（mp4 优先）；zip 为源码压缩包直链，优先于 repo
+   * 项目资源映射：Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号, mp4: 演示视频直链, zip: 源码压缩包直链, hls: HLS视频列表 }
+   * mp4/bvid/hls 至少填一个即显示视频区（hls 优先于 mp4，mp4 优先于 bvid）；zip 为源码压缩包直链，优先于 repo
+   * hls: [{name, src}] 数组——src 是 .m3u8 清单 raw 直链，前端用 hls.js 加载，访客看到单视频无缝播放
    * 命中的 issue 归入「作品集」；下载为软限制（登录 GitHub 后显示入口）
    */
   projectResources: {
-    6: { mp4: 'https://raw.githubusercontent.com/Qianlixun/medias/main/signal-maintenance-demo.mp4' }, // 现场信号设备检修实录
+    6: {  // V1.0: 1+X职业技能等级考试系统现场信号设备虚拟仿真V1.0
+      hls: [
+        { name: 'S700K拆装', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v1-S700K拆装.m3u8' },
+        { name: '信号机部件拆分', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v1-信号机部件拆分.m3u8' },
+        { name: '剪辑版视频', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v1-剪辑版视频.m3u8' },
+        // 完整版视频切片（v1-现场信号设备检修完整版视频.m3u8）已在 medias 仓库作站内备份，但不暴露给前端播放（长度过长体验不佳）
+      ],
+    },
+    7: {  // V2.0: 1+X职业技能等级考试系统现场信号设备虚拟仿真V2.0
+      hls: [
+        { name: '初级卷1无拆装', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-初级卷1无拆装.m3u8' },
+        { name: '初级卷2无拆装', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-初级卷2无拆装.m3u8' },
+        { name: '中级卷1无拆装', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-中级卷1无拆装.m3u8' },
+        { name: '中级卷2无拆装', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-中级卷2无拆装.m3u8' },
+        { name: '现场信号设备虚拟仿真', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-现场信号设备虚拟仿真.m3u8' },
+        { name: '现场信号仿真软件联动展示', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-现场信号仿真软件联动展示.m3u8' },
+        { name: '联动展示（字幕版）', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-现场信号仿真软件联动展示字幕.m3u8' },
+        { name: '联动展示（去logo版）', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-现场信号仿真软件联动展示去掉logo版本.m3u8' },
+        { name: '3D场景与室内外联动展示', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-虚拟仿真基地3D场景展示以及室内外的联动展示张乐尧.m3u8' },
+        // 完整版「现场信号设备虚拟仿真职业技能等级考试系统」切片已在 medias 仓库作站内备份，长度过长不暴露前端
+      ],
+    },
     // 2: { repo: 'demo-project', bvid: 'BV1xx411c7mD' },
     // 3: { repo: 'demo', mp4: 'https://raw.githubusercontent.com/Qianlixun/medias/main/demo.mp4' },
   },

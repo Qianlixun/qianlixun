@@ -4,10 +4,24 @@
       <i class="icon icon-folder"></i>
       <span>项目资源</span>
     </div>
-    <!-- 视频演示：本地 mp4（可在线播 + 可下载）或 B 站外链二选一 -->
-    <div v-if="project.mp4" class="video mp4">
+    <!-- HLS 多视频播放（推荐）：project.hls = [{name, src}] -->
+    <div v-if="hlsVideos.length" class="video-hls">
+      <video ref="hlsVideo" controls preload="metadata" crossorigin="anonymous"></video>
+      <div v-if="hlsVideos.length > 1" class="hls-playlist">
+        <button
+          v-for="(v, i) in hlsVideos"
+          :key="i"
+          class="hls-track"
+          :class="{ active: i === activeHlsIdx }"
+          @click="switchHls(i)"
+        >{{ v.name }}</button>
+      </div>
+    </div>
+    <!-- 兼容旧版：本地 mp4 单视频（可在线播 + 可下载） -->
+    <div v-else-if="project.mp4" class="video mp4">
       <video :src="project.mp4" controls preload="metadata"></video>
     </div>
+    <!-- 兼容旧版：B 站外链 -->
     <div v-else-if="project.bvid" class="video">
       <iframe
         :src="`https://player.bilibili.com/player.html?bvid=${project.bvid}&page=1&high_quality=1&danmaku=0`"
@@ -37,7 +51,9 @@
 </template>
 
 <script>
-// 项目资源展示：B 站视频嵌入 + 公开仓库源码下载
+// 项目资源展示：HLS 多视频（首选）/ 本地 mp4 / B 站外链 + 公开仓库源码下载
+// HLS 段切分见 .workbuddy/redesign/src/hls-split-upload.mjs；hls.js 动态 import 不进首屏
+let Hls = null  // ponytail: 模块级缓存避免重复加载（单例足够，多组件实例共享）
 export default {
   name: 'ProjectResource',
   props: {
@@ -49,19 +65,65 @@ export default {
   data() {
     return {
       downloadUrl: '',
+      activeHlsIdx: 0,
+      hlsInstance: null,
     }
   },
-  async created() {
-    if (this.project.repo && !this.project.zip) await this.fetchRepo()
-  },
   computed: {
-    // 源码下载地址：zip 直链优先，否则用公开仓库默认分支 zip
     sourceUrl() {
       return this.project.zip || this.downloadUrl
     },
+    hlsVideos() {
+      return Array.isArray(this.project.hls) ? this.project.hls : []
+    },
+  },
+  async mounted() {
+    if (this.project.repo && !this.project.zip) await this.fetchRepo()
+    // HLS 首个视频自动加载
+    if (this.hlsVideos.length) {
+      await this.ensureHls()
+      this.loadHls(0)
+    }
+  },
+  beforeUnmount() {
+    this.destroyHls()
   },
   methods: {
-    // 获取仓库默认分支，构造 zip 下载地址；api 不可达时兜底 main 分支
+    async ensureHls() {
+      if (Hls) return
+      const mod = await import('hls.js')
+      Hls = mod.default
+    },
+    loadHls(idx) {
+      const video = this.$refs.hlsVideo
+      if (!video || !Hls) return
+      this.destroyHls()
+      const src = this.hlsVideos[idx]?.src
+      if (!src) return
+      // Safari 原生支持 HLS
+      if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = src
+        return
+      }
+      // 其他浏览器用 hls.js
+      if (Hls.isSupported()) {
+        const hls = new Hls({ maxBufferLength: 30, maxMaxBufferLength: 60 })
+        hls.loadSource(src)
+        hls.attachMedia(video)
+        this.hlsInstance = hls
+      }
+    },
+    switchHls(idx) {
+      if (idx === this.activeHlsIdx) return
+      this.activeHlsIdx = idx
+      this.loadHls(idx)
+    },
+    destroyHls() {
+      if (this.hlsInstance) {
+        this.hlsInstance.destroy()
+        this.hlsInstance = null
+      }
+    },
     async fetchRepo() {
       const { username } = this.$config
       const repo = this.project.repo
@@ -125,6 +187,43 @@ export default {
       width: 100%;
       height: 100%;
       border: none;
+    }
+  }
+
+  // HLS 多视频：video 占满 + 下方播放列表
+  .video-hls {
+    margin-bottom: 1rem;
+    video {
+      display: block;
+      width: 100%;
+      max-height: 480px;
+      background: #000;
+      border-radius: $radius;
+    }
+    .hls-playlist {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .hls-track {
+      padding: 6px 14px;
+      border-radius: $radius-pill;
+      border: 1px solid $border-soft;
+      background: rgba($purple, 0.04);
+      color: $text-color;
+      font-size: $font-size-small;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      &:hover {
+        border-color: rgba($purple, 0.5);
+        color: $purple-deep;
+      }
+      &.active {
+        background-image: $gradient-primary;
+        border-color: transparent;
+        color: white;
+      }
     }
   }
 

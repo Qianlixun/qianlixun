@@ -38,6 +38,8 @@ export default defineConfig({
           if (/[/\\](marked|katex|highlight\.js|zooming|clipboard|github-markdown)[/\\]/.test(id)) return 'markdown-libs'
           if (/[/\\](gitalk|leancloud-storage|axios|github)[/\\]/.test(id)) return 'comment-libs'
           if (/[/\\](aos|nprogress|timeago\.js)[/\\]/.test(id)) return 'ui-vendor'
+          // hls.js 仅 ProjectResource 组件动态 import；独立 chunk 避免进首屏
+          if (/[/\\]hls\.js[/\\]/.test(id)) return 'hls-vendor'
         },
       },
     },

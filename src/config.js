@@ -197,6 +197,21 @@ export default {
     },
     // 2: { repo: 'demo-project', bvid: 'BV1xx411c7mD' },
     // 3: { repo: 'demo', mp4: 'https://raw.githubusercontent.com/Qianlixun/medias/main/demo.mp4' },
+
+    // —— 新增项目（按项目分仓库，HLS 切片独立仓库直链） ——
+    8: {  // 城市轨道交通站台门检修维护教学系统
+      hls: [
+        { name: '周巡检操作视频', src: 'https://raw.githubusercontent.com/Qianlixun/medias-platform-door/main/platform-周巡检操作视频.m3u8' },
+        { name: '更换门控器操作视频', src: 'https://raw.githubusercontent.com/Qianlixun/medias-platform-door/main/platform-更换门控器操作视频.m3u8' },
+        { name: '站台门破损教学视频', src: 'https://raw.githubusercontent.com/Qianlixun/medias-platform-door/main/platform-站台门破损教学视频.m3u8' },
+      ],
+    },
+    // #9 口腔医学 → medias-dental 仓库（待切分上传完成后接线）
+    // #10 信号基础设备 → medias-basic-signal 仓库（待切分上传完成后接线）
+    // #11 AFC 售票机 → medias-afc-ticket 仓库（待切分上传完成后接线）
+    // #12 AFC 检票机 → medias-afc-gate 仓库（待切分上传完成后接线）
+    // #13 1+X 车载 V1.0 → medias-v1-onboard 仓库（待切分上传完成后接线）
+    // #14 1+X 车载 V2.0 → medias-v2-onboard 仓库（待切分上传完成后接线）
   },
 
   /**

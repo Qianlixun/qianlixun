@@ -1,85 +1,102 @@
 // Colors
 // colors for theme.
 // --------------------------------------------------
-// 二次元清新基调：紫粉 + 樱粉，做精致化收敛（统一色阶、降低噪点）
-$whitesmoke: #f5f5f7;
-$black-light: #42414d; // 柔和墨色，替代纯灰，提升可读性
-$purple: #cf95e8; // 主紫（清新）
-$purple-dark: #a87fd6;
-$purple-dim: #8a63b0;
-$purple-deep: #a64fd0; // 链接/强调
-$pink: #f596aa; // 樱粉（取自 themeColors 桃，与主紫做渐变伙伴）
-$pink-deep: #d63b6c; // 樱粉深（用于强调描边）
-$brown: #795548;
+// 深炭黑低饱和金（参照 https://zg.gg/，AGENTS.md 约定）
+//   底色阶：#0e0e10 / #18181c / #1f1f23
+//   金色阶：#c4a06a / #9a7e54 / #d4b87a
+//   暖灰阶文字：#d8d6d2 / #847f7a / #5c5854
+// ponytail: 保留旧变量名（$purple/$pink 等）作为金色阶别名，
+// 避免 20 个依赖文件大改；后续若需语义清晰可重命名（本次不做）
 
-// 品牌渐变（hero / 按钮 / 强调条）
-$gradient-brand: linear-gradient(135deg, #fbc2eb 0%, #a18cd1 100%);
-$gradient-primary: linear-gradient(135deg, #d39bee 0%, #a18cd1 100%);
-$gradient-soft: linear-gradient(135deg, #fdd6f0 0%, #d9c7f5 100%);
+// 底色阶
+$bg-base: #0e0e10; // 页面底
+$bg-card: #18181c; // 卡面
+$bg-card-strong: #1f1f23; // 卡面强（hover/激活）
+
+// 金色强调阶
+$gold-strong: #c4a06a; // 链接/强调主色
+$gold-dim: #9a7e54; // 次级强调
+$gold-soft: #d4b87a; // 柔和高光
+
+// 旧紫粉变量名 → 金色阶别名（依赖文件无需改动即可跟随）
+$whitesmoke: #2a2a2e;
+$black-light: #d8d6d2; // ponytail: 旧名保留，实为暖灰白主文字
+$purple: $gold-strong; // 主强调（旧紫 → 金）
+$purple-dark: $gold-dim;
+$purple-dim: $gold-dim;
+$purple-deep: $gold-strong; // 链接/强调
+$pink: $gold-strong; // 旧樱粉 → 金
+$pink-deep: $gold-dim;
+$brown: #6b6358;
+
+// 品牌渐变（金色，替代旧蓝紫渐变）
+$gradient-brand: linear-gradient(135deg, #c4a06a 0%, #9a7e54 100%);
+$gradient-primary: linear-gradient(135deg, #d4b87a 0%, #9a7e54 100%);
+$gradient-soft: linear-gradient(135deg, rgba(196, 160, 106, 0.15) 0%, rgba(154, 126, 84, 0.1) 100%);
 // 用于 hero 大字渐变 + 强调文字
-$gradient-text: linear-gradient(135deg, #d39bee 0%, #fb6fa6 50%, #d39bee 100%);
-// hero 背景：两层径向 + 底色
-$gradient-mesh: linear-gradient(180deg, #f7e9fa 0%, #ffe9f1 100%);
+$gradient-text: linear-gradient(135deg, #d4b87a 0%, #c4a06a 50%, #9a7e54 100%);
+// hero 背景：深炭黑底 + 极弱金色径向高光
+$gradient-mesh: linear-gradient(180deg, #18181c 0%, #0e0e10 100%);
 
 // Scaffolding
 // --------------------------------------------------
 
 // Global text color on <body>
-$text-color: $black-light;
-$text-secondary: #6b6b7b;
-$text-muted: #9a9aa8;
+$text-color: $black-light; // #d8d6d2 暖灰白
+$text-secondary: #847f7a;
+$text-muted: #5c5854;
 $text-on-dark: #fff;
 
 // Global link color.
-$link-color: $purple-deep;
+$link-color: $gold-strong;
 
 // Selection
-$selection-bg: $purple;
-$selection-color: white;
+$selection-bg: rgba(196, 160, 106, 0.3);
+$selection-color: $text-color;
 
-// Text Clip（标题渐变文字）
-$text-clip-start: #fb618d;
-$text-clip-center: #8dc00a;
-$text-clip-end: $purple;
+// Text Clip（标题渐变文字，金色）
+$text-clip-start: #d4b87a;
+$text-clip-center: $gold-strong;
+$text-clip-end: $gold-dim;
 
-// Background（半透明卡面，分层）
-$bg-white: rgba(255, 255, 255, 0.6);
-$bg-white-dim: rgba(255, 255, 255, 0.7);
-$bg-white-deep: rgba(255, 255, 255, 0.82);
-$bg-dark: rgba(0, 0, 0, 0.06); // 收敛：原 0.1 → 更轻的描边
-$bg-dark-dim: rgba(0, 0, 0, 0.12);
-$bg-dark-deep: rgba(0, 0, 0, 0.22);
-$bg-sp-color: #f4f6fb; // 移动端底色（偏冷白，呼应清新）
+// Background（深色玻璃卡面，分层；旧 $bg-white 系列反转为深色，依赖文件自动跟随）
+$bg-white: rgba(40, 40, 46, 0.6);
+$bg-white-dim: rgba(40, 40, 46, 0.7);
+$bg-white-deep: rgba(40, 40, 46, 0.82);
+$bg-dark: rgba(0, 0, 0, 0.2); // 描边/分隔暗色（在深底上加重）
+$bg-dark-dim: rgba(0, 0, 0, 0.3);
+$bg-dark-deep: rgba(0, 0, 0, 0.5);
+$bg-sp-color: $bg-base; // 移动端底色
 
 // Surface（语义化卡面 + 描边）
-$surface: rgba(255, 255, 255, 0.72);
-$surface-strong: rgba(255, 255, 255, 0.9);
-$border-soft: rgba(120, 90, 160, 0.1);
-$border: rgba(120, 90, 160, 0.16);
+$surface: $bg-card;
+$surface-strong: $bg-card-strong;
+$border-soft: rgba(255, 255, 255, 0.06);
+$border: rgba(255, 255, 255, 0.1);
 
-// Sakura
-$sakura-color: #e87a90;
-$sakura-color-light: #fedfe1;
+// Sakura（保留语义，色值改金色）
+$sakura-color: $gold-strong;
+$sakura-color-light: rgba(196, 160, 106, 0.2);
 
-// Concat（联系方式）
-$concat-email-color: $purple-dark;
-$concat-github-color: #c3ce5f;
-$concat-telegram-color: #6fd4ff;
-$concat-music-color: #f596aa;
-$concat-rss-color: #ffba84;
+// Concat（联系方式图标色，色阶对齐金色但保留各平台辨识）
+$concat-email-color: $gold-strong;
+$concat-github-color: #a8b87a; // 偏黄绿
+$concat-telegram-color: #6f9fc4; // 偏蓝
+$concat-music-color: #c47a8a; // 偏粉
+$concat-rss-color: #c49a6a; // 偏橙
 
-// Loading
-$loading-bg: #c9b8d8;
-$loading-color-one: #faaacc;
-$loading-color-two: #c8aacc;
-$loading-color-three: #96aacc;
-$loading-color-four: #acd0ff;
-$loading-color-five: #88cfff;
+// Loading（深色调）
+$loading-bg: #2a2632;
+$loading-color-one: $gold-strong;
+$loading-color-two: $gold-dim;
+$loading-color-three: #6b6358;
+$loading-color-four: #4a4540;
+$loading-color-five: #3a3530;
 
 // Code
-$code-color-red: #fc625d;
-$code-color-yello: #fdbc40;
-$code-color-green: #35cd4b;
+$code-color-red: #c4646a; // 柔化红
+$code-color-yello: #c49a6a; // 柔化黄（对齐金色）
+$code-color-green: #7aab5a; // 柔化绿
 
 // Radius（统一圆角体系）
 $radius-sm: 8px;
@@ -87,15 +104,15 @@ $radius: 14px;
 $radius-lg: 20px;
 $radius-pill: 999px;
 
-// Shadow（柔和分层阴影，替代旧硬阴影）
-$shadow-1: 0 2px 10px rgba(140, 100, 180, 0.08);
-$shadow-2: 0 8px 24px rgba(140, 100, 180, 0.12);
-$shadow-3: 0 16px 44px rgba(140, 100, 180, 0.18);
+// Shadow（深色背景下需更深的阴影 + hover 时金色微描边）
+$shadow-1: 0 2px 10px rgba(0, 0, 0, 0.4);
+$shadow-2: 0 8px 24px rgba(0, 0, 0, 0.5);
+$shadow-3: 0 16px 44px rgba(0, 0, 0, 0.6);
 $card-shadow: $shadow-2;
-$card-shadow-hover: $shadow-3;
-$card-shadow-light: 0 6px 20px rgba(140, 100, 180, 0.1);
-$card-shadow-light-hover: 0 14px 38px rgba(140, 100, 180, 0.16);
-$block-shadow: #e7dfef 0px 10px 10px -10px inset, #e7dfef 0px -10px 10px -10px inset;
+$card-shadow-hover: $shadow-3, 0 0 0 1px rgba(196, 160, 106, 0.2);
+$card-shadow-light: 0 6px 20px rgba(0, 0, 0, 0.4);
+$card-shadow-light-hover: 0 14px 38px rgba(0, 0, 0, 0.5);
+$block-shadow: rgba(0, 0, 0, 0.4) 0px 10px 10px -10px inset, rgba(0, 0, 0, 0.4) 0px -10px 10px -10px inset;
 
 // Typography
 // --------------------------------------------------

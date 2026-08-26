@@ -79,7 +79,7 @@
       border: 1px solid $border-soft;
       border-radius: $radius;
       outline: none;
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(40, 40, 46, 0.75);
       transition: border-color 0.25s ease, box-shadow 0.25s ease;
 
       &::placeholder {
@@ -106,7 +106,6 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 6px;
       padding: 10px 26px;
       border-radius: $radius-pill;
@@ -125,17 +124,6 @@
 
       .icon {
         font-size: $font-size-normal;
-      }
-    }
-
-    .reset-btn {
-      margin-top: 10px;
-      background-image: none;
-      background-color: rgba($purple, 0.08);
-      color: $purple-deep;
-
-      &:hover {
-        opacity: 1;
       }
     }
   }
@@ -188,7 +176,7 @@
     margin: 0;
     padding: 0;
     border-radius: $radius;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(40, 40, 46, 0.6);
     border: 1px solid $border-soft;
     box-shadow: $shadow-1;
     overflow: hidden;

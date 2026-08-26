@@ -1,14 +1,14 @@
-/* Base16 Atelier Dune Dark - Theme */
+/* Base16 Atelier Dune Dark - Theme (柔化以适配深炭黑低饱和金主题) */
 /* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/dune) */
 /* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
 
 /* Atelier-Dune Comment */
 .hljs-comment,
 .hljs-quote {
-  color: #999580;
+  color: #6b6358;
 }
 
-/* Atelier-Dune Red */
+/* Atelier-Dune Red（柔化） */
 .hljs-variable,
 .hljs-template-variable,
 .hljs-attribute,
@@ -19,10 +19,10 @@
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: #d73737;
+  color: #c4646a;
 }
 
-/* Atelier-Dune Orange */
+/* Atelier-Dune Orange（柔化粉，对齐暖色阶） */
 .hljs-number,
 .hljs-meta,
 .hljs-built_in,
@@ -30,23 +30,23 @@
 .hljs-literal,
 .hljs-type,
 .hljs-params {
-  color: #cd5da0;
+  color: #b86f9c;
 }
 
-/* Atelier-Dune Green */
+/* Atelier-Dune Green（柔化） */
 .hljs-string,
 .hljs-symbol,
 .hljs-bullet {
-  color: #60ac39;
+  color: #7aab5a;
 }
 
-/* Atelier-Dune Blue */
+/* Atelier-Dune Blue（柔化） */
 .hljs-title,
 .hljs-section {
-  color: #6684e1;
+  color: #7a8fc4;
 }
 
-/* Atelier-Dune Purple */
+/* Atelier-Dune Purple（自动跟随 $purple-deep = 金色） */
 .hljs-keyword,
 .hljs-selector-tag {
   color: $purple-deep;
@@ -55,8 +55,8 @@
 .hljs {
   display: block;
   overflow-x: auto;
-  background: #20201d;
-  color: #a6a28c;
+  background: $bg-card;
+  color: #a8a6a2;
   padding: 0.5em;
   border-radius: $radius-sm;
 }

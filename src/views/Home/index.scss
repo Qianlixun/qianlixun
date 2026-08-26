@@ -17,9 +17,9 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='1' cy='1' r='1' fill='%23ffffff' opacity='0.25'/></svg>");
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='1' cy='1' r='1' fill='%23c4a06a' opacity='0.35'/></svg>");
       background-size: 24px 24px;
-      opacity: 0.3;
+      opacity: 0.4;
       pointer-events: none;
     }
 
@@ -65,7 +65,7 @@
     margin: 0;
     padding: 6px 18px;
     border-radius: $radius-pill;
-    background: rgba(255, 255, 255, 0.78);
+    background: rgba(40, 40, 46, 0.78);
     backdrop-filter: blur(8px);
     border: 1px solid $border-soft;
     box-shadow: $shadow-1;
@@ -331,7 +331,7 @@
     padding: 40px 60px;
     border-radius: $radius;
     border: 1px dashed $border;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(40, 40, 46, 0.7);
 
     .empty-emoji {
       font-size: 48px;

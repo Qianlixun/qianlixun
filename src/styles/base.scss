@@ -40,8 +40,10 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   @include pc-layout {
-    // 清新二次元：柔和紫粉渐变页面底色（背景轮播层已移除，纯渐变即可）
-    background: linear-gradient(180deg, rgba(253, 214, 240, 0.55) 0%, rgba(217, 199, 245, 0.45) 40%, #f4f6fb 100%);
+    // 深炭黑低饱和金（参照 zg.gg）：纯深底 + 极弱金色径向高光
+    background:
+      radial-gradient(at 20% 0%, rgba(196, 160, 106, 0.04), transparent 50%),
+      $bg-base;
   }
   @include sp-layout {
     background-color: $bg-sp-color;

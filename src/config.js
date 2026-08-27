@@ -182,7 +182,19 @@ export default {
         // 完整版 v1-现场信号设备检修完整版视频.m3u8 已在 medias 仓库作站内备份，长度过长不暴露前端
       ],
     },
-    // 7: 现场信号设备虚拟仿真 V2.0——视频尚未切片上传到主 medias 仓库，暂不接线（避免前端 hls.js 加载 404）
+    7: {  // 现场信号设备虚拟仿真 V2.0（主 medias 仓库，完整版/变体版切片仅备份不暴露前端）
+      hls: [
+        { name: '初级卷1·无拆装', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-初级卷1无拆装.m3u8' },
+        { name: '初级卷2·无拆装', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-初级卷2无拆装.m3u8' },
+        { name: '中级卷1·无拆装', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-中级卷1无拆装.m3u8' },
+        { name: '中级卷2·无拆装', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-中级卷2无拆装.m3u8' },
+        { name: '联动展示', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-现场信号仿真软件联动展示.m3u8' },
+        { name: '联动展示·字幕版', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-现场信号仿真软件联动展示字幕.m3u8' },
+        { name: '现场信号设备虚拟仿真', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-现场信号设备虚拟仿真.m3u8' },
+        { name: '3D场景联动展示', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-虚拟仿真基地3D场景展示以及室内外的联动展示张乐尧.m3u8' },
+        // 完整版/变体版（v2-现场信号设备虚拟仿真职业技能等级考试系统.m3u8、v2-现场信号仿真软件联动展示去掉logo版本.m3u8）已在 medias 仓库作站内备份，不暴露前端
+      ],
+    },
     8: {  // 城市轨道交通站台门检修维护教学系统（medias-platform-door 仓库）
       hls: [
         { name: '周巡检操作视频', src: 'https://raw.githubusercontent.com/Qianlixun/medias-platform-door/main/platform-周巡检操作视频.m3u8' },

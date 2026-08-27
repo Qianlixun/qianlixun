@@ -309,7 +309,7 @@ export default {
         { name: 'Hlscz200h20220420-13590406', src: 'https://raw.githubusercontent.com/Qianlixun/medias-v1-onboard/main/v1-onboard-Hlscz200h20220420-13590406.m3u8' },
       ],
     },
-    14: {  // 1+X 车载信号 V2.0（medias-v2-onboard 仓库；ts 切片补传中，加载前先确保补传完成）
+    14: {  // 1+X 车载信号 V2.0（medias-v2-onboard 仓库）
       hls: [
         { name: 'M01', src: 'https://raw.githubusercontent.com/Qianlixun/medias-v2-onboard/main/v2-onboard-M01.m3u8' },
         { name: 'M02', src: 'https://raw.githubusercontent.com/Qianlixun/medias-v2-onboard/main/v2-onboard-M02.m3u8' },

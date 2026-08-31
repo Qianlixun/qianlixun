@@ -148,6 +148,38 @@ export default {
       url: '',
       label: '下载简历 PDF',
     },
+    // 结构化简历数据（关于页渲染为时间轴/技能条/列表）
+    // 各数组为空时对应区段不显示；按需填写，无需整段保留
+    resumeData: {
+      // 教育经历：{ period, school, major, degree, desc }
+      education: [
+        {
+          period: '2018.09 - 2022.06',
+          school: '电子科技大学',
+          major: '通信与信息工程',
+          degree: '本科',
+          desc: '主修：信号与系统、通信原理、数据结构、Web 前端开发',
+        },
+      ],
+      // 工作经历：{ period, company, position, desc }
+      // desc 支持 Markdown 行内语法（如 **加粗** / `代码`）
+      work: [
+        // { period: '2022.07 - 至今', company: '某科技公司', position: '前端工程师', desc: '负责 SaaS 平台 Vue 3 全栈开发与性能优化' },
+      ],
+      // 技能：{ name, level(0-100) } —— level 用于渲染进度条
+      skills: [
+        { name: 'Vue 3 / Vuex', level: 90 },
+        { name: 'JavaScript / ES2020', level: 85 },
+        { name: 'HTML5 / CSS3 / SCSS', level: 88 },
+        { name: 'Vite / Webpack', level: 80 },
+        { name: 'Node.js / Express', level: 75 },
+        { name: 'Git / GitHub Actions', level: 82 },
+      ],
+      // 获奖证书：{ period, title, desc }
+      awards: [
+        // { period: '2021.05', title: '全国大学生电子设计竞赛一等奖', desc: '' },
+      ],
+    },
   },
 
   /**

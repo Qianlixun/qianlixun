@@ -150,6 +150,152 @@
         font-size: $font-size-normal;
       }
     }
+
+    // 结构化简历区段（教育/工作 = 时间轴，技能 = 进度条，奖项 = 列表）
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+
+      // 左侧竖线（贴近 item 圆点的左侧）
+      &::before {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 6px;
+        bottom: 6px;
+        width: 2px;
+        background-color: $border;
+        border-radius: 1px;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding: 4px 0 16px 14px;
+
+        &:last-child {
+          padding-bottom: 0;
+        }
+
+        // 圆点
+        &::before {
+          content: '';
+          position: absolute;
+          left: -20px;
+          top: 8px;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: currentColor; // 继承 Segment 主题色
+          box-shadow: 0 0 0 3px $surface-strong;
+        }
+
+        .period {
+          color: $text-secondary;
+          font-size: $font-size-small;
+          margin-bottom: 4px;
+        }
+
+        .detail {
+          .title {
+            color: $text-color;
+            font-weight: $font-weight-bold;
+            font-size: $font-size-normal;
+            line-height: 1.6;
+          }
+
+          .desc {
+            margin-top: 4px;
+            color: $text-muted;
+            font-size: $font-size-small;
+            line-height: 1.7;
+          }
+        }
+      }
+    }
+
+    .skills {
+      display: grid;
+      gap: 14px;
+
+      .skill {
+        display: grid;
+        grid-template-columns: 1fr 2fr auto;
+        align-items: center;
+        gap: 14px;
+
+        @include sp-layout {
+          grid-template-columns: 1fr auto;
+          row-gap: 6px;
+          .bar {
+            grid-column: 1 / -1;
+          }
+        }
+
+        .name {
+          color: $text-color;
+          font-size: $font-size-normal;
+        }
+
+        .bar {
+          position: relative;
+          height: 8px;
+          border-radius: $radius-pill;
+          background-color: $bg-dark;
+          overflow: hidden;
+
+          .fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            border-radius: $radius-pill;
+            transition: width 0.6s ease;
+          }
+        }
+
+        .level {
+          color: $text-secondary;
+          font-size: $font-size-small;
+          min-width: 36px;
+          text-align: right;
+        }
+      }
+    }
+
+    .awards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .award-item {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        line-height: 1.7;
+
+        @include sp-layout {
+          flex-direction: column;
+          gap: 2px;
+        }
+
+        .period {
+          color: $text-muted;
+          font-size: $font-size-small;
+          white-space: nowrap;
+        }
+
+        .title {
+          color: $text-color;
+          font-weight: $font-weight-bold;
+          font-size: $font-size-normal;
+        }
+
+        .desc {
+          color: $text-secondary;
+          font-size: $font-size-small;
+        }
+      }
+    }
     }
   }
 }

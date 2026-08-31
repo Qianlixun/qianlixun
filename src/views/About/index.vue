@@ -68,18 +68,29 @@
               </div>
             </div>
           </Segment>
-          <Segment v-if="rd.skills.length" :title="'技能'" :color="c(2)">
+          <Segment v-if="rd.projects && rd.projects.length" :title="'项目经历'" :color="c(2)">
+            <div class="timeline">
+              <div v-for="(p, i) in rd.projects" :key="i" class="timeline-item">
+                <div class="period">{{ p.period }}</div>
+                <div class="detail">
+                  <div class="title">{{ p.name }} · {{ p.role }}</div>
+                  <div v-if="p.desc" class="desc">{{ p.desc }}</div>
+                </div>
+              </div>
+            </div>
+          </Segment>
+          <Segment v-if="rd.skills.length" :title="'技能'" :color="c(3)">
             <div class="skills">
               <div v-for="(s, i) in rd.skills" :key="i" class="skill">
                 <div class="name">{{ s.name }}</div>
                 <div class="bar">
-                  <div class="fill" :style="{ width: s.level + '%', backgroundColor: c(2) }"></div>
+                  <div class="fill" :style="{ width: s.level + '%', backgroundColor: c(3) }"></div>
                 </div>
                 <div class="level">{{ s.level }}%</div>
               </div>
             </div>
           </Segment>
-          <Segment v-if="rd.awards.length" :title="'获奖证书'" :color="c(3)">
+          <Segment v-if="rd.awards.length" :title="'获奖证书'" :color="c(4)">
             <div class="awards">
               <div v-for="(a, i) in rd.awards" :key="i" class="award-item">
                 <span class="period">{{ a.period }}</span>
@@ -89,7 +100,7 @@
             </div>
           </Segment>
 
-          <Segment v-for="(item, i) in about" :key="item.title" :title="item.title" :color="c(i + 4)">
+          <Segment v-for="(item, i) in about" :key="item.title" :title="item.title" :color="c(i + 5)">
             <MarkDown :content="item.content" />
           </Segment>
         </div>

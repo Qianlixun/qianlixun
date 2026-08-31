@@ -154,31 +154,47 @@ export default {
       // 教育经历：{ period, school, major, degree, desc }
       education: [
         {
-          period: '2018.09 - 2022.06',
-          school: '电子科技大学',
-          major: '通信与信息工程',
-          degree: '本科',
-          desc: '主修：信号与系统、通信原理、数据结构、Web 前端开发',
+          period: '2021 - 2023',
+          school: '北京林业大学',
+          major: '计算机科学与技术',
+          degree: '本科·非全日制',
+          desc: '211 院校',
+        },
+        {
+          period: '2016 - 2019',
+          school: '河北软件职业技术学院',
+          major: '软件技术',
+          degree: '大专',
+          desc: '',
         },
       ],
       // 工作经历：{ period, company, position, desc }
       // desc 支持 Markdown 行内语法（如 **加粗** / `代码`）
       work: [
-        // { period: '2022.07 - 至今', company: '某科技公司', position: '前端工程师', desc: '负责 SaaS 平台 Vue 3 全栈开发与性能优化' },
+        {
+          period: '2020.08 - 至今',
+          company: '谨诚科技（天津）有限公司',
+          position: '3D 研发工程师',
+          desc: '主导 AFC 检修与拆装、和利时 1+X 地面/车载信号、信号基础设备检修、站台门虚实结合等大型虚拟仿真项目的核心架构与软件开发；深度参与城市轨道交通整车车辆检修、口腔医学数智化培训等系统的研发。',
+        },
+        {
+          period: '2018.09 - 2020.03',
+          company: '尼尔瓦修（北京）科技有限公司',
+          position: 'C++ 客户端开发',
+          desc: '负责"无人机飞手模拟训练系统"核心飞行物理模型开发（C++ 实现真实空气动力学参数、风力/湍流扰动、地效影响）；独立开发无人机虚拟组装与考核系统。',
+        },
       ],
       // 技能：{ name, level(0-100) } —— level 用于渲染进度条
       skills: [
-        { name: 'Vue 3 / Vuex', level: 90 },
-        { name: 'JavaScript / ES2020', level: 85 },
-        { name: 'HTML5 / CSS3 / SCSS', level: 88 },
-        { name: 'Vite / Webpack', level: 80 },
-        { name: 'Node.js / Express', level: 75 },
-        { name: 'Git / GitHub Actions', level: 82 },
+        { name: 'UE5 虚拟仿真开发', level: 95 },
+        { name: 'UE4', level: 85 },
+        { name: 'C++', level: 80 },
+        { name: '网络协议 / Socket', level: 75 },
+        { name: 'MySQL', level: 70 },
+        { name: 'Windows 平台开发', level: 80 },
       ],
       // 获奖证书：{ period, title, desc }
-      awards: [
-        // { period: '2021.05', title: '全国大学生电子设计竞赛一等奖', desc: '' },
-      ],
+      awards: [],
     },
   },
 

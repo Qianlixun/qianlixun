@@ -215,7 +215,7 @@ export default {
         {
           period: '2020.08 - 至今',
           name: 'AFC 售检票虚拟仿真系统',
-          role: 'UE5 核心架构与开发',
+          role: 'UE4 核心架构与开发',
           desc: '地铁列车运维售检票仿真系统，含售票机/检票机日常巡检、拆装、故障处理',
           worksLink: '/post/11',
           videoLink: '/post/11',

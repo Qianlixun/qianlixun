@@ -170,7 +170,7 @@
 
       .timeline-item {
         position: relative;
-        padding: 4px 0 16px 14px;
+        padding: 4px 0 20px 14px;
 
         &:last-child {
           padding-bottom: 0;
@@ -189,6 +189,24 @@
           box-shadow: 0 0 0 3px $surface-strong;
         }
 
+        // 升级：时间胶囊（主题色描边 + 圆角），替换原 .period
+        .period-tag {
+          display: inline-block;
+          padding: 2px 10px;
+          margin-bottom: 8px;
+          font-size: $font-size-small;
+          border: 1px solid;
+          border-radius: $radius-pill;
+          background-color: rgba(255, 255, 255, 0.02);
+          letter-spacing: 0.3px;
+
+          @include sp-layout {
+            font-size: $font-size-xs;
+            padding: 2px 8px;
+            margin-bottom: 6px;
+          }
+        }
+
         .period {
           color: $text-secondary;
           font-size: $font-size-small;
@@ -196,6 +214,26 @@
         }
 
         .detail {
+          .title-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-bottom: 4px;
+
+            .company {
+              color: $text-color;
+              font-weight: $font-weight-bold;
+              font-size: $font-size-normal;
+              line-height: 1.5;
+            }
+
+            .role {
+              color: $text-secondary;
+              font-size: $font-size-small;
+              line-height: 1.5;
+            }
+          }
+
           .title {
             color: $text-color;
             font-weight: $font-weight-bold;
@@ -217,12 +255,12 @@
             list-style: none;
             color: $text-muted;
             font-size: $font-size-small;
-            line-height: 1.75;
+            line-height: 1.8;
 
             li {
               position: relative;
-              padding-left: 14px;
-              margin-bottom: 6px;
+              padding-left: 16px;
+              margin-bottom: 7px;
 
               &:last-child {
                 margin-bottom: 0;
@@ -234,15 +272,15 @@
                 position: absolute;
                 left: 0;
                 top: 10px;
-                width: 4px;
-                height: 4px;
+                width: 5px;
+                height: 5px;
                 border-radius: 50%;
                 background-color: currentColor; // 继承 muted 灰色，不抢圆点色
-                opacity: 0.7;
+                opacity: 0.75;
               }
 
               b {
-                color: $text-color;
+                color: var(--accent, $text-color);
                 font-weight: $font-weight-bold;
               }
 
@@ -254,6 +292,64 @@
                 border: 1px solid $border;
                 border-radius: $radius-sm;
                 font-family: ui-monospace, 'SF Mono', Consolas, 'Courier New', monospace;
+              }
+            }
+          }
+
+          // 技术栈 chips（工作经历下）
+          .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+
+            .chip {
+              display: inline-block;
+              padding: 3px 10px;
+              font-size: $font-size-xs;
+              line-height: 1.5;
+              border: 1px solid;
+              border-radius: $radius-pill;
+              background-color: rgba(255, 255, 255, 0.015);
+              transition: background-color 0.15s ease;
+
+              &:hover {
+                background-color: rgba(255, 255, 255, 0.05);
+              }
+            }
+          }
+
+          // 项目链接按钮组
+          .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+
+            .btn-link {
+              --accent: #{$accent-gold};
+              display: inline-flex;
+              align-items: center;
+              gap: 5px;
+              padding: 6px 14px;
+              font-size: $font-size-small;
+              color: var(--accent);
+              border: 1px solid var(--accent);
+              border-radius: $radius-md;
+              text-decoration: none;
+              background-color: transparent;
+              transition: all 0.18s ease;
+
+              &:hover {
+                color: #fff;
+                background-color: var(--accent);
+                border-color: var(--accent);
+              }
+
+              @include sp-layout {
+                width: 100%;
+                justify-content: center;
+                padding: 8px 14px;
               }
             }
           }

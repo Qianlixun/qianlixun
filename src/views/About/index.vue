@@ -49,9 +49,12 @@
           <Segment v-if="rd.education.length" :title="'教育经历'" :color="c(0)">
             <div class="timeline">
               <div v-for="(e, i) in rd.education" :key="i" class="timeline-item">
-                <div class="period">{{ e.period }}</div>
+                <div class="period-tag" :style="{ borderColor: c(0), color: c(0) }">{{ e.period }}</div>
                 <div class="detail">
-                  <div class="title">{{ e.school }} · {{ e.major }} · {{ e.degree }}</div>
+                  <div class="title-wrap">
+                    <div class="company">{{ e.school }}</div>
+                    <div class="role">{{ e.major }} · {{ e.degree }}</div>
+                  </div>
                   <ul v-if="descLines(e.desc).length" class="desc-list">
                     <li v-for="(line, li) in descLines(e.desc)" :key="li" v-html="boldHtml(line)"></li>
                   </ul>
@@ -62,12 +65,18 @@
           <Segment v-if="rd.work.length" :title="'工作经历'" :color="c(1)">
             <div class="timeline">
               <div v-for="(w, i) in rd.work" :key="i" class="timeline-item">
-                <div class="period">{{ w.period }}</div>
+                <div class="period-tag" :style="{ borderColor: c(1), color: c(1) }">{{ w.period }}</div>
                 <div class="detail">
-                  <div class="title">{{ w.company }} · {{ w.position }}</div>
+                  <div class="title-wrap">
+                    <div class="company">{{ w.company }}</div>
+                    <div class="role">{{ w.position }}</div>
+                  </div>
                   <ul v-if="descLines(w.desc).length" class="desc-list">
                     <li v-for="(line, li) in descLines(w.desc)" :key="li" v-html="boldHtml(line)"></li>
                   </ul>
+                  <div v-if="w.stacks && w.stacks.length" class="chips">
+                    <span v-for="(s, si) in w.stacks" :key="si" class="chip" :style="{ borderColor: c(1) + '33', color: c(1) }">{{ s }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -75,12 +84,23 @@
           <Segment v-if="projectsData.length" :title="'项目经历'" :color="c(2)">
             <div class="timeline">
               <div v-for="(p, i) in projectsData" :key="i" class="timeline-item">
-                <div class="period">{{ p.period }}</div>
+                <div class="period-tag" :style="{ borderColor: c(2), color: c(2) }">{{ p.period }}</div>
                 <div class="detail">
-                  <div class="title">{{ p.name }}<span v-if="p.role"> · {{ p.role }}</span></div>
+                  <div class="title-wrap">
+                    <div class="company">{{ p.name }}</div>
+                    <div v-if="p.role" class="role">{{ p.role }}</div>
+                  </div>
                   <ul v-if="descLines(p.desc).length" class="desc-list">
                     <li v-for="(line, li) in descLines(p.desc)" :key="li" v-html="boldHtml(line)"></li>
                   </ul>
+                  <div v-if="(p.worksLink && p.worksLink.trim()) || (p.videoLink && p.videoLink.trim())" class="project-links">
+                    <router-link v-if="p.worksLink && p.worksLink.trim()" :to="p.worksLink.trim()" class="btn-link" :style="{ '--accent': c(2) }">
+                      📁 查看作品页
+                    </router-link>
+                    <a v-if="p.videoLink && p.videoLink.trim() && p.videoLink !== p.worksLink" :href="p.videoLink.trim()" target="_blank" rel="noopener" class="btn-link" :style="{ '--accent': c(2) }">
+                      🎬 观看成果视频
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -99,7 +119,7 @@
           <Segment v-if="rd.awards.length" :title="'获奖证书'" :color="c(4)">
             <div class="awards">
               <div v-for="(a, i) in rd.awards" :key="i" class="award-item">
-                <span class="period">{{ a.period }}</span>
+                <span class="period-tag" :style="{ borderColor: c(4), color: c(4) }">{{ a.period }}</span>
                 <span class="title">{{ a.title }}</span>
                 <span v-if="a.desc" class="desc">{{ a.desc }}</span>
               </div>

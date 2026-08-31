@@ -168,8 +168,8 @@ export default {
           desc: '',
         },
       ],
-      // 工作经历：{ period, company, position, desc }
-      // desc 支持 Markdown 行内语法（如 **加粗** / `代码`）
+      // 工作经历：{ period, company, position, desc, stacks }
+      // desc 支持 Markdown 行内语法（如 **加粗** / `代码`）；stacks 为技术栈 chips 数组
       work: [
         {
           period: '2020.08 - 至今',
@@ -180,6 +180,7 @@ export default {
             '· 负责 UE5 前后端架构设计、物理高保真模拟与虚实结合（Socket 网络协议对接真实设备），交付 **和利时 1+X 地面/车载信号** 等考核系统，累计录制约 **80+ 段**教学/拆装演示视频；\n' +
             '· 采用 HLS 流式切片 + 多仓库部署（**8 个**独立 medias 仓库，~300 个 .ts 分卷）解决单文件 100MB 限制，支持多视频切换与进度控制；\n' +
             '· 完整配合测试完成单元/集成测试，独立编写开发文档；精通 Windows 平台 / MySQL 后台 / Unreal Blueprint / UMG UI。',
+          stacks: ['UE5', 'Unreal Blueprint', 'C++', 'Socket 网络协议', 'MySQL', 'Windows', 'UMG UI', 'HLS 视频分发'],
         },
         {
           period: '2018.09 - 2020.03',
@@ -189,45 +190,59 @@ export default {
             '· 负责 **"无人机飞手模拟训练系统"** 的核心飞行物理模型开发（C++），实现真实空气动力学参数、风力/湍流扰动、地效影响的专业级高逼真模拟，达到飞手训练考核精度要求；\n' +
             '· 独立开发无人机虚拟 **组装教学 + 考核** 双模块系统，实现精细交互规则与装配流程判定；\n' +
             '· Windows 平台 C/C++ 客户端开发，熟练使用客户端相关 Windows API / 调试工具。',
+          stacks: ['C/C++', 'Unreal Engine 4', '物理模拟', '空气动力学仿真', 'Windows API'],
         },
       ],
-      // 项目经历：{ period, name, role, desc }
+      // 项目经历：{ period, name, role, desc, worksLink, videoLink }
+      // worksLink: 站内作品详情页路径（/post/<issue号>）；videoLink: HLS 视频播放页（站外作品页直接跳也可）
       projects: [
         {
           period: '2020.08 - 至今',
           name: '现场信号设备虚拟仿真系统',
           role: 'UE5 核心架构与开发',
           desc: '和利时 1+X 地面/车载信号虚拟仿真，含初级/中级卷无拆装考核、联动展示、3D 场景联动',
+          worksLink: '/post/7',
+          videoLink: '/post/7',
         },
         {
           period: '2020.08 - 至今',
           name: '信号基础设备检修虚拟仿真',
           role: 'UE5 核心架构与开发',
           desc: 'ZD6/ZDJ9 转辙机拆装与机械故障、信号机点灯单元故障、应答器数据读取等检修训练',
+          worksLink: '/post/10',
+          videoLink: '/post/10',
         },
         {
           period: '2020.08 - 至今',
           name: 'AFC 售检票虚拟仿真系统',
           role: 'UE5 核心架构与开发',
           desc: '地铁列车运维售检票仿真系统，含售票机/检票机日常巡检、拆装、故障处理',
+          worksLink: '/post/11',
+          videoLink: '/post/11',
         },
         {
           period: '2020.08 - 至今',
           name: '站台门检修维护教学系统',
           role: 'UE5 核心架构与开发',
           desc: '城市轨道交通站台门虚实结合检修维护教学系统，含周巡检、门控器更换、破损处理',
+          worksLink: '/post/8',
+          videoLink: '/post/8',
         },
         {
           period: '2020.08 - 至今',
           name: '口腔医学数智化培训系统',
           role: '研发参与',
           desc: '口腔医学数智化培训系统研发，含 CBCT 流程、时钟体位、检查洁牙术等模块',
+          worksLink: '/post/9',
+          videoLink: '/post/9',
         },
         {
           period: '2020.08 - 至今',
           name: '城市轨道交通整车车辆检修',
           role: '研发参与',
           desc: '城市轨道交通整车车辆检修系统研发',
+          worksLink: '',
+          videoLink: '',
         },
       ],
       // 技能：{ name, level(0-100) } —— level 用于渲染进度条

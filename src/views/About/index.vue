@@ -52,7 +52,9 @@
                 <div class="period">{{ e.period }}</div>
                 <div class="detail">
                   <div class="title">{{ e.school }} · {{ e.major }} · {{ e.degree }}</div>
-                  <div v-if="e.desc" class="desc">{{ e.desc }}</div>
+                  <ul v-if="descLines(e.desc).length" class="desc-list">
+                    <li v-for="(line, li) in descLines(e.desc)" :key="li" v-html="boldHtml(line)"></li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -63,7 +65,9 @@
                 <div class="period">{{ w.period }}</div>
                 <div class="detail">
                   <div class="title">{{ w.company }} · {{ w.position }}</div>
-                  <div v-if="w.desc" class="desc">{{ w.desc }}</div>
+                  <ul v-if="descLines(w.desc).length" class="desc-list">
+                    <li v-for="(line, li) in descLines(w.desc)" :key="li" v-html="boldHtml(line)"></li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -74,7 +78,9 @@
                 <div class="period">{{ p.period }}</div>
                 <div class="detail">
                   <div class="title">{{ p.name }}<span v-if="p.role"> · {{ p.role }}</span></div>
-                  <div v-if="p.desc" class="desc">{{ p.desc }}</div>
+                  <ul v-if="descLines(p.desc).length" class="desc-list">
+                    <li v-for="(line, li) in descLines(p.desc)" :key="li" v-html="boldHtml(line)"></li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -168,6 +174,22 @@ export default {
       } catch (e) {
         this.projects = []
       }
+    },
+    // desc 按行切分成要点（兼容 \n / \r\n / \n 三种，空跳过，去「·/1./-」前缀）
+    descLines(desc) {
+      if (!desc) return []
+      return String(desc)
+        .split(/\r?\n/)
+        .map((s) => s.replace(/^\s*[\u00b7\u2022\u25CF\-*]+\s*/, '').replace(/^\s*\d+[\.、\)]\s*/, '').trim())
+        .filter(Boolean)
+    },
+    // 轻量行内富文本：**加粗** → <b>、`代码` → <code>（仅处理已在 config 里使用的语法）
+    // 输入仅来自站长 config / Issue，信任边界安全
+    boldHtml(line) {
+      return String(line)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/\*\*([^*]+?)\*\*/g, '<b>$1</b>')
+        .replace(/`([^`]+?)`/g, '<code>$1</code>')
     },
   },
 }

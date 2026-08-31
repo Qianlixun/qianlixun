@@ -106,7 +106,7 @@ export default {
       gap: 4px;
       padding: 4px 12px;
       font-size: $font-size-small;
-      color: white;
+      color: #18181c; // 金底深字
       border-radius: $radius-pill;
       background-image: $gradient-primary;
       box-shadow: $shadow-1;

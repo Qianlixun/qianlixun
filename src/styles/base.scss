@@ -150,7 +150,7 @@ td.hljs-ln-numbers {
       background-color: $purple-dim !important;
       span {
         line-height: 1;
-        color: white;
+        color: #18181c; // 暗金底深字
       }
       @media screen and (max-width: 479px) {
         margin-top: 9px !important;
@@ -200,7 +200,7 @@ td.hljs-ln-numbers {
     .gt-btn-public {
       background-color: $purple-dim;
       span {
-        color: white;
+        color: #18181c; // 暗金底深字
       }
     }
     .gt-avatar-github {
@@ -232,7 +232,7 @@ td.hljs-ln-numbers {
       border: none;
       background-color: $purple-dim;
       span {
-        color: white;
+        color: #18181c; // 暗金底深字
       }
     }
     .gt-comment-body {

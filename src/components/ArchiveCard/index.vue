@@ -41,7 +41,6 @@
 <script>
 import Pagination from '@/components/Pagination'
 import Cover from '@/components/Cover'
-import { shuffle } from '@/utils'
 import config from '@/config'
 
 export default {
@@ -70,7 +69,8 @@ export default {
   },
   data() {
     return {
-      colors: shuffle(this.$config.themeColors),
+      // 卡片顶边框统一主金：shuffle 随机 12 色会抽到灰系（暗卡片上看不清）且每次刷新变化
+      colors: [this.$config.themeColors[0]],
     }
   },
   methods: {

@@ -14,7 +14,9 @@
           class="hls-track"
           :class="{ active: i === activeHlsIdx }"
           @click="switchHls(i)"
-        >{{ v.name }}</button>
+        >
+          {{ v.name }}
+        </button>
       </div>
     </div>
     <!-- 兼容旧版：本地 mp4 单视频（可在线播 + 可下载） -->
@@ -53,7 +55,7 @@
 <script>
 // 项目资源展示：HLS 多视频（首选）/ 本地 mp4 / B 站外链 + 公开仓库源码下载
 // HLS 段切分见 .workbuddy/redesign/src/hls-split-upload.mjs；hls.js 动态 import 不进首屏
-let Hls = null  // ponytail: 模块级缓存避免重复加载（单例足够，多组件实例共享）
+let Hls = null // ponytail: 模块级缓存避免重复加载（单例足够，多组件实例共享）
 export default {
   name: 'ProjectResource',
   props: {
@@ -222,7 +224,7 @@ export default {
       &.active {
         background-image: $gradient-primary;
         border-color: transparent;
-        color: white;
+        color: #18181c; // 金底深字
       }
     }
   }
@@ -269,7 +271,7 @@ export default {
       padding: 10px 22px;
       border-radius: $radius-pill;
       background-image: $gradient-primary;
-      color: white;
+      color: #18181c; // 金底深字
       font-size: $font-size-normal;
       box-shadow: $shadow-1;
       transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;

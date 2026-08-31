@@ -34,7 +34,7 @@
         transition: all 0.3s ease-out;
 
         &:hover {
-          color: white;
+          color: #18181c; // 金底深字
           background-image: $gradient-primary;
           box-shadow: $shadow-1;
           transform: translateY(-2px);

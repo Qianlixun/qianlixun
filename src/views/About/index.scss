@@ -92,7 +92,7 @@
         padding: 10px 22px;
         border-radius: $radius-pill;
         background-image: $gradient-primary;
-        color: #fff;
+        color: #18181c; // 金底深字（白字在亮金端对比不足）
         font-size: $font-size-normal;
         font-weight: $font-weight-bold;
         box-shadow: $shadow-1;
@@ -660,7 +660,7 @@
             transition: all 0.18s ease;
 
             &:hover {
-              color: #fff;
+              color: #18181c;
               background-color: var(--accent);
               border-color: var(--accent);
             }

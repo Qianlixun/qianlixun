@@ -361,12 +361,15 @@
           background-color: $gold-soft;
         }
 
+        // 熟悉/了解：空心圈 + 提亮描边（原填充色与旁边灰色文字同色，看不清）
         &.level-familiar .dot {
-          background-color: $text-secondary;
+          background-color: transparent;
+          border: 2px solid lighten($text-secondary, 22%);
         }
 
         &.level-beginner .dot {
-          background-color: $text-muted;
+          background-color: transparent;
+          border: 2px solid lighten($text-muted, 20%);
         }
       }
     }

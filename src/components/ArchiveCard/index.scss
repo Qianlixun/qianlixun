@@ -16,8 +16,9 @@
       list-style: none;
       border-radius: $radius;
       overflow: hidden;
-      border-top: 3px solid var(--accent, $purple);
       @include card-light;
+      // 放 card-light 之后：其 border:1px 会覆盖本行（曾致金顶边一直不显示）
+      border-top: 3px solid var(--accent, $purple);
 
       .cover {
         position: relative;

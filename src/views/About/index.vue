@@ -68,12 +68,12 @@
               </div>
             </div>
           </Segment>
-          <Segment v-if="rd.projects && rd.projects.length" :title="'项目经历'" :color="c(2)">
+          <Segment v-if="projectsData.length" :title="'项目经历'" :color="c(2)">
             <div class="timeline">
-              <div v-for="(p, i) in rd.projects" :key="i" class="timeline-item">
+              <div v-for="(p, i) in projectsData" :key="i" class="timeline-item">
                 <div class="period">{{ p.period }}</div>
                 <div class="detail">
-                  <div class="title">{{ p.name }} · {{ p.role }}</div>
+                  <div class="title">{{ p.name }}<span v-if="p.role"> · {{ p.role }}</span></div>
                   <div v-if="p.desc" class="desc">{{ p.desc }}</div>
                 </div>
               </div>
@@ -133,6 +133,7 @@ export default {
     return {
       colors: shuffle(this.$config.themeColors),
       about: '',
+      projects: [], // 项目经历（优先从 Issues 拉，空则 fallback 到 config.resumeData.projects）
       initComment: false,
     }
   },
@@ -141,9 +142,14 @@ export default {
     rd() {
       return this.$config.aboutOpts.resumeData || {}
     },
+    // 项目经历展示数据：Issues 拉到了用 Issues，否则 fallback 到 config.resumeData.projects
+    projectsData() {
+      if (this.projects && this.projects.length) return this.projects
+      return (this.rd.projects && this.rd.projects.length) ? this.rd.projects : []
+    },
   },
   async created() {
-    await this.queryAbout()
+    await Promise.all([this.queryAbout(), this.queryProject()])
     this.initComment = true
   },
   methods: {
@@ -154,6 +160,14 @@ export default {
     // 获取关于详情
     async queryAbout() {
       this.about = await this.$store.dispatch('queryPage', { type: 'about' })
+    },
+    // 获取项目经历（blog 仓库 closed issue with label=Project），失败不阻塞
+    async queryProject() {
+      try {
+        this.projects = await this.$store.dispatch('queryPage', { type: 'project' })
+      } catch (e) {
+        this.projects = []
+      }
     },
   },
 }

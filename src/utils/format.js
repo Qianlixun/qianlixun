@@ -86,6 +86,21 @@ export const formatPage = (data, type) => {
         }
       })
       break
+    // 项目经历：Issue body 用 "## " 分段，每段首行标题，后续 "key: value" 行（period/role/desc）
+    case 'project':
+      section = section.map((o) => {
+        const lines = o.split('\r\n').filter((r) => r.length)
+        const result = { name: lines[0] || '' }
+        lines.slice(1).forEach((row) => {
+          const inx = row.indexOf(':')
+          if (inx < 1) return
+          const key = row.slice(0, inx).trim()
+          const value = row.slice(inx + 1).trim()
+          result[key] = value
+        })
+        return result
+      })
+      break
     default:
       break
   }

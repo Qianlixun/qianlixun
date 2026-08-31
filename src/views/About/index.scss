@@ -225,9 +225,10 @@
           font-weight: $font-weight-bold;
           letter-spacing: 0.3px;
 
-          i.icon {
-            font-size: $font-size-small;
-            opacity: 0.85;
+          .dot {
+            font-size: 20px;
+            line-height: 1;
+            opacity: 0.9;
           }
         }
 
@@ -444,8 +445,8 @@
               transition: all 0.18s ease;
 
               &:hover {
-                color: #fff;
-                background-color: var(--accent);
+                color: $text-color;
+                background-color: rgba(var(--accent-rgb, 196, 160, 106), 0.12);
                 border-color: var(--accent);
               }
 

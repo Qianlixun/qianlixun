@@ -51,7 +51,7 @@
             <div class="skill-groups">
               <div v-for="(g, i) in rd.skills" :key="i" class="skill-group">
                 <div class="group-header" :style="{ color: c(3) }">
-                  <i class="icon icon-circle-thin"></i>{{ g.group }}
+                  <span class="dot">◦</span>{{ g.group }}
                 </div>
                 <div class="group-chips">
                   <span

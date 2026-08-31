@@ -46,23 +46,34 @@
         </div>
 
         <div class="content">
-          <!-- 技能专长：分组关键词卡片（进度条仅应届生；3 年+ 用分组更专业） -->
-          <Segment v-if="rd.skills && rd.skills.length" :title="'技能专长'" :color="c(3)">
+          <!-- 技能专长：能力矩阵卡片 + 熟练度标签 -->
+          <Segment v-if="hasSkills" :title="'技能专长'" :color="skillColor">
+            <p v-if="skillSummary" class="skills-summary">{{ skillSummary }}</p>
             <div class="skill-groups">
-              <div v-for="(g, i) in rd.skills" :key="i" class="skill-group">
-                <div class="group-header" :style="{ color: c(3) }">
-                  <span class="dot">◦</span>{{ g.group }}
+              <div v-for="(group, gi) in skillGroups" :key="gi" class="skill-group">
+                <div class="group-head">
+                  <span class="group-name">{{ group.category }}</span>
+                  <span v-if="group.context" class="group-context">{{ group.context }}</span>
                 </div>
-                <div class="group-chips">
+                <div class="skill-tags">
                   <span
-                    v-for="(item, ii) in g.items"
+                    v-for="(item, ii) in group.items"
                     :key="ii"
-                    class="chip"
-                    :style="{ borderColor: c(3) + '33', color: c(3) }"
-                    >{{ item }}</span
+                    class="skill-tag"
+                    :class="'level-' + item.level"
                   >
+                    <span class="tag-name">{{ item.name }}</span>
+                    <span class="tag-level">{{ levelText(item.level) }}</span>
+                  </span>
                 </div>
               </div>
+            </div>
+            <div class="skill-legend">
+              <span class="legend-title">熟练度：</span>
+              <span class="legend-item level-expert"><span class="dot"></span>精通</span>
+              <span class="legend-item level-proficient"><span class="dot"></span>熟练</span>
+              <span class="legend-item level-familiar"><span class="dot"></span>熟悉</span>
+              <span class="legend-item level-beginner"><span class="dot"></span>了解</span>
             </div>
           </Segment>
 
@@ -97,13 +108,7 @@
                     <li v-for="(line, li) in descLines(w.desc)" :key="li" v-html="boldHtml(line)"></li>
                   </ul>
                   <div v-if="w.stacks && w.stacks.length" class="chips">
-                    <span
-                      v-for="(s, si) in w.stacks"
-                      :key="si"
-                      class="chip"
-                      :style="{ borderColor: c(1) + '33', color: c(1) }"
-                      >{{ s }}</span
-                    >
+                    <span v-for="(s, si) in w.stacks" :key="si" class="chip" :style="{ borderColor: c(1) + '33', color: c(1) }">{{ s }}</span>
                   </div>
                 </div>
               </div>
@@ -122,26 +127,11 @@
                   <ul v-if="descLines(p.desc).length" class="desc-list">
                     <li v-for="(line, li) in descLines(p.desc)" :key="li" v-html="boldHtml(line)"></li>
                   </ul>
-                  <div
-                    v-if="(p.worksLink && p.worksLink.trim()) || (p.videoLink && p.videoLink.trim())"
-                    class="project-links"
-                  >
-                    <router-link
-                      v-if="p.worksLink && p.worksLink.trim()"
-                      :to="p.worksLink.trim()"
-                      class="btn-link"
-                      :style="{ '--accent': c(2) }"
-                    >
+                  <div v-if="(p.worksLink && p.worksLink.trim()) || (p.videoLink && p.videoLink.trim())" class="project-links">
+                    <router-link v-if="p.worksLink && p.worksLink.trim()" :to="p.worksLink.trim()" class="btn-link" :style="{ '--accent': c(2) }">
                       查看作品页
                     </router-link>
-                    <a
-                      v-if="p.videoLink && p.videoLink.trim() && p.videoLink !== p.worksLink"
-                      :href="p.videoLink.trim()"
-                      target="_blank"
-                      rel="noopener"
-                      class="btn-link"
-                      :style="{ '--accent': c(2) }"
-                    >
+                    <a v-if="p.videoLink && p.videoLink.trim() && p.videoLink !== p.worksLink" :href="p.videoLink.trim()" target="_blank" rel="noopener" class="btn-link" :style="{ '--accent': c(2) }">
                       观看成果视频
                     </a>
                   </div>
@@ -207,6 +197,14 @@ export default {
       if (this.projects && this.projects.length) return this.projects
       return this.rd.projects && this.rd.projects.length ? this.rd.projects : []
     },
+    highlights() {
+      return this.rd.highlights || [
+        { value: '5+', label: '年仿真研发' },
+        { value: '9+', label: '套完整系统' },
+        { value: '80+', label: '段教学视频' },
+        { value: '多专业', label: '信号 / AFC / 站台门 / 口腔' },
+      ]
+    },
   },
   async created() {
     await Promise.all([this.queryAbout(), this.queryProject()])
@@ -216,6 +214,16 @@ export default {
     // colors 越界兜底（取模循环主题色）
     c(i) {
       return this.colors[i % this.colors.length]
+    },
+    // 技能熟练度文案映射
+    levelText(level) {
+      const map = {
+        expert: '精通',
+        proficient: '熟练',
+        familiar: '熟悉',
+        beginner: '了解',
+      }
+      return map[level] || level
     },
     // 获取关于详情
     async queryAbout() {
@@ -234,21 +242,14 @@ export default {
       if (!desc) return []
       return String(desc)
         .split(/\r?\n/)
-        .map((s) =>
-          s
-            .replace(/^\s*[\u00b7\u2022\u25CF\-*]+\s*/, '')
-            .replace(/^\s*\d+[\.、\)]\s*/, '')
-            .trim()
-        )
+        .map((s) => s.replace(/^\s*[\u00b7\u2022\u25CF\-*]+\s*/, '').replace(/^\s*\d+[\.、\)]\s*/, '').trim())
         .filter(Boolean)
     },
     // 轻量行内富文本：**加粗** → <b>、`代码` → <code>（仅处理已在 config 里使用的语法）
     // 输入仅来自站长 config / Issue，信任边界安全
     boldHtml(line) {
       return String(line)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/\*\*([^*]+?)\*\*/g, '<b>$1</b>')
         .replace(/`([^`]+?)`/g, '<code>$1</code>')
     },

@@ -252,31 +252,35 @@ export default {
         { value: '80+', label: '段教学视频' },
         { value: '多专业', label: '信号 / AFC / 站台门 / 口腔' },
       ],
-      // 技能：分类标签云（替代进度条）
+      // 技能：能力矩阵（分类卡片 + 熟练度标签，替代进度条）
       // level: expert(精通) / proficient(熟练) / familiar(熟悉) / beginner(了解)
       skills: {
-        summary: '5 年专注职业教育虚拟仿真，擅长 UE5 系统架构、C++ 核心模块与虚实结合网络协议对接。',
+        summary: '5 年专注职业教育虚拟仿真，以 UE5 为核心交付 9+ 套完整系统；擅长系统架构、C++ 核心模块、虚实结合网络协议与多专业领域知识沉淀。',
         groups: [
           {
             category: '引擎与仿真',
+            context: '虚拟仿真系统的核心引擎、交互逻辑与物理高保真模拟',
             items: [
               { name: 'Unreal Engine 5', level: 'expert' },
               { name: 'Unreal Engine 4', level: 'proficient' },
               { name: 'Blueprint / UMG UI', level: 'expert' },
               { name: '物理模拟 & 空气动力学', level: 'proficient' },
+              { name: 'Socket 虚实结合', level: 'familiar' },
             ],
           },
           {
             category: '程序开发',
+            context: '高性能客户端模块、网络协议对接与数据层开发',
             items: [
               { name: 'C++', level: 'proficient' },
               { name: 'Windows 平台开发', level: 'proficient' },
-              { name: 'Socket 网络协议', level: 'familiar' },
               { name: 'MySQL', level: 'familiar' },
+              { name: 'Windows API', level: 'familiar' },
             ],
           },
           {
             category: '工具与工程',
+            context: '研发流程、资产分发、工程化与文档体系建设',
             items: [
               { name: 'Git / GitHub', level: 'proficient' },
               { name: 'HLS 视频分发', level: 'familiar' },
@@ -286,6 +290,7 @@ export default {
           },
           {
             category: '专业领域',
+            context: '轨道交通与医学仿真等垂直行业知识深度',
             items: [
               { name: '城市轨道交通信号', level: 'expert' },
               { name: '职业教育虚拟仿真', level: 'expert' },

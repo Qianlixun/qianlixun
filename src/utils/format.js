@@ -79,17 +79,18 @@ export const formatPage = (data, type) => {
       break
     case 'about':
       section = section.map((o) => {
-        const title = o.match(/.+?\r\n/)[0]
+        const title = o.match(/.+?(\r\n|\n)/)[0]
         return {
           title,
           content: o.slice(title.length),
         }
       })
       break
-    // 项目经历：Issue body 用 "## " 分段，每段首行标题，后续 "key: value" 行（period/role/desc）
+    // 项目经历：Issue body 用 "## " 分段，每段首行标题，后续 "key: value" 行（period/role/desc/worksLink/videoLink）
     case 'project':
       section = section.map((o) => {
-        const lines = o.split('\r\n').filter((r) => r.length)
+        // 兼容 \r\n 与 \n（API 更新的 body 常为 LF，GitHub 网页编辑为 CRLF）
+        const lines = o.split(/\r\n|\n/).filter((r) => r.length)
         const result = { name: lines[0] || '' }
         lines.slice(1).forEach((row) => {
           const inx = row.indexOf(':')

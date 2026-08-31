@@ -32,7 +32,8 @@
     box-shadow: $shadow-1;
 
     span {
-      color: white;
+      // 金底深字：原白字在金/灰浅底上对比不足（看不清的根源之一）
+      color: #18181c;
       font-weight: $font-weight-bold;
       font-size: $font-size-normal;
     }

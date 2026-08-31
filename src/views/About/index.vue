@@ -186,7 +186,6 @@ import Loading from '@/components/Loading'
 import Comment from '@/components/Comment'
 import Quote from '@/components/Quote'
 import Segment from '@/components/Segment'
-import { shuffle } from '@/utils'
 
 export default {
   name: 'About',
@@ -199,7 +198,9 @@ export default {
   },
   data() {
     return {
-      colors: shuffle(this.$config.themeColors),
+      // 区段主色统一为 themeColors[0]（主金）：此前 shuffle 随机洗牌，灰系色做标签底+白字看不清，
+      // 且每次刷新变化；统一后与时间胶囊/圆点/精通标签同一金色视觉体系
+      colors: [this.$config.themeColors[0]],
       about: '',
       projects: [], // 项目经历（优先从 Issues 拉，空则 fallback 到 config.resumeData.projects）
       initComment: false,

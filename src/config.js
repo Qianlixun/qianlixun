@@ -141,8 +141,8 @@ export default {
     display: true,
     enableComment: true,
     qoute: '寻遍千山，终见灯火',
-    graduated: 'University of Electronic Science and Technology of China (UESTC)',
-    college: 'Communication&Information Engineering',
+    graduated: '', // 关于页 header 院校徽章行；留空不显示
+    college: '', // 关于页 header 专业徽章行；留空不显示
     // 简历 PDF 下载：自托管 medias 仓库 raw 直链，留空则「关于我」不显示下载按钮
     resume: {
       url: '',

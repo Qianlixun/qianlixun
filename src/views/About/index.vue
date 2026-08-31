@@ -56,12 +56,7 @@
                   <span v-if="group.context" class="group-context">{{ group.context }}</span>
                 </div>
                 <div class="skill-tags">
-                  <span
-                    v-for="(item, ii) in group.items"
-                    :key="ii"
-                    class="skill-tag"
-                    :class="'level-' + item.level"
-                  >
+                  <span v-for="(item, ii) in group.items" :key="ii" class="skill-tag" :class="'level-' + item.level">
                     <span class="tag-name">{{ item.name }}</span>
                     <span class="tag-level">{{ levelText(item.level) }}</span>
                   </span>
@@ -108,7 +103,13 @@
                     <li v-for="(line, li) in descLines(w.desc)" :key="li" v-html="boldHtml(line)"></li>
                   </ul>
                   <div v-if="w.stacks && w.stacks.length" class="chips">
-                    <span v-for="(s, si) in w.stacks" :key="si" class="chip" :style="{ borderColor: c(1) + '33', color: c(1) }">{{ s }}</span>
+                    <span
+                      v-for="(s, si) in w.stacks"
+                      :key="si"
+                      class="chip"
+                      :style="{ borderColor: c(1) + '33', color: c(1) }"
+                      >{{ s }}</span
+                    >
                   </div>
                 </div>
               </div>
@@ -116,25 +117,42 @@
           </Segment>
 
           <Segment v-if="projectsData.length" :title="'项目经历'" :color="c(2)">
-            <div class="timeline">
-              <div v-for="(p, i) in projectsData" :key="i" class="timeline-item">
-                <div class="period-tag" :style="{ borderColor: c(2), color: c(2) }">{{ p.period }}</div>
-                <div class="detail">
+            <div class="project-cards">
+              <div v-for="(p, i) in projectsData" :key="i" class="project-card">
+                <div class="card-header">
                   <div class="title-wrap">
-                    <div class="company">{{ p.name }}</div>
-                    <div v-if="p.role" class="role">{{ p.role }}</div>
+                    <div class="project-name">{{ p.name }}</div>
+                    <div v-if="p.role" class="project-role">{{ p.role }}</div>
                   </div>
-                  <ul v-if="descLines(p.desc).length" class="desc-list">
-                    <li v-for="(line, li) in descLines(p.desc)" :key="li" v-html="boldHtml(line)"></li>
-                  </ul>
-                  <div v-if="(p.worksLink && p.worksLink.trim()) || (p.videoLink && p.videoLink.trim())" class="project-links">
-                    <router-link v-if="p.worksLink && p.worksLink.trim()" :to="p.worksLink.trim()" class="btn-link" :style="{ '--accent': c(2) }">
-                      查看作品页
-                    </router-link>
-                    <a v-if="p.videoLink && p.videoLink.trim() && p.videoLink !== p.worksLink" :href="p.videoLink.trim()" target="_blank" rel="noopener" class="btn-link" :style="{ '--accent': c(2) }">
-                      观看成果视频
-                    </a>
+                  <div v-if="p.period" class="period-tag" :style="{ borderColor: c(2), color: c(2) }">
+                    {{ p.period }}
                   </div>
+                </div>
+                <ul v-if="descLines(p.desc).length" class="desc-list">
+                  <li v-for="(line, li) in descLines(p.desc)" :key="li" v-html="boldHtml(line)"></li>
+                </ul>
+                <div
+                  v-if="(p.worksLink && p.worksLink.trim()) || (p.videoLink && p.videoLink.trim())"
+                  class="project-links"
+                >
+                  <router-link
+                    v-if="p.worksLink && p.worksLink.trim()"
+                    :to="p.worksLink.trim()"
+                    class="btn-link"
+                    :style="{ '--accent': c(2) }"
+                  >
+                    <i class="icon icon-link"></i> 查看作品页
+                  </router-link>
+                  <a
+                    v-if="p.videoLink && p.videoLink.trim() && p.videoLink !== p.worksLink"
+                    :href="p.videoLink.trim()"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn-link"
+                    :style="{ '--accent': c(2) }"
+                  >
+                    <i class="icon icon-link"></i> 观看成果视频
+                  </a>
                 </div>
               </div>
             </div>
@@ -197,13 +215,32 @@ export default {
       if (this.projects && this.projects.length) return this.projects
       return this.rd.projects && this.rd.projects.length ? this.rd.projects : []
     },
+    // 技能区主题色
+    skillColor() {
+      return this.c(3)
+    },
+    // 技能数据
+    skillData() {
+      return this.rd.skills || {}
+    },
+    skillSummary() {
+      return this.skillData.summary || ''
+    },
+    skillGroups() {
+      return this.skillData.groups || []
+    },
+    hasSkills() {
+      return this.skillGroups.length > 0
+    },
     highlights() {
-      return this.rd.highlights || [
-        { value: '5+', label: '年仿真研发' },
-        { value: '9+', label: '套完整系统' },
-        { value: '80+', label: '段教学视频' },
-        { value: '多专业', label: '信号 / AFC / 站台门 / 口腔' },
-      ]
+      return (
+        this.rd.highlights || [
+          { value: '5+', label: '年仿真研发' },
+          { value: '9+', label: '套完整系统' },
+          { value: '80+', label: '段教学视频' },
+          { value: '多专业', label: '信号 / AFC / 站台门 / 口腔' },
+        ]
+      )
     },
   },
   async created() {
@@ -242,14 +279,21 @@ export default {
       if (!desc) return []
       return String(desc)
         .split(/\r?\n/)
-        .map((s) => s.replace(/^\s*[\u00b7\u2022\u25CF\-*]+\s*/, '').replace(/^\s*\d+[\.、\)]\s*/, '').trim())
+        .map((s) =>
+          s
+            .replace(/^\s*[\u00b7\u2022\u25CF\-*]+\s*/, '')
+            .replace(/^\s*\d+[\.、\)]\s*/, '')
+            .trim()
+        )
         .filter(Boolean)
     },
     // 轻量行内富文本：**加粗** → <b>、`代码` → <code>（仅处理已在 config 里使用的语法）
     // 输入仅来自站长 config / Issue，信任边界安全
     boldHtml(line) {
       return String(line)
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
         .replace(/\*\*([^*]+?)\*\*/g, '<b>$1</b>')
         .replace(/`([^`]+?)`/g, '<code>$1</code>')
     },

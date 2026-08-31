@@ -3,47 +3,68 @@
     <Transition name="fade-transform" mode="out-in">
       <div class="page" v-if="about">
         <Quote :quote="$config.aboutOpts.qoute" />
-        <div class="content">
-          <div class="header">
-            <div class="info">
-              <span>
-                <i class="icon icon-fort-awesome"></i>
-                {{ $config.title }}
-              </span>
-              <span>
-                <i class="icon icon-pagelines"></i>
-                {{ $config.subtitle }}
-              </span>
-              <span v-if="$config.aboutOpts.graduated">
-                <i class="icon icon-graduation-cap"></i>
-                {{ $config.aboutOpts.graduated }}
-              </span>
-              <span v-if="$config.aboutOpts.college">
-                <i class="icon icon-tripadvisor"></i>
-                {{ $config.aboutOpts.college }}
-              </span>
+
+        <!-- 简历 Hero：姓名、角色、数据名片、联系方式 -->
+        <div class="about-hero">
+          <div class="hero-main">
+            <div class="hero-titles">
+              <h1 class="hero-name">{{ $config.title }}</h1>
+              <p class="hero-role">3D 研发工程师 / 虚拟仿真系统架构</p>
+              <p class="hero-tagline">{{ $config.subtitle }}</p>
+            </div>
+            <div class="hero-actions">
+              <a
+                v-if="$config.aboutOpts.resume && $config.aboutOpts.resume.url"
+                class="hero-resume btn cursor"
+                :href="$config.aboutOpts.resume.url"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="icon icon-inbox"></i> {{ $config.aboutOpts.resume.label }}
+              </a>
+              <div class="contact-bar">
+                <a
+                  v-for="item in $config.contactOpts.list"
+                  :key="item.name"
+                  :href="item.link"
+                  :title="item.name"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <img :alt="item.name" :src="item.icon" />
+                </a>
+              </div>
             </div>
           </div>
-          <div class="contact">
-            <a
-              v-for="item in $config.contactOpts.list"
-              :key="item.name"
-              :href="item.link"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <img :alt="item.name" :src="item.icon" />
-            </a>
+
+          <div class="hero-stats">
+            <div v-for="(stat, i) in highlights" :key="i" class="stat-card">
+              <div class="stat-value">{{ stat.value }}</div>
+              <div class="stat-label">{{ stat.label }}</div>
+            </div>
           </div>
-          <a
-            v-if="$config.aboutOpts.resume && $config.aboutOpts.resume.url"
-            class="resume btn cursor"
-            :href="$config.aboutOpts.resume.url"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="icon icon-inbox"></i> {{ $config.aboutOpts.resume.label }}
-          </a>
+        </div>
+
+        <div class="content">
+          <!-- 技能专长：分组关键词卡片（进度条仅应届生；3 年+ 用分组更专业） -->
+          <Segment v-if="rd.skills && rd.skills.length" :title="'技能专长'" :color="c(3)">
+            <div class="skill-groups">
+              <div v-for="(g, i) in rd.skills" :key="i" class="skill-group">
+                <div class="group-header" :style="{ color: c(3) }">
+                  <i class="icon icon-circle-thin"></i>{{ g.group }}
+                </div>
+                <div class="group-chips">
+                  <span
+                    v-for="(item, ii) in g.items"
+                    :key="ii"
+                    class="chip"
+                    :style="{ borderColor: c(3) + '33', color: c(3) }"
+                    >{{ item }}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </Segment>
 
           <!-- 结构化简历区段（来自 config.resumeData，空数组不渲染） -->
           <Segment v-if="rd.education.length" :title="'教育经历'" :color="c(0)">
@@ -62,6 +83,7 @@
               </div>
             </div>
           </Segment>
+
           <Segment v-if="rd.work.length" :title="'工作经历'" :color="c(1)">
             <div class="timeline">
               <div v-for="(w, i) in rd.work" :key="i" class="timeline-item">
@@ -75,12 +97,19 @@
                     <li v-for="(line, li) in descLines(w.desc)" :key="li" v-html="boldHtml(line)"></li>
                   </ul>
                   <div v-if="w.stacks && w.stacks.length" class="chips">
-                    <span v-for="(s, si) in w.stacks" :key="si" class="chip" :style="{ borderColor: c(1) + '33', color: c(1) }">{{ s }}</span>
+                    <span
+                      v-for="(s, si) in w.stacks"
+                      :key="si"
+                      class="chip"
+                      :style="{ borderColor: c(1) + '33', color: c(1) }"
+                      >{{ s }}</span
+                    >
                   </div>
                 </div>
               </div>
             </div>
           </Segment>
+
           <Segment v-if="projectsData.length" :title="'项目经历'" :color="c(2)">
             <div class="timeline">
               <div v-for="(p, i) in projectsData" :key="i" class="timeline-item">
@@ -93,29 +122,34 @@
                   <ul v-if="descLines(p.desc).length" class="desc-list">
                     <li v-for="(line, li) in descLines(p.desc)" :key="li" v-html="boldHtml(line)"></li>
                   </ul>
-                  <div v-if="(p.worksLink && p.worksLink.trim()) || (p.videoLink && p.videoLink.trim())" class="project-links">
-                    <router-link v-if="p.worksLink && p.worksLink.trim()" :to="p.worksLink.trim()" class="btn-link" :style="{ '--accent': c(2) }">
-                      📁 查看作品页
+                  <div
+                    v-if="(p.worksLink && p.worksLink.trim()) || (p.videoLink && p.videoLink.trim())"
+                    class="project-links"
+                  >
+                    <router-link
+                      v-if="p.worksLink && p.worksLink.trim()"
+                      :to="p.worksLink.trim()"
+                      class="btn-link"
+                      :style="{ '--accent': c(2) }"
+                    >
+                      查看作品页
                     </router-link>
-                    <a v-if="p.videoLink && p.videoLink.trim() && p.videoLink !== p.worksLink" :href="p.videoLink.trim()" target="_blank" rel="noopener" class="btn-link" :style="{ '--accent': c(2) }">
-                      🎬 观看成果视频
+                    <a
+                      v-if="p.videoLink && p.videoLink.trim() && p.videoLink !== p.worksLink"
+                      :href="p.videoLink.trim()"
+                      target="_blank"
+                      rel="noopener"
+                      class="btn-link"
+                      :style="{ '--accent': c(2) }"
+                    >
+                      观看成果视频
                     </a>
                   </div>
                 </div>
               </div>
             </div>
           </Segment>
-          <Segment v-if="rd.skills.length" :title="'技能'" :color="c(3)">
-            <div class="skills">
-              <div v-for="(s, i) in rd.skills" :key="i" class="skill">
-                <div class="name">{{ s.name }}</div>
-                <div class="bar">
-                  <div class="fill" :style="{ width: s.level + '%', backgroundColor: c(3) }"></div>
-                </div>
-                <div class="level">{{ s.level }}%</div>
-              </div>
-            </div>
-          </Segment>
+
           <Segment v-if="rd.awards.length" :title="'获奖证书'" :color="c(4)">
             <div class="awards">
               <div v-for="(a, i) in rd.awards" :key="i" class="award-item">
@@ -171,7 +205,7 @@ export default {
     // 项目经历展示数据：Issues 拉到了用 Issues，否则 fallback 到 config.resumeData.projects
     projectsData() {
       if (this.projects && this.projects.length) return this.projects
-      return (this.rd.projects && this.rd.projects.length) ? this.rd.projects : []
+      return this.rd.projects && this.rd.projects.length ? this.rd.projects : []
     },
   },
   async created() {
@@ -200,14 +234,21 @@ export default {
       if (!desc) return []
       return String(desc)
         .split(/\r?\n/)
-        .map((s) => s.replace(/^\s*[\u00b7\u2022\u25CF\-*]+\s*/, '').replace(/^\s*\d+[\.、\)]\s*/, '').trim())
+        .map((s) =>
+          s
+            .replace(/^\s*[\u00b7\u2022\u25CF\-*]+\s*/, '')
+            .replace(/^\s*\d+[\.、\)]\s*/, '')
+            .trim()
+        )
         .filter(Boolean)
     },
     // 轻量行内富文本：**加粗** → <b>、`代码` → <code>（仅处理已在 config 里使用的语法）
     // 输入仅来自站长 config / Issue，信任边界安全
     boldHtml(line) {
       return String(line)
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
         .replace(/\*\*([^*]+?)\*\*/g, '<b>$1</b>')
         .replace(/`([^`]+?)`/g, '<code>$1</code>')
     },

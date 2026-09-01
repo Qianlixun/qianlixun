@@ -6,7 +6,18 @@
     </div>
     <!-- HLS 多视频播放（推荐）：project.hls = [{name, src}] -->
     <div v-if="hlsVideos.length" class="video-hls">
-      <video ref="hlsVideo" controls preload="metadata" crossorigin="anonymous"></video>
+      <div class="hls-video-wrap">
+        <video ref="hlsVideo" controls preload="metadata" crossorigin="anonymous" @canplay="hlsLoading = false"></video>
+        <!-- 首片冷启动可能要数十秒（CDN 回源），给加载提示避免"以为坏了" -->
+        <div v-if="hlsLoading" class="hls-loading">
+          <span class="spinner"></span>
+          <p>视频加载中（首次点播较慢，稍候）…</p>
+        </div>
+        <div v-if="hlsFatal" class="hls-error">
+          <p>视频加载失败</p>
+          <button class="hls-retry" @click="retryHls">重试</button>
+        </div>
+      </div>
       <div v-if="hlsVideos.length > 1" class="hls-playlist">
         <button
           v-for="(v, i) in hlsVideos"
@@ -54,7 +65,8 @@
 
 <script>
 // 项目资源展示：HLS 多视频（首选）/ 本地 mp4 / B 站外链 + 公开仓库源码下载
-// HLS 段切分见 .workbuddy/redesign/src/hls-split-upload.mjs；hls.js 动态 import 不进首屏
+// HLS 分片由各 medias 仓库的 hls-resplit 工作流维护（关键帧对齐小分片，走 jsDelivr CDN）；
+// hls.js 动态 import 不进首屏
 let Hls = null // ponytail: 模块级缓存避免重复加载（单例足够，多组件实例共享）
 export default {
   name: 'ProjectResource',
@@ -69,6 +81,8 @@ export default {
       downloadUrl: '',
       activeHlsIdx: 0,
       hlsInstance: null,
+      hlsLoading: false,
+      hlsFatal: false,
     }
   },
   computed: {
@@ -102,6 +116,8 @@ export default {
       this.destroyHls()
       const src = this.hlsVideos[idx]?.src
       if (!src) return
+      this.hlsLoading = true
+      this.hlsFatal = false
       // Safari 原生支持 HLS
       if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = src
@@ -109,11 +125,30 @@ export default {
       }
       // 其他浏览器用 hls.js
       if (Hls.isSupported()) {
-        const hls = new Hls({ maxBufferLength: 30, maxMaxBufferLength: 60 })
+        // CDN 首片冷启动可达数十秒：放宽分片超时与重试，避免 20s 默认值提前放弃
+        const hls = new Hls({
+          maxBufferLength: 30,
+          maxMaxBufferLength: 60,
+          fragLoadingTimeOut: 60000,
+          fragLoadingMaxRetry: 6,
+          fragLoadingRetryDelay: 2000,
+          fragLoadingMaxRetryTimeout: 64000,
+          manifestLoadingTimeOut: 20000,
+          manifestLoadingMaxRetry: 6,
+        })
         hls.loadSource(src)
         hls.attachMedia(video)
+        hls.on(Hls.Events.ERROR, (_, data) => {
+          if (data.fatal) {
+            this.hlsLoading = false
+            this.hlsFatal = true
+          }
+        })
         this.hlsInstance = hls
       }
+    },
+    retryHls() {
+      this.loadHls(this.activeHlsIdx)
     },
     switchHls(idx) {
       if (idx === this.activeHlsIdx) return
@@ -195,12 +230,53 @@ export default {
   // HLS 多视频：video 占满 + 下方播放列表
   .video-hls {
     margin-bottom: 1rem;
-    video {
-      display: block;
-      width: 100%;
-      max-height: 480px;
-      background: #000;
+    .hls-video-wrap {
+      position: relative;
+      video {
+        display: block;
+        width: 100%;
+        max-height: 480px;
+        background: #000;
+        border-radius: $radius;
+      }
+    }
+    .hls-loading,
+    .hls-error {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       border-radius: $radius;
+      background: rgba(0, 0, 0, 0.55);
+      color: #e8e6e3;
+      font-size: $font-size-small;
+      p {
+        margin: 0;
+      }
+    }
+    .spinner {
+      width: 26px;
+      height: 26px;
+      border: 3px solid rgba(255, 255, 255, 0.25);
+      border-top-color: #d8d6d2;
+      border-radius: 50%;
+      animation: hls-spin 0.8s linear infinite;
+    }
+    .hls-retry {
+      padding: 6px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: $radius-pill;
+      background: transparent;
+      color: #e8e6e3;
+      font-size: $font-size-small;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      &:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
     }
     .hls-playlist {
       display: flex;
@@ -284,6 +360,12 @@ export default {
         font-size: $font-size-normal;
       }
     }
+  }
+}
+
+@keyframes hls-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>

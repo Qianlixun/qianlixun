@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div id="post">
     <Transition name="fade-transform" mode="out-in">
       <article v-if="post">
@@ -73,6 +73,10 @@ export default {
       this.post = post
     } else {
       await this.queryPost(number)
+    }
+    // 详情页标题用文章名（SEO/浏览器标签可辨识）
+    if (this.post && this.post.title) {
+      document.title = `${this.post.title} | 千里寻`
     }
     this.$nextTick(() => {
       this.initComment = true

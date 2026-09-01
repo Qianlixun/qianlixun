@@ -58,11 +58,18 @@ export const parseTime = (time, format = '{y}-{m}-{d} {h}:{i}:{s}') => {
 }
 
 /**
- * 图片地址恒等返回
- * 原 fileCDN 会把原作者图床做替换加速；现所有素材已自托管到
- * public/assets/，不再依赖任何外部图床，故直接返回原地址。
+ * 图片地址转换：raw.githubusercontent.com → fastly.jsdelivr.net
+ * raw 域名国内访问仅 ~10KB/s（封面/文章图基本加载不出来），
+ * jsDelivr CDN 实测快 30 倍以上；单文件 ≤20MB（图片远小于该值）。
+ * Cover 组件与 MarkDown 渲染器统一经过此处，是全站图片的单一改写点。
  */
-export const fileCDN = (url) => url
+export const fileCDN = (url) => {
+  if (typeof url !== 'string') return url
+  return url.replace(
+    /^https:\/\/raw\.githubusercontent\.com\/([^/\s]+)\/([^/\s]+)\/main\//,
+    'https://fastly.jsdelivr.net/gh/$1/$2@main/'
+  )
+}
 
 /**
  * 图片尺寸处理

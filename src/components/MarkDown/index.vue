@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="markdown" v-html="html"></div>
 </template>
 
@@ -45,7 +45,9 @@ renderer.image = function (href, title, text) {
   const img = new Image()
   img.src = cdnHref
   const compelete = (isSuccess) => {
+    // probe 可能先于 v-html 插入 DOM 完成，元素可能还不存在
     const dom = document.getElementById(id)
+    if (!dom) return
     dom.src = isSuccess ? cdnHref : href
     dom.style.opacity = 1
   }
@@ -83,6 +85,9 @@ renderer.codespan = function (text) {
 
 const rendererCode = renderer.code
 renderer.code = function code(_code, infostring, escaped) {
+  // lang 须先解析再使用（原实现先引用后声明，触发 TDZ ReferenceError，代码块直接渲染失败）
+  const lang = (infostring || '').match(/\S*/)[0]
+
   // katex 支持， https://github.com/markedjs/marked/issues/1538#issuecomment-526189561
   if (!lang) {
     const math = mathsExpression(_code)
@@ -94,8 +99,6 @@ renderer.code = function code(_code, infostring, escaped) {
   CODE_ID++
   const id = `code-${CODE_ID}`
   CODE_COPY_LIST.push({ id, code: _code })
-
-  const lang = (infostring || '').match(/\S*/)[0]
 
   if (this.options.highlight) {
     const out = this.options.highlight(_code, lang)

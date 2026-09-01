@@ -93,7 +93,7 @@ export default {
         name: '邮箱',
         desc: '99498515@qq.com',
         icon: `${B}assets/img/email.svg`,
-        link: 'http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=tNnR9Nfc1drH3N3NwZrX29k',
+        link: 'https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=tNnR9Nfc1drH3N3NwZrX29k',
       },
       {
         name: 'GitHub',
@@ -325,7 +325,9 @@ export default {
   /**
    * 项目资源映射：Issue 编号 → { repo: 公开源码仓库名, bvid: B站视频BV号, mp4: 演示视频直链, zip: 源码压缩包直链, hls: HLS视频列表 }
    * mp4/bvid/hls 至少填一个即显示视频区（hls 优先于 mp4，mp4 优先于 bvid）；zip 为源码压缩包直链，优先于 repo
-   * hls: [{name, src}] 数组——src 是 .m3u8 清单 raw 直链，前端用 hls.js 加载，访客看到单视频无缝播放
+   * hls: [{name, src}] 数组——src 是 .m3u8 清单直链，前端用 hls.js 加载，访客看到单视频无缝播放
+   * 视频托管约定：一律走 fastly.jsdelivr.net（raw.githubusercontent.com 国内仅 ~10KB/s 基本不可用；
+   * jsDelivr 单文件上限 20MB，medias 仓库分片已由 hls-resplit 工作流重切为关键帧对齐的小分片）
    * 命中的 issue 归入「作品集」；下载为软限制（登录 GitHub 后显示入口）
    */
   projectResources: {
@@ -333,12 +335,12 @@ export default {
     6: {
       // 现场信号设备虚拟仿真 V1.0（主 medias 仓库，完整版切片仅备份不暴露前端）
       hls: [
-        { name: 'S700K拆装', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v1-S700K拆装.m3u8' },
+        { name: 'S700K拆装', src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/v1-S700K拆装.m3u8' },
         {
           name: '信号机部件拆分',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v1-信号机部件拆分.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/v1-信号机部件拆分.m3u8',
         },
-        { name: '剪辑版视频', src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v1-剪辑版视频.m3u8' },
+        { name: '剪辑版视频', src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/v1-剪辑版视频.m3u8' },
         // 完整版 v1-现场信号设备检修完整版视频.m3u8 已在 medias 仓库作站内备份，长度过长不暴露前端
       ],
     },
@@ -347,35 +349,35 @@ export default {
       hls: [
         {
           name: '初级卷1·无拆装',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-初级卷1无拆装.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/v2-初级卷1无拆装.m3u8',
         },
         {
           name: '初级卷2·无拆装',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-初级卷2无拆装.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/v2-初级卷2无拆装.m3u8',
         },
         {
           name: '中级卷1·无拆装',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-中级卷1无拆装.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/v2-中级卷1无拆装.m3u8',
         },
         {
           name: '中级卷2·无拆装',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-中级卷2无拆装.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/v2-中级卷2无拆装.m3u8',
         },
         {
           name: '联动展示',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-现场信号仿真软件联动展示.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/v2-现场信号仿真软件联动展示.m3u8',
         },
         {
           name: '联动展示·字幕版',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-现场信号仿真软件联动展示字幕.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/v2-现场信号仿真软件联动展示字幕.m3u8',
         },
         {
           name: '现场信号设备虚拟仿真',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-现场信号设备虚拟仿真.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/v2-现场信号设备虚拟仿真.m3u8',
         },
         {
           name: '3D场景联动展示',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias/main/v2-虚拟仿真基地3D场景展示以及室内外的联动展示张乐尧.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/v2-虚拟仿真基地3D场景展示以及室内外的联动展示张乐尧.m3u8',
         },
         // 完整版/变体版（v2-现场信号设备虚拟仿真职业技能等级考试系统.m3u8、v2-现场信号仿真软件联动展示去掉logo版本.m3u8）已在 medias 仓库作站内备份，不暴露前端
       ],
@@ -385,15 +387,15 @@ export default {
       hls: [
         {
           name: '周巡检操作视频',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-platform-door/main/platform-周巡检操作视频.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-platform-door@main/platform-周巡检操作视频.m3u8',
         },
         {
           name: '更换门控器操作视频',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-platform-door/main/platform-更换门控器操作视频.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-platform-door@main/platform-更换门控器操作视频.m3u8',
         },
         {
           name: '站台门破损教学视频',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-platform-door/main/platform-站台门破损教学视频.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-platform-door@main/platform-站台门破损教学视频.m3u8',
         },
       ],
     },
@@ -402,59 +404,59 @@ export default {
       hls: [
         {
           name: 'CBCT的使用方法与标准流程',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-CBCT的使用方法与标准流程.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-CBCT的使用方法与标准流程.m3u8',
         },
         {
           name: '医护患时钟体位',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-医护患时钟体位.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-医护患时钟体位.m3u8',
         },
         {
           name: '口腔一般检查',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-口腔一般检查.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-口腔一般检查.m3u8',
         },
         {
           name: '口腔门诊接诊话术洁牙术',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-口腔门诊接诊话术洁牙术.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-口腔门诊接诊话术洁牙术.m3u8',
         },
         {
           name: '工具器械认知',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-工具器械认知.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-工具器械认知.m3u8',
         },
         {
           name: '术前摆台',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-术前摆台.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-术前摆台.m3u8',
         },
         {
           name: '术后撤台',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-术后撤台.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-术后撤台.m3u8',
         },
         {
           name: '窝沟封闭·医生',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-窝沟封闭医生.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-窝沟封闭医生.m3u8',
         },
         {
           name: '窝沟封闭·咨询',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-窝沟封闭咨询.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-窝沟封闭咨询.m3u8',
         },
         {
           name: '窝沟封闭·护士',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-窝沟封闭护士.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-窝沟封闭护士.m3u8',
         },
         {
           name: '诊间消毒',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-诊间消毒.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-诊间消毒.m3u8',
         },
         {
           name: '超声波龈上洁牙术·医生',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-超声波龈上洁牙术医生.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-超声波龈上洁牙术医生.m3u8',
         },
         {
           name: '超声波龈上洁牙术·咨询',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-超声波龈上洁牙术咨询.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-超声波龈上洁牙术咨询.m3u8',
         },
         {
           name: '超声波龈上洁牙术·护士',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-dental/main/dental-超声波龈上洁牙术护士.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-dental@main/dental-超声波龈上洁牙术护士.m3u8',
         },
       ],
     },
@@ -463,39 +465,39 @@ export default {
       hls: [
         {
           name: 'JPXC-1000偏极继电器参数测试',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-basic-signal/main/basic-JPXC-1000偏极继电器参数测试.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-basic-signal@main/basic-JPXC-1000偏极继电器参数测试.m3u8',
         },
         {
           name: 'ZD6安装',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-basic-signal/main/basic-ZD6安装.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-basic-signal@main/basic-ZD6安装.m3u8',
         },
         {
           name: 'ZD6拆除',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-basic-signal/main/basic-ZD6拆除.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-basic-signal@main/basic-ZD6拆除.m3u8',
         },
         {
           name: 'ZD6转辙机机械故障',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-basic-signal/main/basic-ZD6转辙机机械故障.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-basic-signal@main/basic-ZD6转辙机机械故障.m3u8',
         },
         {
           name: 'ZDJ9转辙机测试',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-basic-signal/main/basic-ZDJ9转辙机测试.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-basic-signal@main/basic-ZDJ9转辙机测试.m3u8',
         },
         {
           name: '读写工具读取应答器数据',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-basic-signal/main/basic-读写工具读取应答器数据.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-basic-signal@main/basic-读写工具读取应答器数据.m3u8',
         },
         {
           name: '信号机点灯单元故障',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-basic-signal/main/basic-信号机点灯单元故障.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-basic-signal@main/basic-信号机点灯单元故障.m3u8',
         },
         {
           name: '信号基础设备检修虚拟仿真软件',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-basic-signal/main/basic-信号基础设备检修虚拟仿真软件.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-basic-signal@main/basic-信号基础设备检修虚拟仿真软件.m3u8',
         },
         {
           name: '信号检修VR操作视频',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-basic-signal/main/basic-信号检修VR操作视频.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-basic-signal@main/basic-信号检修VR操作视频.m3u8',
         },
       ],
     },
@@ -504,139 +506,139 @@ export default {
       hls: [
         {
           name: '01·售票机设备概述',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-01售票机设备概述.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-01售票机设备概述.m3u8',
         },
         {
           name: '01·售票机日常巡检',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-01售票机日常巡检.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-01售票机日常巡检.m3u8',
         },
         {
           name: '01·拆除更换电源模块',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-01拆除更换电源模块.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-01拆除更换电源模块.m3u8',
         },
         {
           name: '01·乘客显示屏黑屏故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-01售票机乘客显示屏黑屏故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-01售票机乘客显示屏黑屏故障处理.m3u8',
         },
         {
           name: '02·售票机定期巡检',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-02售票机定期巡检.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-02售票机定期巡检.m3u8',
         },
         {
           name: '02·售票机电气结构与电气原理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-03售票机电气结构与电气原理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-03售票机电气结构与电气原理.m3u8',
         },
         {
           name: '02·拆除更换主控单元',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-02拆除更换主控单元.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-02拆除更换主控单元.m3u8',
         },
         {
           name: '02·乘客显示屏花屏故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-02售票机乘客显示屏花屏故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-02售票机乘客显示屏花屏故障处理.m3u8',
         },
         {
           name: '03·售票机硬件接口介绍',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-04售票机硬件接口介绍.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-04售票机硬件接口介绍.m3u8',
         },
         {
           name: '03·拆除更换IO板',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-03拆除更换IO板.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-03拆除更换IO板.m3u8',
         },
         {
           name: '03·乘客显示屏触摸无反应故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-03售票机乘客显示屏触摸无反应故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-03售票机乘客显示屏触摸无反应故障处理.m3u8',
         },
         {
           name: '04·拆除更换乘客显示器',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-04拆除更换乘客显示器.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-04拆除更换乘客显示器.m3u8',
         },
         {
           name: '04·主控单元无法启动故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-04售票机主控单元无法启动故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-04售票机主控单元无法启动故障处理.m3u8',
         },
         {
           name: '05·拆除更换维修面板',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-05拆除更换维修面板.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-05拆除更换维修面板.m3u8',
         },
         {
           name: '05·打印机信号灯显示红色故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-05售票机打印机信号灯显示红色故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-05售票机打印机信号灯显示红色故障处理.m3u8',
         },
         {
           name: '06·拆除更换维护打印机',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-06拆除更换维护打印机.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-06拆除更换维护打印机.m3u8',
         },
         {
           name: '06·打印机无法通讯故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-06售票机打印机无法通讯故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-06售票机打印机无法通讯故障处理.m3u8',
         },
         {
           name: '07·拆除更换运营显示器',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-07拆除更换运营显示器.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-07拆除更换运营显示器.m3u8',
         },
         {
           name: '07·读写器故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-07售票机读写器故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-07售票机读写器故障处理.m3u8',
         },
         {
           name: '08·单程票控制板故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-08售票机单程票控制板故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-08售票机单程票控制板故障处理.m3u8',
         },
         {
           name: '09·硬币处理模块故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-09售票机硬币处理模块故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-09售票机硬币处理模块故障处理.m3u8',
         },
         {
           name: 'ECU·主控单元故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-ECU主控单元故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-ECU主控单元故障处理.m3u8',
         },
         {
           name: 'ECU·故障拆除和更换',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-ECU故障拆除和更换.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-ECU故障拆除和更换.m3u8',
         },
         {
           name: '电源模块·拆除和更换',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-电源模块拆除和更换.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-电源模块拆除和更换.m3u8',
         },
         {
           name: '乘客显示屏黑屏',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-乘客显示屏黑屏.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-乘客显示屏黑屏.m3u8',
         },
         {
           name: '更换票盒',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-更换票盒.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-更换票盒.m3u8',
         },
         {
           name: '单程票补充',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-售票机单程票补充.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-售票机单程票补充.m3u8',
         },
         {
           name: '单程票回收操作',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-售票机单程票回收操作.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-售票机单程票回收操作.m3u8',
         },
         {
           name: '废票箱的废票操作',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-售票机废票箱的废票操作.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-售票机废票箱的废票操作.m3u8',
         },
         {
           name: '关机步骤',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-售票机关机步骤.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-售票机关机步骤.m3u8',
         },
         {
           name: '开机步骤',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-售票机开机步骤.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-售票机开机步骤.m3u8',
         },
         {
           name: '模块组成',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-售票机模块组成.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-售票机模块组成.m3u8',
         },
         {
           name: '硬币补充操作',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-售票机硬币补充操作.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-售票机硬币补充操作.m3u8',
         },
         {
           name: '正常购票',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-ticket/main/afc-ticket-售票机正常购票.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-ticket@main/afc-ticket-售票机正常购票.m3u8',
         },
       ],
     },
@@ -645,99 +647,99 @@ export default {
       hls: [
         {
           name: '设备概述',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机设备概述.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机设备概述.m3u8',
         },
         {
           name: '模块组成',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机模块组成.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机模块组成.m3u8',
         },
         {
           name: '电气原理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机电气原理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机电气原理.m3u8',
         },
         {
           name: '硬件接口介绍',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机硬件接口介绍.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机硬件接口介绍.m3u8',
         },
         {
           name: '日常巡检',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机日常巡检.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机日常巡检.m3u8',
         },
         {
           name: '定期巡检',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机定期巡检.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机定期巡检.m3u8',
         },
         {
           name: '开机步骤',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机开机步骤.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机开机步骤.m3u8',
         },
         {
           name: '关机步骤',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机关机步骤.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机关机步骤.m3u8',
         },
         {
           name: '正常服务模式',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机正常服务模式.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机正常服务模式.m3u8',
         },
         {
           name: '降级模式',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机降级模式.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机降级模式.m3u8',
         },
         {
           name: '紧急模式',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机紧急模式.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机紧急模式.m3u8',
         },
         {
           name: '维修模式',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机维修模式.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机维修模式.m3u8',
         },
         {
           name: '更换票盒',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机更换票盒.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机更换票盒.m3u8',
         },
         {
           name: '单程票回收模块故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机单程票回收模块故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机单程票回收模块故障处理.m3u8',
         },
         {
           name: '读写器故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机读写器故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机读写器故障处理.m3u8',
         },
         {
           name: '花屏故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机花屏故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机花屏故障处理.m3u8',
         },
         {
           name: '扇门单元故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机扇门单元故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机扇门单元故障处理.m3u8',
         },
         {
           name: '通道传感器故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机通道传感器故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机通道传感器故障处理.m3u8',
         },
         {
           name: '主控单元无法启动故障处理',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-检票机主控单元无法启动故障处理.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-检票机主控单元无法启动故障处理.m3u8',
         },
         {
           name: '乘客显示屏黑屏',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-自动检票机乘客显示屏黑屏.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-自动检票机乘客显示屏黑屏.m3u8',
         },
         {
           name: '故障处理仿真培训系统',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-自动检票机故障处理仿真培训系统.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-自动检票机故障处理仿真培训系统.m3u8',
         },
         {
           name: '检修作业仿真培训系统',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-自动检票机检修作业仿真培训系统.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-自动检票机检修作业仿真培训系统.m3u8',
         },
         {
           name: '模块拆除和更换仿真培训系统',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-自动检票机模块拆除和更换作业仿真培训系统.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-自动检票机模块拆除和更换作业仿真培训系统.m3u8',
         },
         {
           name: '认知仿真培训系统',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-afc-gate/main/afc-gate-自动检票机认知仿真培训系统.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-afc-gate@main/afc-gate-自动检票机认知仿真培训系统.m3u8',
         },
       ],
     },
@@ -746,49 +748,49 @@ export default {
       hls: [
         {
           name: '和利时车载300S·初级1卷',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-v1-onboard/main/v1-onboard-和利时车载300S初级1卷.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v1-onboard@main/v1-onboard-和利时车载300S初级1卷.m3u8',
         },
         {
           name: '和利时车载300S·中级1卷',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-v1-onboard/main/v1-onboard-和利时车载300S中级1卷.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v1-onboard@main/v1-onboard-和利时车载300S中级1卷.m3u8',
         },
         {
           name: '300S速度传感器1轮径设置',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-v1-onboard/main/v1-onboard-300S速度传感器1轮径设置.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v1-onboard@main/v1-onboard-300S速度传感器1轮径设置.m3u8',
         },
         {
           name: '300S下载RIM数据',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-v1-onboard/main/v1-onboard-300S下载RIM数据.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v1-onboard@main/v1-onboard-300S下载RIM数据.m3u8',
         },
         {
           name: 'Hlscz200h20220420-13511905',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-v1-onboard/main/v1-onboard-Hlscz200h20220420-13511905.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v1-onboard@main/v1-onboard-Hlscz200h20220420-13511905.m3u8',
         },
         {
           name: 'Hlscz200h20220420-13590406',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-v1-onboard/main/v1-onboard-Hlscz200h20220420-13590406.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v1-onboard@main/v1-onboard-Hlscz200h20220420-13590406.m3u8',
         },
       ],
     },
     14: {
       // 1+X 车载信号 V2.0（medias-v2-onboard 仓库）
       hls: [
-        { name: 'M01', src: 'https://raw.githubusercontent.com/Qianlixun/medias-v2-onboard/main/v2-onboard-M01.m3u8' },
-        { name: 'M02', src: 'https://raw.githubusercontent.com/Qianlixun/medias-v2-onboard/main/v2-onboard-M02.m3u8' },
-        { name: 'P01', src: 'https://raw.githubusercontent.com/Qianlixun/medias-v2-onboard/main/v2-onboard-P01.m3u8' },
-        { name: 'P02', src: 'https://raw.githubusercontent.com/Qianlixun/medias-v2-onboard/main/v2-onboard-P02.m3u8' },
+        { name: 'M01', src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v2-onboard@main/v2-onboard-M01.m3u8' },
+        { name: 'M02', src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v2-onboard@main/v2-onboard-M02.m3u8' },
+        { name: 'P01', src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v2-onboard@main/v2-onboard-P01.m3u8' },
+        { name: 'P02', src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v2-onboard@main/v2-onboard-P02.m3u8' },
         {
           name: '练习卷1',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-v2-onboard/main/v2-onboard-练习卷1.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v2-onboard@main/v2-onboard-练习卷1.m3u8',
         },
         {
           name: '练习卷2',
-          src: 'https://raw.githubusercontent.com/Qianlixun/medias-v2-onboard/main/v2-onboard-练习卷2.m3u8',
+          src: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias-v2-onboard@main/v2-onboard-练习卷2.m3u8',
         },
       ],
     },
     // 2: { repo: 'demo-project', bvid: 'BV1xx411c7mD' },
-    // 3: { repo: 'demo', mp4: 'https://raw.githubusercontent.com/Qianlixun/medias/main/demo.mp4' },
+    // 3: { repo: 'demo', mp4: 'https://fastly.jsdelivr.net/gh/Qianlixun/medias@main/demo.mp4' },
   },
 
   /**

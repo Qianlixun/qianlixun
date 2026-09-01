@@ -46,10 +46,14 @@ export default {
       const cdnUrl = fileCDN(this.src)
 
       const img = new Image()
-      img.onload = img.onerror = () => {
+      // 成功才换封面；失败保持默认封面，但无论成败都放行懒加载链（loadNext）
+      img.onload = () => {
         this.imgSrc = cdnUrl
         this.$emit('loadNext')
         this.$nextTick(() => (this.visible = true))
+      }
+      img.onerror = () => {
+        this.$emit('loadNext')
       }
       img.src = cdnUrl
     },
